@@ -1,0 +1,46 @@
+First and most critical: there is a runtime error in Path B 
+(Freelance) and Path D (Investment) — the FormBox component 
+is used but not defined or imported in scope. Please:
+  1. Move FormBox into its own component file 
+     (src/components/FormBox.tsx) with proper export
+  2. Import it wherever it's used (W-2 anatomy in Path A 
+     works correctly — match that pattern)
+  3. Build the missing form anatomies in Path B using the 
+     same FormBox pattern: 1099-NEC, 1099-K, Schedule C 
+     (Part I / Part II / Line 31), Schedule SE
+  4. Build form anatomies in Path D for: 1099-INT, 
+     1099-DIV, 1099-B, 1099-R
+
+After that, four smaller fixes:
+
+  5. Bar visualization in Compare screen has math errors:
+     - Column 2: $39,423 "taxes" total includes $5,000 
+       business expenses incorrectly. Move expenses to a 
+       gray "spent" segment (like column 3 does with 
+       business expenses).
+     - Column 3: "$72,697 taxes" appears to be a typo. 
+       Should be $22,697 (sum of SE $10,597 + Fed $9,500 
+       + State $2,600). Bar segments must sum to exactly 
+       $100,000.
+     - Column 1: $5,000 pre-tax benefits (401k + 
+       insurance) should be in a gray "spent or saved" 
+       segment, not in "taxes" — they aren't taxes.
+     - Verify all three column bars sum to exactly 
+       $100,000.
+
+  6. Logo in top navigation still reads "Aria Tax". 
+     Change to "Aria Tax Services" everywhere it appears 
+     in the header/nav. The meta tag is already updated 
+     but the visible logo isn't.
+
+  7. In the Raise Visualizer, add the standard deduction 
+     ($15,750 for single in 2025) as a fourth segment at 
+     the BASE of the stacked-bar visualization, labeled 
+     "Standard deduction (0%)". This way the total of all 
+     stack segments equals gross salary (not just taxable 
+     income). Add a small total label below the stack: 
+     "Total: $73,000 = your gross salary."
+
+  8. Add 1099-G to the 1099 Family Tree under "Other 
+     income (not self-employment)" — government payments, 
+     unemployment, state tax refunds.

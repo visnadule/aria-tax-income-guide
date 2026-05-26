@@ -64,7 +64,7 @@ function App() {
             <div className="w-8 h-8 bg-sage-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-serif text-sm font-bold">A</span>
             </div>
-            <span className="text-ink-700 font-serif text-lg hidden sm:block">Aria Tax</span>
+            <span className="text-ink-700 font-serif text-lg hidden sm:block">Aria Tax Services</span>
           </button>
           <nav className="flex items-center gap-2">
             <button
@@ -1143,23 +1143,25 @@ function InvestmentRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => vo
               </div>
 
               <div className="bg-white rounded-xl p-5 border-2 border-sand-200">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="font-mono font-medium text-sand-700 bg-sand-100 px-2 py-0.5 rounded">1099-B</span>
+                <div className="mb-2">
+                  <span className="font-mono font-medium text-sand-700 bg-sand-100 px-2 py-0.5 rounded text-sm">1099-B</span>
                 </div>
-                <div className="text-sm text-ink-600">
+                <div className="text-sm text-ink-600 mb-3">
                   <div className="font-medium text-ink-800 mb-1">Sale proceeds</div>
                   <div className="text-ink-500">Stocks, bonds, crypto sales</div>
                 </div>
+                <Form1099BAnatomy />
               </div>
 
               <div className="bg-white rounded-xl p-5 border-2 border-sand-200">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="font-mono font-medium text-sand-700 bg-sand-100 px-2 py-0.5 rounded">1099-R</span>
+                <div className="mb-2">
+                  <span className="font-mono font-medium text-sand-700 bg-sand-100 px-2 py-0.5 rounded text-sm">1099-R</span>
                 </div>
-                <div className="text-sm text-ink-600">
+                <div className="text-sm text-ink-600 mb-3">
                   <div className="font-medium text-ink-800 mb-1">Retirement distributions</div>
                   <div className="text-ink-500">401(k), IRA, pension</div>
                 </div>
+                <Form1099RAnatomy />
               </div>
             </div>
           </div>
@@ -1280,6 +1282,15 @@ function Form1099Tree({ onNavigate }: { onNavigate: (view: ViewState) => void })
           description: 'Reports rents, royalties, prizes, awards, medical payments, and other income types. Box 7 used to be for self-employment—that moved to 1099-NEC.',
           landingSpot: 'Depends on box. Rents → Schedule E. Royalties → Schedule E.',
           taxNotes: 'Not all 1099-MISC = Schedule C. Box matters.',
+        },
+        {
+          id: 'g',
+          name: '1099-G',
+          fullName: 'Certain Government Payments',
+          scheduleC: false,
+          description: 'Reports government payments including unemployment compensation, state and local tax refunds, and other government payments such as agricultural payments.',
+          landingSpot: 'Form 1040, Schedule 1 (unemployment). State refunds on Schedule 1 if previously deducted.',
+          taxNotes: 'Unemployment is fully taxable as ordinary income. State tax refunds are taxable only if you deducted state taxes in the prior year.',
         },
       ],
     },
@@ -1664,6 +1675,8 @@ function ComparisonView({ onNavigate }: { onNavigate: (view: ViewState) => void 
             { label: 'State income tax', amount: -employed.stateIncomeTax, note: 'illustrative' },
           ]}
           takeHome={employed.takeHome}
+          savedAmount={employed.preTaxBenefits}
+          savedLabel="spent or saved"
           icon={<Briefcase className="w-6 h-6" />}
           color="steel"
           notes="Employer pays the other half of FICA (7.65%). Benefits paid by employer. No Schedule C."
@@ -1687,6 +1700,8 @@ function ComparisonView({ onNavigate }: { onNavigate: (view: ViewState) => void 
             { label: 'State income tax', amount: -contracted.stateIncomeTax, note: 'illustrative' },
           ]}
           takeHome={contracted.takeHome}
+          savedAmount={contracted.businessExpenses}
+          savedLabel="business pays"
           icon={<PenTool className="w-6 h-6" />}
           color="sage"
           notes="You pay both halves of FICA. No employer benefits. Quarterly estimated payments may apply."
@@ -1711,6 +1726,8 @@ function ComparisonView({ onNavigate }: { onNavigate: (view: ViewState) => void 
             { label: 'State income tax', amount: -soloOwner.stateIncomeTax, note: 'illustrative' },
           ]}
           takeHome={soloOwner.takeHome}
+          savedAmount={soloOwner.businessExpenses}
+          savedLabel="business pays"
           icon={<Receipt className="w-6 h-6" />}
           color="sand"
           notes="Real business overhead. You deduct the actual cost of running it. Quarterly payments likely."
@@ -1838,6 +1855,8 @@ function ThreeWayColumn({
   color,
   notes,
   structure,
+  savedAmount = 0,
+  savedLabel = 'spent or saved',
 }: {
   title: string;
   subtitle: string;
@@ -1848,6 +1867,8 @@ function ThreeWayColumn({
   color: 'steel' | 'sage' | 'sand';
   notes: string;
   structure: string[];
+  savedAmount?: number;
+  savedLabel?: string;
 }) {
   const colorMap = {
     steel: { bg: 'bg-steel-50', border: 'border-steel-200', iconBg: 'bg-steel-100', iconText: 'text-steel-600', accent: 'text-steel-700', takeHomeBg: 'bg-emerald-100', takeHomeText: 'text-emerald-700' },
@@ -1857,14 +1878,12 @@ function ThreeWayColumn({
 
   const c = colorMap[color];
 
-  // Calculate segments for stacked bar
-  const totalTaxes = gross - takeHome - (rows.find(r => r.label.includes('expenses'))?.amount || 0);
-  const businessExpensesRow = rows.find(r => r.label.toLowerCase().includes('expenses') || r.label.toLowerCase().includes('business'));
-  const businessExpenses = businessExpensesRow ? Math.abs(businessExpensesRow.amount) : 0;
+  // Calculate segments for stacked bar — all three must sum to exactly gross
+  const totalTaxes = gross - takeHome - savedAmount;
 
   const takeHomePercent = (takeHome / gross) * 100;
   const taxPercent = (totalTaxes / gross) * 100;
-  const expensePercent = (businessExpenses / gross) * 100;
+  const savedPercent = (savedAmount / gross) * 100;
 
   return (
     <div className={`${c.bg} rounded-2xl border-2 ${c.border} overflow-hidden`}>
@@ -1883,14 +1902,14 @@ function ThreeWayColumn({
       {/* Stacked bar visualization */}
       <div className="p-6 pb-4">
         <div className="flex h-48 rounded-lg overflow-hidden border border-ink-100 mb-4">
-          {businessExpenses > 0 && (
+          {savedAmount > 0 && (
             <div
               className="bg-ink-100 flex items-center justify-center text-center px-2 transition-all"
-              style={{ width: `${expensePercent}%` }}
+              style={{ width: `${savedPercent}%` }}
             >
               <div className="text-xs text-ink-600 font-medium">
-                <div>${Math.round(businessExpenses).toLocaleString()}</div>
-                <div className="text-ink-500 text-xs">business pays</div>
+                <div>${Math.round(savedAmount).toLocaleString()}</div>
+                <div className="text-ink-500 text-xs">{savedLabel}</div>
               </div>
             </div>
           )}
@@ -2386,6 +2405,44 @@ function Form1099KAnatomy() {
   );
 }
 
+function Form1099BAnatomy() {
+  return (
+    <div className="mt-4">
+      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 p-4">
+        <div className="text-center mb-3 pb-2 border-b border-sand-200">
+          <div className="text-xs text-sand-600 font-medium">Form 1099-B</div>
+          <div className="text-sm text-ink-700 font-serif">Proceeds From Broker Transactions</div>
+        </div>
+        <div className="space-y-2">
+          <FormBox box="Box 1a" label="Date of sale or exchange" tooltip="When the security was sold — determines short-term vs. long-term capital gain treatment" />
+          <FormBox box="Box 1d" label="Proceeds" tooltip="Amount you received from the sale — report on Schedule D" />
+          <FormBox box="Box 1e" label="Cost or other basis" tooltip="What you originally paid — subtract from proceeds to find your gain or loss" />
+          <FormBox box="Box 2" label="Short-term or long-term" tooltip="Held ≤1 year = short-term (ordinary rates). Held >1 year = long-term (0%, 15%, or 20%)" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Form1099RAnatomy() {
+  return (
+    <div className="mt-4">
+      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 p-4">
+        <div className="text-center mb-3 pb-2 border-b border-sand-200">
+          <div className="text-xs text-sand-600 font-medium">Form 1099-R</div>
+          <div className="text-sm text-ink-700 font-serif">Distributions From Pensions &amp; Retirement</div>
+        </div>
+        <div className="space-y-2">
+          <FormBox box="Box 1" label="Gross distribution" tooltip="Total amount distributed from your retirement account before any withholding" />
+          <FormBox box="Box 2a" label="Taxable amount" tooltip="The portion subject to income tax — may differ from Box 1 if you had after-tax contributions" />
+          <FormBox box="Box 4" label="Federal income tax withheld" tooltip="Tax already withheld — appears as a credit on your Form 1040" />
+          <FormBox box="Box 7" label="Distribution code" tooltip="Code tells the IRS why you received this distribution. Code 1 = early (penalty may apply). Code 7 = normal retirement age." />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function FormScheduleSEAnatomy() {
   return (
     <div className="mt-4">
@@ -2574,16 +2631,25 @@ function RaiseVisualizer() {
             <h3 className="font-serif text-lg text-ink-800 mb-4">Tax brackets (stacked)</h3>
 
             <div className="space-y-2 mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-8 bg-gradient-to-r from-ink-100 to-ink-200 rounded-lg flex items-center justify-center text-xs font-medium text-ink-600">
+                  ${standardDeductions[filingStatus].toLocaleString()} — Standard deduction (0%)
+                </div>
+                <div className="w-20 text-right font-mono text-sm text-ink-500">$0</div>
+              </div>
               {current.layers.map((layer, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <div className="flex-1 h-8 bg-gradient-to-r from-sage-100 to-sage-200 rounded-lg flex items-center justify-center text-xs font-medium text-sage-700">
-                    {Math.round(layer.income).toLocaleString()} @ {Math.round(layer.rate * 100)}%
+                    ${Math.round(layer.income).toLocaleString()} @ {Math.round(layer.rate * 100)}%
                   </div>
                   <div className="w-20 text-right font-mono text-sm text-ink-700">
                     ${Math.round(layer.income * layer.rate).toLocaleString()}
                   </div>
                 </div>
               ))}
+              <div className="flex items-center justify-end gap-3 pt-1 border-t border-ink-100">
+                <span className="text-xs text-ink-500">Total: ${salary.toLocaleString()} = your gross salary</span>
+              </div>
             </div>
 
             <div className="bg-cream-50 rounded-xl p-4 border border-ink-100">
@@ -2750,6 +2816,36 @@ function RaiseVisualizer() {
           It excludes FICA (7.65%), state tax, pre-tax deductions, and credits. Your actual take-home will be lower.
         </p>
       </div>
+    </div>
+  );
+}
+
+function FormBox({
+  box,
+  label,
+  tooltip,
+}: {
+  box: string;
+  label: string;
+  tooltip: string;
+}) {
+  const [show, setShow] = useState(false);
+  return (
+    <div
+      className="relative flex items-start gap-2 p-2 rounded-lg bg-white border border-sand-200 cursor-help hover:border-sand-400 transition-colors"
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      onClick={() => setShow(s => !s)}
+    >
+      <span className="font-mono text-xs text-sand-700 font-semibold whitespace-nowrap bg-sand-50 px-1.5 py-0.5 rounded border border-sand-200">
+        {box}
+      </span>
+      <span className="text-xs text-ink-700 leading-tight pt-0.5">{label}</span>
+      {show && (
+        <div className="absolute left-0 top-full mt-1 z-20 bg-ink-800 text-white text-xs rounded-xl p-3 shadow-xl max-w-xs leading-relaxed pointer-events-none">
+          {tooltip}
+        </div>
+      )}
     </div>
   );
 }
