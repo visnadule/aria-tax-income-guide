@@ -3135,13 +3135,7 @@ function RaiseVisualizer() {
             <h3 className="font-serif text-lg text-ink-800 mb-4">Tax brackets (stacked)</h3>
 
             <div className="space-y-2 mb-6">
-              <div className="flex items-center gap-3">
-                <div className="flex-1 h-8 bg-gradient-to-r from-ink-100 to-ink-200 rounded-lg flex items-center justify-center text-xs font-medium text-ink-600">
-                  ${standardDeductions[filingStatus].toLocaleString()} — Standard deduction (0%)
-                </div>
-                <div className="w-20 text-right font-mono text-sm text-ink-500">$0</div>
-              </div>
-              {current.layers.map((layer, idx) => (
+              {[...current.layers].reverse().map((layer, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <div className="flex-1 h-8 bg-gradient-to-r from-sage-100 to-sage-200 rounded-lg flex items-center justify-center text-xs font-medium text-sage-700">
                     ${Math.round(layer.income).toLocaleString()} @ {Math.round(layer.rate * 100)}%
@@ -3151,6 +3145,12 @@ function RaiseVisualizer() {
                   </div>
                 </div>
               ))}
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-8 bg-gradient-to-r from-ink-100 to-ink-200 rounded-lg flex items-center justify-center text-xs font-medium text-ink-500">
+                  ${standardDeductions[filingStatus].toLocaleString()} — Standard deduction (0%)
+                </div>
+                <div className="w-20 text-right font-mono text-sm text-ink-400">$0</div>
+              </div>
               <div className="flex items-center justify-end gap-3 pt-1 border-t border-ink-100">
                 <span className="text-xs text-ink-500">Total: ${salary.toLocaleString()} = your gross salary</span>
               </div>
@@ -3234,7 +3234,7 @@ function RaiseVisualizer() {
                   <h4 className="font-medium text-ink-800 mb-3">Before: ${prevSalary.toLocaleString()}</h4>
                   <div className="space-y-3">
                     <div className="space-y-1">
-                      {calculateTax(prevSalary).layers.map((layer, idx) => (
+                      {[...calculateTax(prevSalary).layers].reverse().map((layer, idx) => (
                         <div key={idx} className="flex items-center gap-2 text-xs">
                           <div className="flex-1 h-6 bg-gradient-to-r from-steel-100 to-steel-200 rounded flex items-center justify-center font-medium text-steel-700">
                             ${Math.round(layer.income).toLocaleString()} @ {Math.round(layer.rate * 100)}%
@@ -3244,6 +3244,15 @@ function RaiseVisualizer() {
                           </div>
                         </div>
                       ))}
+                      <div className="flex items-center gap-2 text-xs">
+                        <div className="flex-1 h-6 bg-ink-100 rounded flex items-center justify-center font-medium text-ink-500">
+                          ${standardDeductions[filingStatus].toLocaleString()} — Std deduction (0%)
+                        </div>
+                        <div className="w-16 text-right font-mono text-ink-400">$0</div>
+                      </div>
+                      <div className="pt-0.5 text-right">
+                        <span className="text-xs text-ink-400">Total: ${prevSalary.toLocaleString()} = gross salary</span>
+                      </div>
                     </div>
                     <div className="pt-2 border-t border-steel-300 space-y-1 text-sm">
                       <div className="flex justify-between">
@@ -3262,7 +3271,7 @@ function RaiseVisualizer() {
                   <h4 className="font-medium text-ink-800 mb-3">After: ${salary.toLocaleString()}</h4>
                   <div className="space-y-3">
                     <div className="space-y-1">
-                      {current.layers.map((layer, idx) => (
+                      {[...current.layers].reverse().map((layer, idx) => (
                         <div key={idx} className="flex items-center gap-2 text-xs">
                           <div className="flex-1 h-6 bg-gradient-to-r from-sage-100 to-sage-200 rounded flex items-center justify-center font-medium text-sage-700">
                             ${Math.round(layer.income).toLocaleString()} @ {Math.round(layer.rate * 100)}%
@@ -3272,6 +3281,15 @@ function RaiseVisualizer() {
                           </div>
                         </div>
                       ))}
+                      <div className="flex items-center gap-2 text-xs">
+                        <div className="flex-1 h-6 bg-ink-100 rounded flex items-center justify-center font-medium text-ink-500">
+                          ${standardDeductions[filingStatus].toLocaleString()} — Std deduction (0%)
+                        </div>
+                        <div className="w-16 text-right font-mono text-ink-400">$0</div>
+                      </div>
+                      <div className="pt-0.5 text-right">
+                        <span className="text-xs text-ink-400">Total: ${salary.toLocaleString()} = gross salary</span>
+                      </div>
                     </div>
                     <div className="pt-2 border-t border-sage-300 space-y-1 text-sm">
                       <div className="flex justify-between">
