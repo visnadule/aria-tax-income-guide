@@ -1,44 +1,55 @@
-# [Project name]
+# Aria Tax
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An educational guide that helps users understand how their income is reported in the US tax system — covering W-2s, 1099s, Schedule C, and more.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/aria-tax run dev` — run the frontend (port assigned by workflow)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React + Vite + Tailwind CSS v3 (PostCSS)
+- Fonts: Merriweather (serif headings) + Inter (sans-serif body) via Google Fonts
+- Icons: lucide-react
+- No backend — pure frontend educational app
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/aria-tax/` — the main web app
+- `artifacts/aria-tax/src/App.tsx` — all views and components (single-file app, ~2800 lines)
+- `artifacts/aria-tax/src/index.css` — Tailwind v3 base + custom component styles
+- `artifacts/aria-tax/tailwind.config.js` — custom color palette (sage, sand, steel, cream, ink)
+- `artifacts/aria-tax/index.html` — Google Fonts links + SEO meta tags
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Single-file component approach in App.tsx — all views (W2, Freelance, Mixed, Investment, 1099 Tree, Schedule C, Comparison) live in one file for simplicity.
+- Tailwind v3 with PostCSS (not the v4 Vite plugin) — required because the app was built with v3 custom config/colors.
+- No database or API — the app is fully static educational content, no data persistence needed.
+- Custom color palette: sage (green tones), sand (warm amber), steel (muted blue), cream (background), ink (text).
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Entry screen: Users pick their earner type (W-2, Freelance, Mixed, Investment)
+- Per-type roadmaps: Visual flow diagrams showing how income travels through the tax system
+- Form anatomy viewers: Interactive breakdowns of W-2, 1099-NEC, 1099-K forms
+- 1099 Family tree: Visual taxonomy of all 1099 form variants
+- Schedule C view: Explanation of the business profit/loss form
+- Comparison view: Side-by-side comparison of income types
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- App is educational only — "This is an educational guide, not tax advice. No data is collected. Nothing is filed."
+- Created by Aria Tax Services PA
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Do NOT switch to Tailwind v4 / `@tailwindcss/vite` — the custom color palette and animation keyframes require v3 config format.
+- vite.config.ts uses `css.postcss.plugins` to load tailwind + autoprefixer (not the vite plugin).
+- The `@supabase/supabase-js` package was listed in the original Bolt package.json but is NOT used anywhere in the app — it was not migrated.
 
 ## Pointers
 
