@@ -1,0 +1,70 @@
+Block: "No one withheld anything" 
+       (existing — keep header and clock icon)
+
+Subtitle change FROM:
+   "You may owe quarterly estimated payments"
+TO:
+   "You may need to pay quarterly estimated tax — 
+    here's when that rule applies."
+
+Add a Level-1 explanation block UNDER the subtitle, 
+above the quarterly deadlines grid:
+
+  ┌────────────────────────────────────────────────┐
+  │ The threshold                                  │
+  │                                                │
+  │ Quarterly payments are generally required if   │
+  │ you expect to still owe the IRS $1,000 or more │
+  │ at filing time — AFTER withholding and         │
+  │ refundable credits.                            │
+  │                                                │
+  │ The $1,000 is not your total tax. It's what's  │
+  │ still owed after everything already paid in.   │
+  └────────────────────────────────────────────────┘
+
+Keep the existing quarterly deadlines grid (Q1 Apr 15, 
+Q2 Jun 15, Q3 Sep 15, Q4 Jan 15) below this block.
+
+Add a Level-2 expandable block BELOW the deadlines, 
+labeled "The safe harbor (more detail)":
+
+  When expanded:
+  ┌────────────────────────────────────────────────┐
+  │ Even if you'll owe more than $1,000, you       │
+  │ generally avoid an underpayment penalty if     │
+  │ your withholding plus estimated payments       │
+  │ cover at least:                                │
+  │                                                │
+  │   • 90% of this year's tax, OR                 │
+  │   • 100% of last year's tax                    │
+  │     (110% if prior-year AGI was over $150,000, │
+  │      or $75,000 if married filing separately)  │
+  │                                                │
+  │ Whichever is smaller.                          │
+  │                                                │
+  │ This is why people with stable W-2 jobs and    │
+  │ small side income often don't need separate    │
+  │ quarterly payments — their W-2 withholding can │
+  │ be enough to satisfy the safe harbor on its    │
+  │ own.                                           │
+  └────────────────────────────────────────────────┘
+
+Add a Level-3 sidebar (or callout) labeled 
+"Common confusion":
+
+  ┌────────────────────────────────────────────────┐
+  │ "My total tax will be way more than $1,000.    │
+  │  Do I need to pay quarterly?"                  │
+  │                                                │
+  │ Not necessarily. The $1,000 threshold is about │
+  │ what's still owed AFTER withholding. If your   │
+  │ W-2 withholding already covers most of your    │
+  │ tax, you may be fine even with significant     │
+  │ side income.                                   │
+  └────────────────────────────────────────────────┘
+
+At the bottom of the block, small text:
+
+  "Simplified for clarity. Actual requirements depend 
+  on your full picture: withholding, credits, prior-
+  year tax, and safe harbor rules."

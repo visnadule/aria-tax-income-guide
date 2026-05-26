@@ -557,33 +557,11 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           <FlowNode
             icon={<Clock className="w-6 h-6" />}
             title="No one withheld anything"
-            description="You may owe quarterly estimated payments"
+            description="You may need to pay quarterly estimated tax — here's when that rule applies."
             color="sand"
             highlight
           >
-            <div className="mt-4 p-4 bg-sand-50 rounded-lg border border-sand-200">
-              <div className="text-center mb-3">
-                <span className="text-sm font-medium text-sand-700">Quarterly deadlines</span>
-              </div>
-              <div className="grid grid-cols-4 gap-2 text-center text-sm">
-                <div className="p-2 bg-white rounded border border-ink-100">
-                  <div className="text-ink-400">Q1</div>
-                  <div className="font-medium text-ink-700">Apr 15</div>
-                </div>
-                <div className="p-2 bg-white rounded border border-ink-100">
-                  <div className="text-ink-400">Q2</div>
-                  <div className="font-medium text-ink-700">Jun 15</div>
-                </div>
-                <div className="p-2 bg-white rounded border border-ink-100">
-                  <div className="text-ink-400">Q3</div>
-                  <div className="font-medium text-ink-700">Sep 15</div>
-                </div>
-                <div className="p-2 bg-white rounded border border-ink-100">
-                  <div className="text-ink-400">Q4</div>
-                  <div className="font-medium text-ink-700">Jan 15</div>
-                </div>
-              </div>
-            </div>
+            <QuarterlyPaymentsDetail />
           </FlowNode>
         </div>
       </div>
@@ -2121,6 +2099,111 @@ function ExpandableSection({
           {children}
         </div>
       </div>
+    </div>
+  );
+}
+
+// Quarterly Payments Detail — expandable self-contained component
+function QuarterlyPaymentsDetail() {
+  const [showSafeHarbor, setShowSafeHarbor] = useState(false);
+
+  return (
+    <div className="mt-4 space-y-4">
+      {/* Level 1 — The threshold */}
+      <div className="p-4 bg-sand-50 rounded-lg border border-sand-200">
+        <div className="text-sm font-semibold text-sand-700 mb-2">The threshold</div>
+        <p className="text-sm text-ink-700 leading-relaxed">
+          Quarterly payments are generally required if you expect to still owe the IRS{' '}
+          <span className="font-semibold text-ink-800">$1,000 or more</span> at filing time —
+          after withholding and refundable credits.
+        </p>
+        <p className="text-sm text-ink-600 mt-2 leading-relaxed">
+          The $1,000 is not your total tax. It's what's still owed after everything already paid in.
+        </p>
+      </div>
+
+      {/* Quarterly deadlines grid */}
+      <div className="p-4 bg-sand-50 rounded-lg border border-sand-200">
+        <div className="text-center mb-3">
+          <span className="text-sm font-medium text-sand-700">Quarterly deadlines</span>
+        </div>
+        <div className="grid grid-cols-4 gap-2 text-center text-sm">
+          <div className="p-2 bg-white rounded border border-ink-100">
+            <div className="text-ink-400">Q1</div>
+            <div className="font-medium text-ink-700">Apr 15</div>
+          </div>
+          <div className="p-2 bg-white rounded border border-ink-100">
+            <div className="text-ink-400">Q2</div>
+            <div className="font-medium text-ink-700">Jun 15</div>
+          </div>
+          <div className="p-2 bg-white rounded border border-ink-100">
+            <div className="text-ink-400">Q3</div>
+            <div className="font-medium text-ink-700">Sep 15</div>
+          </div>
+          <div className="p-2 bg-white rounded border border-ink-100">
+            <div className="text-ink-400">Q4</div>
+            <div className="font-medium text-ink-700">Jan 15</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Level 2 — Safe harbor (expandable) */}
+      <div className="rounded-lg border border-sand-200 overflow-hidden">
+        <button
+          onClick={() => setShowSafeHarbor(!showSafeHarbor)}
+          className="w-full flex items-center justify-between px-4 py-3 bg-sand-50 hover:bg-sand-100 transition-colors text-left"
+        >
+          <span className="text-sm font-medium text-sand-800">The safe harbor (more detail)</span>
+          <ChevronDown className={`w-4 h-4 text-sand-600 transition-transform duration-200 ${showSafeHarbor ? 'rotate-180' : ''}`} />
+        </button>
+        {showSafeHarbor && (
+          <div className="px-4 py-4 bg-white border-t border-sand-200 space-y-3">
+            <p className="text-sm text-ink-700 leading-relaxed">
+              Even if you'll owe more than $1,000, you generally avoid an underpayment penalty if
+              your withholding plus estimated payments cover at least:
+            </p>
+            <ul className="space-y-2 text-sm text-ink-700">
+              <li className="flex items-start gap-2">
+                <span className="text-sand-500 font-bold flex-shrink-0 mt-0.5">•</span>
+                <span><span className="font-semibold">90% of this year's tax</span>, OR</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-sand-500 font-bold flex-shrink-0 mt-0.5">•</span>
+                <span>
+                  <span className="font-semibold">100% of last year's tax</span>{' '}
+                  <span className="text-ink-500">(110% if prior-year AGI exceeded $150,000,
+                  or $75,000 if married filing separately)</span>
+                </span>
+              </li>
+            </ul>
+            <p className="text-sm text-ink-500 italic">Whichever is smaller.</p>
+            <p className="text-sm text-ink-600 leading-relaxed pt-1 border-t border-sand-100">
+              This is why people with stable W-2 jobs and small side income often don't need
+              separate quarterly payments — their W-2 withholding can be enough to satisfy the
+              safe harbor on its own.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Level 3 — Common confusion callout */}
+      <div className="p-4 bg-amber-50 rounded-lg border border-amber-200">
+        <div className="text-sm font-semibold text-amber-800 mb-2">Common confusion</div>
+        <p className="text-sm text-ink-600 italic mb-2 leading-relaxed">
+          "My total tax will be way more than $1,000. Do I need to pay quarterly?"
+        </p>
+        <p className="text-sm text-ink-700 leading-relaxed">
+          Not necessarily. The $1,000 threshold is about what's still owed{' '}
+          <span className="font-semibold">after withholding</span>. If your W-2 withholding
+          already covers most of your tax, you may be fine even with significant side income.
+        </p>
+      </div>
+
+      {/* Disclaimer */}
+      <p className="text-xs text-ink-400 italic leading-relaxed">
+        Simplified for clarity. Actual requirements depend on your full picture: withholding,
+        credits, prior-year tax, and safe harbor rules.
+      </p>
     </div>
   );
 }
