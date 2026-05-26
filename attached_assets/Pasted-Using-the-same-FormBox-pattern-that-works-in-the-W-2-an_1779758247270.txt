@@ -1,0 +1,128 @@
+Using the same FormBox pattern that works in the W-2 
+anatomy on Path A, build form anatomies for these 
+additional forms. Embed each anatomy inline at the 
+point in the roadmap where the form is first 
+introduced.
+
+PATH B (Freelance / Schedule C):
+
+  1099-NEC anatomy
+    Banner: "1099-NEC · Nonemployee Compensation"
+    Boxes to include:
+      Box 1: Nonemployee compensation ($X amount)
+      Box 4: Federal income tax withheld (usually $0)
+      Box 5-7: State info (state name, state tax 
+              withheld, payer's state number)
+    Tooltips should explain: who sends it (clients), 
+    when it arrives (by January 31), and where Box 1 
+    lands on the return (Schedule C, Part I, Line 1).
+
+  1099-K anatomy
+    Banner: "1099-K · Payment Card and Third Party 
+    Network Transactions"
+    Boxes to include:
+      Box 1a: Gross amount of payment card/third party
+              network transactions
+      Box 4: Federal income tax withheld (usually $0)
+      Box 5a-l: Monthly amounts (just show 2-3 months 
+                as representative)
+    Tooltip on Box 1a: explains this is gross receipts 
+    before any platform fees or refunds, and that the 
+    taxable amount on Schedule C will usually be less 
+    than this number after expenses.
+
+  Schedule C anatomy (simplified — not the full form)
+    Banner: "Schedule C · Profit or Loss From Business"
+    Structure to show (in stacked sections rather than 
+    boxes):
+      Part I — Income
+        Line 1: Gross receipts or sales
+        Line 7: Gross income
+      Part II — Expenses (show 4-5 representative 
+      categories)
+        Line 8: Advertising
+        Line 18: Office expense
+        Line 22: Supplies
+        Line 25: Utilities
+        Line 27a: Other expenses
+      Part II — Bottom
+        Line 28: Total expenses
+        Line 31: Net profit or (loss)
+    Tooltip on Line 31: explains this is the number 
+    that flows to Schedule 1, then to Form 1040, and 
+    becomes the base for both income tax and 
+    self-employment tax.
+
+  Schedule SE anatomy (simplified)
+    Banner: "Schedule SE · Self-Employment Tax"
+    Structure to show:
+      Net SE earnings (from Schedule C Line 31)
+      × 92.35% adjustment
+      = SE income subject to tax
+      × 15.3% (= 12.4% SS + 2.9% Medicare)
+      = Total SE tax
+      ÷ 2 = deductible half
+    Tooltip on the 15.3%: explains this is what a 
+    W-2 employee and their employer pay TOGETHER, 
+    but as self-employed you pay both halves yourself.
+    Tooltip on deductible half: explains this gets 
+    deducted on Schedule 1, partially offsetting the 
+    income tax burden of SE tax.
+
+PATH D (Investment / Interest / Retirement):
+
+  1099-INT anatomy
+    Banner: "1099-INT · Interest Income"
+    Boxes:
+      Box 1: Interest income
+      Box 2: Early withdrawal penalty
+      Box 3: Interest on U.S. Savings Bonds and 
+             Treasury obligations
+      Box 4: Federal income tax withheld
+    Tooltip on Box 1: lands on Schedule B (or directly 
+    on Form 1040 if interest under $1,500 total).
+
+  1099-DIV anatomy
+    Banner: "1099-DIV · Dividends and Distributions"
+    Boxes:
+      Box 1a: Total ordinary dividends
+      Box 1b: Qualified dividends
+      Box 2a: Total capital gain distributions
+      Box 4: Federal income tax withheld
+    Tooltip on Box 1b: explains qualified dividends 
+    are taxed at lower long-term capital gains rates, 
+    not ordinary income rates — this is the most 
+    misunderstood box on this form.
+
+  1099-B anatomy
+    Banner: "1099-B · Proceeds from Broker Transactions"
+    Boxes:
+      Box 1a: Description of property
+      Box 1c: Date sold
+      Box 1d: Proceeds
+      Box 1e: Cost or other basis
+      Box 2: Type of gain or loss (short-term vs 
+             long-term)
+    Tooltip on Box 1d vs Box 1e: explains that the 
+    gain (or loss) is Proceeds minus Basis — and that 
+    if Basis is blank, taxpayer must determine it 
+    themselves.
+
+  1099-R anatomy
+    Banner: "1099-R · Distributions from Pensions, 
+    Annuities, Retirement Plans"
+    Boxes:
+      Box 1: Gross distribution
+      Box 2a: Taxable amount
+      Box 4: Federal income tax withheld
+      Box 7: Distribution code(s)
+    Tooltip on Box 7: explains this code determines 
+    whether the distribution is subject to early-
+    withdrawal penalty, is a rollover, is normal 
+    retirement, etc. The most important box on the 
+    form even though it's just a letter.
+
+For all anatomies: match the visual pattern from the 
+existing W-2 anatomy on Path A. Hover or focus reveals 
+a tooltip BELOW the form (not floating), with the box 
+label, description, and "where it lands" section.

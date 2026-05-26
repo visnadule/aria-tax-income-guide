@@ -497,19 +497,7 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
             description="Profit or Loss From Business (Sole Proprietorship)"
             color="sage"
           >
-            <div className="mt-4">
-              <div className="bg-cream-50 rounded-xl border-2 border-sage-200 p-4">
-                <div className="text-center mb-3 pb-2 border-b border-sage-200">
-                  <div className="text-xs text-sage-600 font-medium">Schedule C</div>
-                  <div className="text-sm text-ink-700 font-serif">Profit or Loss From Business</div>
-                </div>
-                <div className="space-y-2">
-                  <FormBox box="Part I" label="Gross receipts or sales" tooltip="All income received from your business — Line 1" />
-                  <FormBox box="Part II" label="Expenses" tooltip="Business expenses by category — advertising, supplies, travel, etc." />
-                  <FormBox box="Line 31" label="Net profit (or loss)" tooltip="Income minus expenses — flows to Form 1040 via Schedule 1" />
-                </div>
-              </div>
-            </div>
+            <ScheduleCAnatomy />
           </FlowNode>
 
           <FlowConnector />
@@ -2137,6 +2125,153 @@ function ExpandableSection({
   );
 }
 
+// Schedule C Anatomy — section-grouped interactive component
+function ScheduleCAnatomy() {
+  const [activeTip, setActiveTip] = useState<string | null>(null);
+
+  const sections: Array<{
+    name: string;
+    items: Array<{ line: string; label: string; value: string; desc: string; where: string }>;
+  }> = [
+    {
+      name: 'Part I — Income',
+      items: [
+        {
+          line: 'Line 1',
+          label: 'Gross receipts or sales',
+          value: '$42,500',
+          desc: 'Total income received from your business before any deductions. Includes all 1099-NEC amounts, 1099-K amounts, direct payments, and any other business revenue — whether or not you received a form.',
+          where: 'Starting point for Schedule C income. Platform fees and refunds are deducted as Part II expenses.',
+        },
+        {
+          line: 'Line 7',
+          label: 'Gross income',
+          value: '$42,500',
+          desc: 'Gross receipts minus cost of goods sold (if applicable). For most service-based freelancers, this equals Line 1 — cost of goods sold only applies if you sell physical products.',
+          where: 'Carries into Part II as the income figure against which expenses are subtracted.',
+        },
+      ],
+    },
+    {
+      name: 'Part II — Expenses',
+      items: [
+        {
+          line: 'Line 8',
+          label: 'Advertising',
+          value: '$600',
+          desc: 'Business promotion costs — website hosting, paid ads, business cards, social media promotion, print materials. Must be ordinary and necessary for the business.',
+          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+        },
+        {
+          line: 'Line 18',
+          label: 'Office expense',
+          value: '$840',
+          desc: 'Office supplies used directly in your business — printer paper, pens, folders, toner. Separate from home office (Line 30) and from equipment over $2,500 (which may need depreciation).',
+          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+        },
+        {
+          line: 'Line 22',
+          label: 'Supplies',
+          value: '$1,200',
+          desc: 'Materials and supplies used in delivering your service — tools, client materials, project-specific purchases. The line between Line 18 and Line 22 is fuzzy; the IRS cares more that you claim it somewhere than exactly which line.',
+          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+        },
+        {
+          line: 'Line 25',
+          label: 'Utilities',
+          value: '$480',
+          desc: 'Business-portion utility costs — phone (business use percentage), internet (business use percentage), electricity for a dedicated home office. You may need to allocate based on square footage or usage.',
+          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+        },
+        {
+          line: 'Line 27a',
+          label: 'Other expenses',
+          value: '$920',
+          desc: 'Ordinary and necessary business expenses not listed on Lines 8–26 — software subscriptions, professional dues, continuing education, bank fees, business books, reference materials.',
+          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+        },
+      ],
+    },
+    {
+      name: 'Part II — Bottom Line',
+      items: [
+        {
+          line: 'Line 28',
+          label: 'Total expenses',
+          value: '$4,040',
+          desc: 'Sum of all business expenses from Lines 8 through 27b. This is the total deductible amount against your gross income — every dollar here reduces your taxable profit.',
+          where: 'Subtracted from Line 7 (gross income) to calculate net profit on Line 31.',
+        },
+        {
+          line: 'Line 31',
+          label: 'Net profit or (loss)',
+          value: '$38,460',
+          desc: 'Your business bottom line — gross income minus total expenses. This single number does two things: it flows to Schedule 1 as ordinary income (subject to income tax), and it also becomes the base for Schedule SE (self-employment tax). Every dollar of legitimate expense reduces both taxes simultaneously.',
+          where: 'Schedule 1, Line 3 → Form 1040, Line 8 (ordinary income). Also base for Schedule SE self-employment tax.',
+        },
+      ],
+    },
+  ];
+
+  const allItems = sections.flatMap(s => s.items);
+  const activeTipData = activeTip ? allItems.find(i => i.line === activeTip) : null;
+
+  return (
+    <div className="mt-4">
+      <p className="text-xs text-ink-500 mb-3">Hover or focus any line to see what it reports and where it lands.</p>
+
+      <div className="bg-cream-50 rounded-xl border-2 border-sage-200 overflow-hidden mb-4">
+        <div className="bg-sage-50 px-4 py-3 border-b border-sage-200 flex justify-between items-baseline">
+          <span className="text-sm font-medium text-ink-700">Schedule C · Profit or Loss From Business</span>
+          <span className="text-xs text-ink-400">Filed with Form 1040</span>
+        </div>
+
+        {sections.map((section) => (
+          <div key={section.name}>
+            <div className="px-4 py-1.5 bg-sage-50 border-y border-sage-100">
+              <span className="text-xs font-semibold text-sage-700 uppercase tracking-wide">{section.name}</span>
+            </div>
+            <div className="divide-y divide-sage-50">
+              {section.items.map((item) => (
+                <button
+                  key={item.line}
+                  onMouseEnter={() => setActiveTip(item.line)}
+                  onFocus={() => setActiveTip(item.line)}
+                  onClick={() => setActiveTip(item.line)}
+                  className={`w-full text-left flex items-center gap-3 px-4 py-2.5 transition-colors ${
+                    activeTip === item.line ? 'bg-sage-100' : 'bg-white hover:bg-sage-50'
+                  }`}
+                >
+                  <div className="text-xs text-sage-600 font-semibold w-14 flex-shrink-0">{item.line}</div>
+                  <div className="text-sm text-ink-700 flex-1 leading-tight">{item.label}</div>
+                  <div className="text-xs text-ink-500 font-mono ml-2 flex-shrink-0">{item.value}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="bg-sage-50 rounded-xl p-4 border border-sage-200">
+        {!activeTip ? (
+          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a line above</p>
+        ) : activeTipData ? (
+          <div className="space-y-3">
+            <div className="text-xs font-medium text-sage-600 uppercase tracking-wide">
+              {activeTipData.line} · {activeTipData.label}
+            </div>
+            <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
+            <div className="pt-3 border-t border-sage-200">
+              <div className="text-xs font-medium text-sage-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <p className="text-sm text-ink-600">{activeTipData.where}</p>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 // Form Anatomy Components with Interactive Tooltips
 interface FormBoxData {
   box: string;
@@ -2260,22 +2395,36 @@ function Form1099NECAnatomy() {
       box: 'Box 1',
       label: 'Nonemployee compensation',
       value: '$8,750.00',
-      desc: 'Gross amount paid to you for services — report this on Schedule C, Part I, line 1 (gross receipts).',
-      where: 'Schedule C, line 1a (business income)',
-    },
-    {
-      box: 'Box 2',
-      label: 'Payer made direct sales',
-      value: '(check if X)',
-      desc: 'Marked with an X if $5,000 or more of payments were made directly to you by consumers (not through the company).',
-      where: 'Reference only — informs business classification',
+      desc: 'Gross amount paid to you for services. Your client sends this when they paid you $600 or more during the year — it arrives by January 31. This number goes directly to Schedule C, Part I, Line 1 as gross receipts before any expense deductions.',
+      where: 'Schedule C, Part I, Line 1 (gross receipts or sales)',
     },
     {
       box: 'Box 4',
       label: 'Federal income tax withheld',
       value: '$0.00',
-      desc: 'Federal backup withholding, if any. Rare for 1099-NEC; you typically receive the full amount and handle taxes yourself.',
-      where: 'Reduces your annual tax liability (Form 1040, line 25a)',
+      desc: 'Backup withholding — nearly always $0 for 1099-NEC. You receive the full payment amount and are responsible for estimating and paying your own taxes quarterly. If you see a non-zero amount here, it means your tax ID was flagged for backup withholding.',
+      where: 'Form 1040, Line 25a (federal tax withheld) — offsets what you owe at filing',
+    },
+    {
+      box: 'Box 5',
+      label: 'State tax withheld',
+      value: '$0.00',
+      desc: 'State income tax withheld by the payer, if any. Nearly always $0 — self-employed workers are responsible for paying their own state estimated taxes.',
+      where: 'Your state income tax return — state tax withheld line',
+    },
+    {
+      box: 'Box 6',
+      label: "State / Payer's state no.",
+      value: 'FL / —',
+      desc: "The state where the income was earned and the payer's state tax ID number. Used to match the income to the correct state filing jurisdiction.",
+      where: 'State return — identifies the filing state',
+    },
+    {
+      box: 'Box 7',
+      label: 'State income',
+      value: '$8,750.00',
+      desc: 'The amount of compensation attributable to the state listed in Box 6. Usually equals Box 1 if you work in a single state.',
+      where: 'State income tax return — same figure as Box 1 in single-state situations',
     },
   ];
 
@@ -2283,12 +2432,12 @@ function Form1099NECAnatomy() {
 
   return (
     <div className="mt-4">
-      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports.</p>
+      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands.</p>
 
       <div className="bg-cream-50 rounded-xl border-2 border-sage-200 overflow-hidden mb-4">
         <div className="bg-sage-50 px-4 py-3 border-b border-sage-200 flex justify-between items-baseline">
-          <span className="text-sm font-medium text-ink-700">Nonemployee Compensation</span>
-          <span className="text-xs text-ink-400">If $600+ paid</span>
+          <span className="text-sm font-medium text-ink-700">1099-NEC · Nonemployee Compensation</span>
+          <span className="text-xs text-ink-400">Arrives by Jan 31</span>
         </div>
 
         <div className="grid grid-cols-2 divide-x divide-sage-200">
@@ -2337,23 +2486,37 @@ function Form1099KAnatomy() {
     {
       box: 'Box 1a',
       label: 'Gross amount of payment card/third party network transactions',
-      value: '$12,400.00',
-      desc: 'Total dollar amount of all transactions reported to you through payment cards, digital wallets, or third-party networks.',
-      where: 'Schedule C, line 1a (gross receipts) — though not all is income',
+      value: '$24,300.00',
+      desc: 'Total gross receipts reported to the IRS — this is before platform fees, refunds, chargebacks, or any deductions. Your actual taxable amount on Schedule C will usually be lower: you deduct platform fees and other expenses in Part II. Do not assume Box 1a equals your profit.',
+      where: 'Schedule C, Part I, Line 1 (gross receipts) — then deduct fees and refunds as expenses in Part II',
     },
     {
-      box: 'Box 1b',
-      label: 'Card-not-present transactions',
-      value: '$3,200.00',
-      desc: 'Portion of Box 1a from transactions where the card was not physically present (online, phone, mail).',
-      where: 'Reference — same line as Box 1a total',
+      box: 'Box 4',
+      label: 'Federal income tax withheld',
+      value: '$0.00',
+      desc: 'Backup withholding — nearly always $0. You are responsible for paying your own taxes through quarterly estimated payments (April 15, June 16, Sept 15, Jan 15).',
+      where: 'Form 1040, Line 25a — offsets what you owe at filing',
     },
     {
-      box: 'Box 2',
-      label: 'Merchant category code',
-      value: '5733',
-      desc: 'IRS classification code describing the category of your business (e.g., computer/software sales, restaurants).',
-      where: 'Reference only — context for IRS',
+      box: 'Box 5a',
+      label: 'January transactions',
+      value: '$1,840.00',
+      desc: 'Gross payment volume processed in January. Boxes 5a–5l break down the annual Box 1a total by month — useful for estimating quarterly tax payments.',
+      where: 'Reference — the 12-month total (5a through 5l) equals Box 1a',
+    },
+    {
+      box: 'Box 5b',
+      label: 'February transactions',
+      value: '$2,100.00',
+      desc: 'Gross payment volume processed in February.',
+      where: 'Reference — the 12-month total equals Box 1a',
+    },
+    {
+      box: 'Box 5c',
+      label: 'March transactions',
+      value: '$1,950.00',
+      desc: 'Gross payment volume for March. Q1 total (5a + 5b + 5c) helps you estimate how much to pay by April 15 for your first quarterly payment.',
+      where: 'Reference — the 12-month total equals Box 1a',
     },
   ];
 
@@ -2361,12 +2524,12 @@ function Form1099KAnatomy() {
 
   return (
     <div className="mt-4">
-      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports.</p>
+      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands.</p>
 
       <div className="bg-cream-50 rounded-xl border-2 border-sand-200 overflow-hidden mb-4">
         <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
-          <span className="text-sm font-medium text-ink-700">Payment Card & Third Party</span>
-          <span className="text-xs text-ink-400">If $20,000+ reported</span>
+          <span className="text-sm font-medium text-ink-700">1099-K · Payment Card & Third Party Network</span>
+          <span className="text-xs text-ink-400">Arrives by Jan 31</span>
         </div>
 
         <div className="grid grid-cols-2 divide-x divide-sand-200">
@@ -2409,93 +2572,431 @@ function Form1099KAnatomy() {
 }
 
 function Form1099BAnatomy() {
+  const [activeTip, setActiveTip] = useState<string | null>(null);
+
+  const boxes: FormBoxData[] = [
+    {
+      box: 'Box 1a',
+      label: 'Description of property',
+      value: '100 sh XYZ Corp',
+      desc: 'What was sold — typically the security name and number of shares, units of crypto, or description of property.',
+      where: 'Schedule D, Part I or Part II (description column)',
+    },
+    {
+      box: 'Box 1c',
+      label: 'Date sold or disposed',
+      value: '08/14/2024',
+      desc: 'The date of the sale. Combined with the purchase date, this determines whether the gain or loss is short-term (held 1 year or less) or long-term (held more than 1 year).',
+      where: 'Schedule D — determines which section (short vs. long-term) and applicable tax rate',
+    },
+    {
+      box: 'Box 1d',
+      label: 'Proceeds',
+      value: '$4,820.00',
+      desc: 'The amount you received from the sale — your gross selling price. Gain or loss = Proceeds (Box 1d) minus Basis (Box 1e). If Box 1e is blank, you must determine your own cost basis.',
+      where: 'Schedule D, Proceeds column → Form 8949 if adjustments needed',
+    },
+    {
+      box: 'Box 1e',
+      label: 'Cost or other basis',
+      value: '$3,100.00',
+      desc: 'What you originally paid for the asset (purchase price + commissions). If this box is blank or shows $0, the broker did not have basis information on file — you must look up your original purchase price and report the correct basis yourself.',
+      where: 'Schedule D, Cost/Basis column — subtracted from Box 1d to get your gain or loss',
+    },
+    {
+      box: 'Box 2',
+      label: 'Type of gain or loss',
+      value: 'Long-term',
+      desc: 'Short-term = held 1 year or less → taxed at ordinary income rates. Long-term = held more than 1 year → taxed at preferential capital gains rates (0%, 15%, or 20% depending on income).',
+      where: 'Schedule D, Part I (short-term) or Part II (long-term)',
+    },
+  ];
+
+  const activeTipData = activeTip ? boxes.find(b => b.box === activeTip) : null;
+
   return (
     <div className="mt-4">
-      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 p-4">
-        <div className="text-center mb-3 pb-2 border-b border-sand-200">
-          <div className="text-xs text-sand-600 font-medium">Form 1099-B</div>
-          <div className="text-sm text-ink-700 font-serif">Proceeds From Broker Transactions</div>
+      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands.</p>
+
+      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 overflow-hidden mb-4">
+        <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
+          <span className="text-sm font-medium text-ink-700">1099-B · Proceeds from Broker Transactions</span>
+          <span className="text-xs text-ink-400">From your brokerage</span>
         </div>
-        <div className="space-y-2">
-          <FormBox box="Box 1a" label="Date of sale or exchange" tooltip="When the security was sold — determines short-term vs. long-term capital gain treatment" />
-          <FormBox box="Box 1d" label="Proceeds" tooltip="Amount you received from the sale — report on Schedule D" />
-          <FormBox box="Box 1e" label="Cost or other basis" tooltip="What you originally paid — subtract from proceeds to find your gain or loss" />
-          <FormBox box="Box 2" label="Short-term or long-term" tooltip="Held ≤1 year = short-term (ordinary rates). Held >1 year = long-term (0%, 15%, or 20%)" />
+
+        <div className="grid grid-cols-2 divide-x divide-sand-200">
+          {boxes.map((box) => (
+            <button
+              key={box.box}
+              onMouseEnter={() => setActiveTip(box.box)}
+              onFocus={() => setActiveTip(box.box)}
+              onClick={() => setActiveTip(box.box)}
+              className={`text-left p-3 transition-colors ${
+                activeTip === box.box ? 'bg-sand-100' : 'bg-white hover:bg-sand-50'
+              }`}
+            >
+              <div className="text-xs text-sand-600 font-medium uppercase tracking-wide mb-1">{box.box}</div>
+              <div className="text-sm font-medium text-ink-700 leading-tight mb-1">{box.label}</div>
+              <div className="text-xs text-ink-500 font-mono">{box.value}</div>
+            </button>
+          ))}
         </div>
+      </div>
+
+      <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
+        {!activeTip ? (
+          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a box above</p>
+        ) : activeTipData ? (
+          <div className="space-y-3">
+            <div className="text-xs font-medium text-sand-600 uppercase tracking-wide">
+              {activeTipData.box} · {activeTipData.label}
+            </div>
+            <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
+            <div className="pt-3 border-t border-sand-200">
+              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <p className="text-sm text-ink-600">{activeTipData.where}</p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
 }
 
 function Form1099RAnatomy() {
+  const [activeTip, setActiveTip] = useState<string | null>(null);
+
+  const boxes: FormBoxData[] = [
+    {
+      box: 'Box 1',
+      label: 'Gross distribution',
+      value: '$12,000.00',
+      desc: 'Total amount distributed from your retirement account before any withholding or taxes. This is the full amount that left the account.',
+      where: 'Form 1040, Line 5a (pension/annuity total) — Box 2a is the taxable portion',
+    },
+    {
+      box: 'Box 2a',
+      label: 'Taxable amount',
+      value: '$12,000.00',
+      desc: 'The portion of the distribution subject to income tax. Usually equals Box 1 for traditional 401(k) and IRA distributions. May be less than Box 1 if you made after-tax (non-deductible) contributions.',
+      where: 'Form 1040, Line 5b (pension/annuity taxable amount) → added to ordinary income',
+    },
+    {
+      box: 'Box 4',
+      label: 'Federal income tax withheld',
+      value: '$2,400.00',
+      desc: 'Federal income tax withheld from your distribution — typically 20% for most retirement plan withdrawals, or 10% for IRA distributions (both are adjustable). This counts as a payment toward your tax bill.',
+      where: 'Form 1040, Line 25b (federal tax withheld) — reduces what you owe at filing',
+    },
+    {
+      box: 'Box 7',
+      label: 'Distribution code(s)',
+      value: '1',
+      desc: 'The most important box on the form — even though it is just a letter or number. Code 1 = early distribution (under 59½), may trigger 10% penalty. Code 2 = early, exception applies. Code 7 = normal distribution (59½ or older). Code G = direct rollover (not taxable). The code determines whether you owe a penalty.',
+      where: 'Determines Form 5329 (additional taxes) — penalty applies if Code 1 with no exception',
+    },
+  ];
+
+  const activeTipData = activeTip ? boxes.find(b => b.box === activeTip) : null;
+
   return (
     <div className="mt-4">
-      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 p-4">
-        <div className="text-center mb-3 pb-2 border-b border-sand-200">
-          <div className="text-xs text-sand-600 font-medium">Form 1099-R</div>
-          <div className="text-sm text-ink-700 font-serif">Distributions From Pensions &amp; Retirement</div>
+      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands.</p>
+
+      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 overflow-hidden mb-4">
+        <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
+          <span className="text-sm font-medium text-ink-700">1099-R · Distributions from Retirement Plans</span>
+          <span className="text-xs text-ink-400">From your plan administrator</span>
         </div>
-        <div className="space-y-2">
-          <FormBox box="Box 1" label="Gross distribution" tooltip="Total amount distributed from your retirement account before any withholding" />
-          <FormBox box="Box 2a" label="Taxable amount" tooltip="The portion subject to income tax — may differ from Box 1 if you had after-tax contributions" />
-          <FormBox box="Box 4" label="Federal income tax withheld" tooltip="Tax already withheld — appears as a credit on your Form 1040" />
-          <FormBox box="Box 7" label="Distribution code" tooltip="Code tells the IRS why you received this distribution. Code 1 = early (penalty may apply). Code 7 = normal retirement age." />
+
+        <div className="grid grid-cols-2 divide-x divide-sand-200">
+          {boxes.map((box) => (
+            <button
+              key={box.box}
+              onMouseEnter={() => setActiveTip(box.box)}
+              onFocus={() => setActiveTip(box.box)}
+              onClick={() => setActiveTip(box.box)}
+              className={`text-left p-3 transition-colors ${
+                activeTip === box.box ? 'bg-sand-100' : 'bg-white hover:bg-sand-50'
+              }`}
+            >
+              <div className="text-xs text-sand-600 font-medium uppercase tracking-wide mb-1">{box.box}</div>
+              <div className="text-sm font-medium text-ink-700 leading-tight mb-1">{box.label}</div>
+              <div className="text-xs text-ink-500 font-mono">{box.value}</div>
+            </button>
+          ))}
         </div>
+      </div>
+
+      <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
+        {!activeTip ? (
+          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a box above</p>
+        ) : activeTipData ? (
+          <div className="space-y-3">
+            <div className="text-xs font-medium text-sand-600 uppercase tracking-wide">
+              {activeTipData.box} · {activeTipData.label}
+            </div>
+            <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
+            <div className="pt-3 border-t border-sand-200">
+              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <p className="text-sm text-ink-600">{activeTipData.where}</p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
 }
 
 function FormScheduleSEAnatomy() {
+  const [activeTip, setActiveTip] = useState<string | null>(null);
+
+  const steps: Array<{ id: string; label: string; value: string; desc: string; where: string }> = [
+    {
+      id: 'net',
+      label: 'Net SE earnings',
+      value: 'From Schedule C, Line 31',
+      desc: 'Your net profit from Schedule C — gross receipts minus all allowable business expenses. This is the starting number for the entire self-employment tax calculation.',
+      where: 'Schedule SE, Line 2 or Line 3 (depending on method)',
+    },
+    {
+      id: 'adjustment',
+      label: '× 92.35%',
+      value: 'SE income reduction',
+      desc: 'Multiply net earnings by 92.35% (that is, 100% minus 7.65%). This removes the employer-equivalent half of SE tax from the taxable base — mirroring how W-2 employees are not taxed on the employer share of FICA that their employer pays on their behalf.',
+      where: 'Schedule SE, Line 4a — this becomes your SE income subject to tax',
+    },
+    {
+      id: 'rate',
+      label: '× 15.3%',
+      value: '12.4% SS + 2.9% Medicare',
+      desc: 'This is the combined employee AND employer share of FICA. A W-2 employee pays 7.65% and their employer quietly pays the other 7.65% — but as self-employed you pay both halves yourself. The rate applies to the 92.35%-adjusted amount, not your full net profit.',
+      where: 'Schedule SE, Line 12 (SS) + Line 13 (Medicare) = Line 15 total → Form 1040 Schedule 2, Line 4',
+    },
+    {
+      id: 'deductible',
+      label: '÷ 2 = Deductible half',
+      value: 'Above-the-line deduction',
+      desc: 'Half of your SE tax is deductible as an above-the-line adjustment on Schedule 1. This partially compensates for paying both halves of FICA — it reduces your adjusted gross income and therefore your income tax base, even though the SE tax itself is still fully owed.',
+      where: 'Schedule 1, Line 15 → reduces Form 1040 adjusted gross income before the standard deduction',
+    },
+  ];
+
+  const activeTipData = activeTip ? steps.find(s => s.id === activeTip) : null;
+
   return (
     <div className="mt-4">
-      <div className="bg-cream-50 rounded-xl border-2 border-sand-300 p-4">
-        <div className="text-center mb-3 pb-2 border-b border-sand-200">
-          <div className="text-xs text-sand-700 font-medium">Schedule SE</div>
-          <div className="text-sm text-ink-700 font-serif">Self-Employment Tax</div>
+      <p className="text-xs text-ink-500 mb-3">Hover or focus any step to see how the calculation works.</p>
+
+      <div className="bg-cream-50 rounded-xl border-2 border-sand-300 overflow-hidden mb-4">
+        <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
+          <span className="text-sm font-medium text-ink-700">Schedule SE · Self-Employment Tax</span>
+          <span className="text-xs text-ink-400">Calculated on Schedule SE</span>
         </div>
-        <div className="space-y-2">
-          <FormBox box="Line 4" label="Net earnings from self-employment" tooltip="Schedule C net profit × 92.35%" />
-          <FormBox box="Line 12" label="Social Security tax" tooltip="12.4% on earnings up to $176,100 (2025)" />
-          <FormBox box="Line 14" label="Medicare tax" tooltip="2.9% on all earnings + additional 0.9% if high earner" />
-          <FormBox box="Line 15" label="Total self-employment tax" tooltip="Sum of Social Security and Medicare — flows to Form 1040 Schedule 2" />
+
+        <div className="divide-y divide-sand-100">
+          {steps.map((step) => (
+            <button
+              key={step.id}
+              onMouseEnter={() => setActiveTip(step.id)}
+              onFocus={() => setActiveTip(step.id)}
+              onClick={() => setActiveTip(step.id)}
+              className={`w-full text-left flex items-center gap-3 px-4 py-3 transition-colors ${
+                activeTip === step.id ? 'bg-sand-100' : 'bg-white hover:bg-sand-50'
+              }`}
+            >
+              <div className="text-sm font-bold text-sand-700 w-28 flex-shrink-0 font-mono">{step.label}</div>
+              <div className="text-sm text-ink-500 flex-1 leading-tight">{step.value}</div>
+            </button>
+          ))}
         </div>
+      </div>
+
+      <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
+        {!activeTip ? (
+          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a step above</p>
+        ) : activeTipData ? (
+          <div className="space-y-3">
+            <div className="text-xs font-medium text-sand-600 uppercase tracking-wide">
+              {activeTipData.label}
+            </div>
+            <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
+            <div className="pt-3 border-t border-sand-200">
+              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <p className="text-sm text-ink-600">{activeTipData.where}</p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
 }
 
 function Form1099INTAnatomy() {
+  const [activeTip, setActiveTip] = useState<string | null>(null);
+
+  const boxes: FormBoxData[] = [
+    {
+      box: 'Box 1',
+      label: 'Interest income',
+      value: '$340.00',
+      desc: 'Total taxable interest earned from bank accounts, savings accounts, CDs, and bonds. If your total interest income from all sources is $1,500 or less, you can report it directly on Form 1040. If over $1,500, you must also complete Schedule B.',
+      where: 'Schedule B, Part I → Form 1040, Line 2b (taxable interest)',
+    },
+    {
+      box: 'Box 2',
+      label: 'Early withdrawal penalty',
+      value: '$28.00',
+      desc: 'Penalty you paid for withdrawing from a time deposit (like a CD) before maturity. Even though it reduces your actual return, you still report the full interest in Box 1 — then deduct this penalty separately as an above-the-line adjustment.',
+      where: 'Schedule 1, Line 18 (Penalty on early withdrawal of savings) — reduces your AGI',
+    },
+    {
+      box: 'Box 3',
+      label: 'Interest on U.S. Savings Bonds and Treasury obligations',
+      value: '$125.00',
+      desc: 'Interest from federal government securities — U.S. Savings Bonds (like Series EE or I), Treasury bills, notes, and bonds. This interest is exempt from state and local income tax, but is fully taxable for federal purposes.',
+      where: 'Form 1040, Line 2b (federal) — exempt from state return',
+    },
+    {
+      box: 'Box 4',
+      label: 'Federal income tax withheld',
+      value: '$0.00',
+      desc: 'Backup withholding applied if your tax ID was missing or flagged. Rare for most bank accounts — but if you see a non-zero amount, it means the bank has already sent that money to the IRS on your behalf.',
+      where: 'Form 1040, Line 25a (federal tax withheld) — reduces what you owe at filing',
+    },
+  ];
+
+  const activeTipData = activeTip ? boxes.find(b => b.box === activeTip) : null;
+
   return (
     <div className="mt-4">
-      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 p-4">
-        <div className="text-center mb-3 pb-2 border-b border-sand-200">
-          <div className="text-xs text-sand-600 font-medium">Form 1099-INT</div>
-          <div className="text-sm text-ink-700 font-serif">Interest Income</div>
+      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands.</p>
+
+      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 overflow-hidden mb-4">
+        <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
+          <span className="text-sm font-medium text-ink-700">1099-INT · Interest Income</span>
+          <span className="text-xs text-ink-400">From banks, CDs, bonds</span>
         </div>
-        <div className="space-y-2">
-          <FormBox box="Box 1" label="Interest income" tooltip="Total interest earned — report on Schedule B or Form 1040 Line 2b" />
-          <FormBox box="Box 2" label="Early withdrawal penalty" tooltip="Penalty for early CD withdrawal — deductible on Schedule 1" />
-          <FormBox box="Box 3" label="Interest on U.S. savings bonds" tooltip="May be tax-exempt if used for education" />
+
+        <div className="grid grid-cols-2 divide-x divide-sand-200">
+          {boxes.map((box) => (
+            <button
+              key={box.box}
+              onMouseEnter={() => setActiveTip(box.box)}
+              onFocus={() => setActiveTip(box.box)}
+              onClick={() => setActiveTip(box.box)}
+              className={`text-left p-3 transition-colors ${
+                activeTip === box.box ? 'bg-sand-100' : 'bg-white hover:bg-sand-50'
+              }`}
+            >
+              <div className="text-xs text-sand-600 font-medium uppercase tracking-wide mb-1">{box.box}</div>
+              <div className="text-sm font-medium text-ink-700 leading-tight mb-1">{box.label}</div>
+              <div className="text-xs text-ink-500 font-mono">{box.value}</div>
+            </button>
+          ))}
         </div>
+      </div>
+
+      <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
+        {!activeTip ? (
+          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a box above</p>
+        ) : activeTipData ? (
+          <div className="space-y-3">
+            <div className="text-xs font-medium text-sand-600 uppercase tracking-wide">
+              {activeTipData.box} · {activeTipData.label}
+            </div>
+            <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
+            <div className="pt-3 border-t border-sand-200">
+              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <p className="text-sm text-ink-600">{activeTipData.where}</p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
 }
 
 function Form1099DIVAnatomy() {
+  const [activeTip, setActiveTip] = useState<string | null>(null);
+
+  const boxes: FormBoxData[] = [
+    {
+      box: 'Box 1a',
+      label: 'Total ordinary dividends',
+      value: '$820.00',
+      desc: 'All dividends received from stocks and mutual funds. This is your total dividend income — but not all of it is taxed the same way. Box 1b (below) shows the portion that qualifies for lower rates.',
+      where: 'Schedule B, Part II (if over $1,500 total) → Form 1040, Line 3b',
+    },
+    {
+      box: 'Box 1b',
+      label: 'Qualified dividends',
+      value: '$680.00',
+      desc: 'The most misunderstood box on this form. Qualified dividends are a subset of Box 1a — they come from U.S. corporations (or qualifying foreign ones) and you held the stock long enough. They are taxed at preferential long-term capital gains rates (0%, 15%, or 20%) instead of your ordinary income tax rate. A dividend is not automatically qualified just because a company declared it.',
+      where: 'Form 1040, Line 3a — taxed at capital gains rates, not ordinary income rates',
+    },
+    {
+      box: 'Box 2a',
+      label: 'Total capital gain distributions',
+      value: '$145.00',
+      desc: 'Gains distributed by mutual funds and ETFs from selling securities inside the fund during the year. You receive this even if you never sold your fund shares. Treated as long-term capital gain regardless of how long you held the fund.',
+      where: 'Schedule D, Part II (long-term) → Form 1040, Line 13',
+    },
+    {
+      box: 'Box 4',
+      label: 'Federal income tax withheld',
+      value: '$0.00',
+      desc: 'Backup withholding on dividends — rare for most investors. If non-zero, the brokerage sent this amount directly to the IRS and it counts as a tax payment you already made.',
+      where: 'Form 1040, Line 25a (federal tax withheld) — offsets what you owe',
+    },
+  ];
+
+  const activeTipData = activeTip ? boxes.find(b => b.box === activeTip) : null;
+
   return (
     <div className="mt-4">
-      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 p-4">
-        <div className="text-center mb-3 pb-2 border-b border-sand-200">
-          <div className="text-xs text-sand-600 font-medium">Form 1099-DIV</div>
-          <div className="text-sm text-ink-700 font-serif">Dividends and Distributions</div>
+      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands.</p>
+
+      <div className="bg-cream-50 rounded-xl border-2 border-sand-200 overflow-hidden mb-4">
+        <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
+          <span className="text-sm font-medium text-ink-700">1099-DIV · Dividends and Distributions</span>
+          <span className="text-xs text-ink-400">From your brokerage</span>
         </div>
-        <div className="space-y-2">
-          <FormBox box="Box 1a" label="Total ordinary dividends" tooltip="Regular dividends — report on Form 1040 Line 3b or Schedule B" />
-          <FormBox box="Box 1b" label="Qualified dividends" tooltip="Taxed at lower capital gains rates — report on Form 1040 Line 3a" />
-          <FormBox box="Box 2a" label="Total capital gain distributions" tooltip="Mutual fund capital gains — report on Schedule D" />
+
+        <div className="grid grid-cols-2 divide-x divide-sand-200">
+          {boxes.map((box) => (
+            <button
+              key={box.box}
+              onMouseEnter={() => setActiveTip(box.box)}
+              onFocus={() => setActiveTip(box.box)}
+              onClick={() => setActiveTip(box.box)}
+              className={`text-left p-3 transition-colors ${
+                activeTip === box.box ? 'bg-sand-100' : 'bg-white hover:bg-sand-50'
+              }`}
+            >
+              <div className="text-xs text-sand-600 font-medium uppercase tracking-wide mb-1">{box.box}</div>
+              <div className="text-sm font-medium text-ink-700 leading-tight mb-1">{box.label}</div>
+              <div className="text-xs text-ink-500 font-mono">{box.value}</div>
+            </button>
+          ))}
         </div>
+      </div>
+
+      <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
+        {!activeTip ? (
+          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a box above</p>
+        ) : activeTipData ? (
+          <div className="space-y-3">
+            <div className="text-xs font-medium text-sand-600 uppercase tracking-wide">
+              {activeTipData.box} · {activeTipData.label}
+            </div>
+            <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
+            <div className="pt-3 border-t border-sand-200">
+              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <p className="text-sm text-ink-600">{activeTipData.where}</p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
