@@ -1899,36 +1899,38 @@ function ThreeWayColumn({
         </div>
       </div>
 
-      {/* Stacked bar visualization */}
-      <div className="p-6 pb-4">
-        <div className="flex h-48 rounded-lg overflow-hidden border border-ink-100 mb-4">
+      {/* Stacked bar visualization — vertical, bottom-to-top: green → red → gray */}
+      <div className="px-6 pb-4">
+        <div className="flex flex-col w-full rounded-xl overflow-hidden border border-ink-100" style={{ height: '240px' }}>
+          {/* Top: gray — smallest, but always min 40px so label fits */}
           {savedAmount > 0 && (
             <div
-              className="bg-ink-100 flex items-center justify-center text-center px-2 transition-all"
-              style={{ width: `${savedPercent}%` }}
+              className="bg-ink-200 flex items-center justify-center text-center px-2 transition-all flex-shrink-0"
+              style={{ height: `${savedPercent}%`, minHeight: '40px' }}
             >
-              <div className="text-xs text-ink-600 font-medium">
-                <div>${Math.round(savedAmount).toLocaleString()}</div>
-                <div className="text-ink-500 text-xs">{savedLabel}</div>
+              <div className="text-xs text-ink-600 font-medium leading-tight text-center">
+                <div className="font-semibold">${Math.round(savedAmount).toLocaleString()}</div>
+                <div className="text-ink-500">{savedLabel}</div>
               </div>
             </div>
           )}
+          {/* Middle: red/pink — taxes */}
           <div
-            className="bg-red-100 flex items-center justify-center text-center px-2 transition-all"
-            style={{ width: `${taxPercent}%` }}
+            className="bg-red-100 flex items-center justify-center text-center px-2 transition-all flex-shrink-0"
+            style={{ height: `${taxPercent}%` }}
           >
-            <div className="text-xs text-red-700 font-medium">
-              <div>${Math.round(totalTaxes).toLocaleString()}</div>
-              <div className="text-red-600 text-xs">taxes</div>
+            <div className="text-xs text-red-700 font-medium leading-tight text-center">
+              <div className="font-semibold">${Math.round(totalTaxes).toLocaleString()}</div>
+              <div className="text-red-500">taxes</div>
             </div>
           </div>
+          {/* Bottom: green — reaches you, always the largest */}
           <div
-            className="bg-emerald-100 flex items-center justify-center text-center px-2 transition-all"
-            style={{ width: `${takeHomePercent}%` }}
+            className="bg-emerald-100 flex items-center justify-center text-center px-2 transition-all flex-grow"
           >
-            <div className="text-xs text-emerald-700 font-medium">
-              <div>${Math.round(takeHome).toLocaleString()}</div>
-              <div className="text-emerald-600 text-xs">reaches you</div>
+            <div className="text-xs text-emerald-700 font-medium leading-tight text-center">
+              <div className="font-semibold">${Math.round(takeHome).toLocaleString()}</div>
+              <div className="text-emerald-600">reaches you</div>
             </div>
           </div>
         </div>
