@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import FormBox from './components/FormBox';
 import {
   Briefcase,
@@ -33,9 +34,28 @@ type ViewState =
   | 'scheduleC'
   | 'comparison';
 
+function LanguageToggle() {
+  const { i18n } = useTranslation();
+  const isEn = i18n.language.startsWith('en');
+  return (
+    <div className="flex items-center gap-1 ml-2 pl-2 border-l border-ink-200">
+      <button
+        onClick={() => i18n.changeLanguage(isEn ? 'ru' : 'en')}
+        className="focus-ring rounded-lg px-2 py-1 text-xs flex items-center gap-1 transition-colors"
+        title="Switch language / Сменить язык"
+      >
+        <span className={isEn ? 'font-bold text-ink-700' : 'text-ink-400 hover:text-ink-600'}>EN</span>
+        <span className="text-ink-300 mx-0.5">|</span>
+        <span className={!isEn ? 'font-bold text-ink-700' : 'text-ink-400 hover:text-ink-600'}>RU</span>
+      </button>
+    </div>
+  );
+}
+
 function App() {
   const [view, setView] = useState<ViewState>('entry');
   const [reducedMotion, setReducedMotion] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -73,9 +93,9 @@ function App() {
             <button
               onClick={() => navigate('entry')}
               className="focus-ring rounded-lg px-2 py-1 text-xs text-ink-400 hover:text-ink-600 transition-colors hidden sm:block"
-              title="Back to guide home"
+              title={t('nav.guideTitle')}
             >
-              / Guide
+              {t('nav.guide')}
             </button>
           </div>
           <nav className="flex items-center gap-2">
@@ -83,20 +103,21 @@ function App() {
               onClick={() => navigate('form1099Tree')}
               className="focus-ring rounded-lg text-sm text-ink-500 hover:text-ink-700 px-3 py-2 transition-colors"
             >
-              1099 Family
+              {t('nav.family1099')}
             </button>
             <button
               onClick={() => navigate('scheduleC')}
               className="focus-ring rounded-lg text-sm text-ink-500 hover:text-ink-700 px-3 py-2 transition-colors"
             >
-              Schedule C
+              {t('nav.scheduleC')}
             </button>
             <button
               onClick={() => navigate('comparison')}
               className="focus-ring rounded-lg text-sm text-ink-500 hover:text-ink-700 px-3 py-2 transition-colors"
             >
-              Compare
+              {t('nav.compare')}
             </button>
+            <LanguageToggle />
           </nav>
         </div>
       </header>
@@ -115,20 +136,19 @@ function App() {
       <footer className="border-t border-ink-100 mt-20">
         <div className="max-w-6xl mx-auto px-6 py-8 space-y-3">
           <p className="text-center text-sm text-ink-400 max-w-xl mx-auto">
-            This is an educational guide, not tax advice.
-            No data is collected. Nothing is filed.
+            {t('footer.disclaimer')}
           </p>
           <p className="text-center text-xs text-ink-400">
             <a href="https://ariataxpa.com" target="_self" rel="noopener" className="hover:text-ink-600 transition-colors underline-offset-2 hover:underline">
-              About Aria Tax Services
+              {t('footer.about')}
             </a>
             <span className="mx-2 text-ink-300">|</span>
             <a href="https://ariataxpa.com" target="_self" rel="noopener" className="hover:text-ink-600 transition-colors underline-offset-2 hover:underline">
-              Contact
+              {t('footer.contact')}
             </a>
           </p>
           <p className="text-center text-xs text-ink-300">
-            &copy; {new Date().getFullYear()} Aria Tax Services PA. All rights reserved.
+            {t('footer.copyright', { year: new Date().getFullYear() })}
           </p>
         </div>
       </footer>
@@ -137,41 +157,41 @@ function App() {
 }
 
 function EntryScreen({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
+  const { t } = useTranslation();
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-ink-900 mb-6">
-          What kind of earner are you?
+          {t('entry.header')}
         </h1>
         <p className="text-lg md:text-xl text-ink-600 max-w-2xl mx-auto leading-relaxed">
-          Income doesn't fit into two neat boxes.
-          Find where you fit, and see how the tax system actually sees you.
+          {t('entry.subhead')}
         </p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
         <IncomeCard
           icon={<Briefcase className="w-8 h-8" />}
-          title="I'm a W-2 employee"
-          description="I get a paycheck with taxes already taken out."
+          title={t('entry.cards.w2.title')}
+          description={t('entry.cards.w2.subtitle')}
           onClick={() => onNavigate('w2')}
         />
         <IncomeCard
           icon={<PenTool className="w-8 h-8" />}
-          title="I do freelance or contract work"
-          description="I'm paid directly by clients, customers, or platforms."
+          title={t('entry.cards.freelance.title')}
+          description={t('entry.cards.freelance.subtitle')}
           onClick={() => onNavigate('freelance')}
         />
         <IncomeCard
           icon={<Layers className="w-8 h-8" />}
-          title="I have a job AND side income"
-          description="I'm an employee, but I also earn on the side."
+          title={t('entry.cards.mixed.title')}
+          description={t('entry.cards.mixed.subtitle')}
           onClick={() => onNavigate('mixed')}
         />
         <IncomeCard
           icon={<TrendingUp className="w-8 h-8" />}
-          title="I have investment, interest, or retirement income"
-          description="Money comes from accounts, not from work."
+          title={t('entry.cards.investment.title')}
+          description={t('entry.cards.investment.subtitle')}
           onClick={() => onNavigate('investment')}
         />
       </div>
@@ -190,6 +210,7 @@ function IncomeCard({
   description: string;
   onClick: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <button
       onClick={onClick}
@@ -203,7 +224,7 @@ function IncomeCard({
       </h3>
       <p className="text-ink-500 leading-relaxed">{description}</p>
       <div className="mt-6 flex items-center text-steel-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-        Explore this path
+        {t('common.explorePath')}
         <ArrowRight className="w-4 h-4 ml-2" />
       </div>
     </button>
@@ -211,18 +232,20 @@ function IncomeCard({
 }
 
 function BackButton({ onClick }: { onClick: () => void }) {
+  const { t } = useTranslation();
   return (
     <button
       onClick={onClick}
       className="focus-ring rounded-lg inline-flex items-center text-ink-500 hover:text-ink-700 mb-8 transition-colors group"
     >
       <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-      Back to start
+      {t('common.backToStart')}
     </button>
   );
 }
 
 function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
+  const { t } = useTranslation();
   return (
     <div className="animate-fade-in max-w-3xl mx-auto">
       <BackButton onClick={() => onNavigate('entry')} />
@@ -230,18 +253,16 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 text-sm text-steel-600 mb-4 bg-steel-50 px-4 py-2 rounded-full">
           <Briefcase className="w-4 h-4" />
-          W-2 Employee
+          {t('pathA.badge')}
         </div>
         <h1 className="text-3xl md:text-4xl font-serif text-ink-900 mb-6">
-          Your income follows a linear path
+          {t('pathA.header')}
         </h1>
         <p className="text-lg text-ink-600 leading-relaxed mb-4">
-          As an employee, your income is reported through your employer's payroll system.
-          Taxes are withheld before you ever see the money.
+          {t('pathA.intro')}
         </p>
         <p className="text-base text-ink-500 leading-relaxed italic">
-          Most of your tax is handled before you file. Your employer withholds, deposits with the IRS,
-          and reports the totals on your W-2. Filing reconciles the math.
+          {t('pathA.introItalic')}
         </p>
       </div>
 
@@ -252,10 +273,9 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
             <HelpCircle className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-medium text-ink-800 mb-2">Understanding refunds</h3>
+            <h3 className="font-medium text-ink-800 mb-2">{t('pathA.confusion.title')}</h3>
             <p className="text-sm text-ink-600 leading-relaxed">
-              A refund doesn't mean you didn't pay tax. It means you <span className="font-medium text-sand-700">overpaid</span> through
-              the year and the IRS is returning the difference.
+              {t('pathA.confusion.body')} <span className="font-medium text-sand-700">{t('pathA.confusion.overpaid')}</span> {t('pathA.confusion.bodyEnd')}
             </p>
           </div>
         </div>
@@ -267,8 +287,8 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
           {/* Employer */}
           <FlowNode
             icon={<Building className="w-6 h-6" />}
-            title="Employer"
-            description="Your company or organization"
+            title={t('pathA.flow.employer.title')}
+            description={t('pathA.flow.employer.desc')}
             color="steel"
           />
 
@@ -277,29 +297,29 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
           {/* Paycheck */}
           <FlowNode
             icon={<Wallet className="w-6 h-6" />}
-            title="You receive a paycheck"
-            description="Direct deposit or paper check"
+            title={t('pathA.flow.paycheck.title')}
+            description={t('pathA.flow.paycheck.desc')}
             color="sage"
-            detail="Payroll system processes your pay and withholds taxes automatically."
+            detail={t('pathA.flow.paycheck.detail')}
           >
             <div className="mt-4 p-4 bg-sage-50 rounded-lg border border-sage-200">
-              <div className="text-sm text-ink-500 mb-3">Your pay stub shows:</div>
+              <div className="text-sm text-ink-500 mb-3">{t('pathA.flow.paycheck.paystub')}</div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-ink-500">Gross pay</span>
-                  <span className="font-mono text-ink-700">Your full wages</span>
+                  <span className="text-ink-500">{t('pathA.flow.paycheck.grossPay')}</span>
+                  <span className="font-mono text-ink-700">{t('pathA.flow.paycheck.grossPayValue')}</span>
                 </div>
                 <div className="flex justify-between text-red-600">
-                  <span className="text-ink-500">Pre-tax deductions</span>
-                  <span className="font-mono">401k, health insurance</span>
+                  <span className="text-ink-500">{t('pathA.flow.paycheck.preTaxDeductions')}</span>
+                  <span className="font-mono">{t('pathA.flow.paycheck.preTaxValue')}</span>
                 </div>
                 <div className="flex justify-between text-red-600">
-                  <span className="text-ink-500">Tax withholdings</span>
-                  <span className="font-mono">Federal, state, FICA</span>
+                  <span className="text-ink-500">{t('pathA.flow.paycheck.taxWithholdings')}</span>
+                  <span className="font-mono">{t('pathA.flow.paycheck.taxWithholdingsValue')}</span>
                 </div>
                 <div className="border-t border-sage-200 pt-2 mt-2 flex justify-between">
-                  <span className="font-medium text-ink-700">Net pay</span>
-                  <span className="font-mono font-medium text-sage-700">What hits your account</span>
+                  <span className="font-medium text-ink-700">{t('pathA.flow.paycheck.netPay')}</span>
+                  <span className="font-mono font-medium text-sage-700">{t('pathA.flow.paycheck.netPayValue')}</span>
                 </div>
               </div>
             </div>
@@ -310,8 +330,8 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
           {/* W-2 Form */}
           <FlowNode
             icon={<FileText className="w-6 h-6" />}
-            title="Form W-2"
-            description="Arrives by January 31 of the following year"
+            title={t('pathA.flow.w2Form.title')}
+            description={t('pathA.flow.w2Form.desc')}
             color="sand"
           >
             <FormW2Anatomy />
@@ -322,19 +342,19 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
           {/* Form 1040 */}
           <FlowNode
             icon={<ArrowDown className="w-6 h-6" />}
-            title="Form 1040, Line 1"
-            description="Wages, salaries, tips"
+            title={t('pathA.flow.form1040.title')}
+            description={t('pathA.flow.form1040.desc')}
             color="steel"
           >
             <div className="mt-4 flex flex-wrap gap-3">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-steel-50 rounded-lg text-sm text-steel-700 border border-steel-200">
-                <X className="w-4 h-4" /> No Schedule C
+                <X className="w-4 h-4" /> {t('pathA.flow.form1040.noScheduleC')}
               </span>
               <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-steel-50 rounded-lg text-sm text-steel-700 border border-steel-200">
-                <X className="w-4 h-4" /> No Schedule SE
+                <X className="w-4 h-4" /> {t('pathA.flow.form1040.noScheduleSE')}
               </span>
               <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-steel-50 rounded-lg text-sm text-steel-700 border border-steel-200">
-                <X className="w-4 h-4" /> No estimated payments
+                <X className="w-4 h-4" /> {t('pathA.flow.form1040.noEstimated')}
               </span>
             </div>
           </FlowNode>
@@ -347,21 +367,21 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white border-2 border-steel-200 text-steel-600 mb-4">
                 <Calculator className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-serif text-ink-800 mb-2">Reconciliation happens</h3>
-              <p className="text-sm text-ink-500">The IRS compares what was withheld against what you owe</p>
+              <h3 className="text-xl font-serif text-ink-800 mb-2">{t('pathA.flow.reconciliation.title')}</h3>
+              <p className="text-sm text-ink-500">{t('pathA.flow.reconciliation.subtitle')}</p>
             </div>
             <div className="grid md:grid-cols-3 gap-4">
               <div className="bg-white rounded-xl p-5 border-2 border-sage-200 text-center">
-                <div className="text-sage-600 font-medium mb-1">Refund</div>
-                <div className="text-sm text-ink-500">Withholding exceeded liability</div>
+                <div className="text-sage-600 font-medium mb-1">{t('pathA.flow.reconciliation.refund')}</div>
+                <div className="text-sm text-ink-500">{t('pathA.flow.reconciliation.refundDesc')}</div>
               </div>
               <div className="bg-white rounded-xl p-5 border-2 border-sand-200 text-center">
-                <div className="text-sand-700 font-medium mb-1">Balance due</div>
-                <div className="text-sm text-ink-500">Underpaid during the year</div>
+                <div className="text-sand-700 font-medium mb-1">{t('pathA.flow.reconciliation.balanceDue')}</div>
+                <div className="text-sm text-ink-500">{t('pathA.flow.reconciliation.balanceDueDesc')}</div>
               </div>
               <div className="bg-white rounded-xl p-5 border-2 border-steel-200 text-center">
-                <div className="text-steel-600 font-medium mb-1">Even</div>
-                <div className="text-sm text-ink-500">Withholding matched obligation</div>
+                <div className="text-steel-600 font-medium mb-1">{t('pathA.flow.reconciliation.even')}</div>
+                <div className="text-sm text-ink-500">{t('pathA.flow.reconciliation.evenDesc')}</div>
               </div>
             </div>
           </div>
@@ -378,42 +398,41 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
             <Layers className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-medium text-ink-800 mb-2">When this gets more complicated</h3>
+            <h3 className="font-medium text-ink-800 mb-2">{t('pathA.complicated.title')}</h3>
             <p className="text-sm text-ink-600 leading-relaxed mb-3">
-              If you also have side income, your W-2 withholding usually isn't enough to cover
-              the tax on that side income.
+              {t('pathA.complicated.body')}
             </p>
             <button
               onClick={() => onNavigate('mixed')}
               className="text-link text-sm font-medium"
             >
-              See mixed income path
+              {t('pathA.complicated.link')}
             </button>
           </div>
         </div>
       </div>
 
       <InsightBox
-        title="What makes W-2 different"
-        content="Your employer acts as a tax collector. They calculate, withhold, and remit taxes on your behalf. You don't make estimated payments. Self-employment tax doesn't apply. Your responsibility begins when you file."
+        title={t('pathA.insight.title')}
+        content={t('pathA.insight.content')}
       />
 
       <div className="mt-12 p-6 bg-sand-50 rounded-2xl border border-sand-200">
         <p className="text-ink-600 mb-4">
-          Curious how this compares to other income types?
+          {t('pathA.compare.prompt')}
         </p>
         <div className="flex flex-wrap gap-3">
           <button
             onClick={() => onNavigate('freelance')}
             className="text-link px-4 py-2 rounded-lg focus-ring"
           >
-            See freelance income path
+            {t('pathA.compare.freelanceLink')}
           </button>
           <button
             onClick={() => onNavigate('comparison')}
             className="text-link px-4 py-2 rounded-lg focus-ring"
           >
-            Compare income types
+            {t('pathA.compare.compareLink')}
           </button>
         </div>
       </div>
@@ -423,6 +442,7 @@ function W2Roadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
 
 function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
   const [expandedStep, setExpandedStep] = useState<number | null>(null);
+  const { t } = useTranslation();
 
   return (
     <div className="animate-fade-in max-w-3xl mx-auto">
@@ -431,14 +451,13 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
       <div className="mb-12">
         <div className="inline-flex items-center gap-2 text-sm text-sage-600 mb-4 bg-sage-50 px-4 py-2 rounded-full">
           <PenTool className="w-4 h-4" />
-          Freelance / Contract
+          {t('pathB.badge')}
         </div>
         <h1 className="text-3xl md:text-4xl font-serif text-ink-900 mb-6">
-          You're part of the tax system now
+          {t('pathB.header')}
         </h1>
         <p className="text-lg text-ink-600 leading-relaxed">
-          When you're paid directly by clients without an employer intermediary,
-          the tax responsibilities shift entirely to you.
+          {t('pathB.intro')}
         </p>
       </div>
 
@@ -448,8 +467,8 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           {/* Payment Source */}
           <FlowNode
             icon={<User className="w-6 h-6" />}
-            title="Client / Customer / Platform"
-            description="A person or business pays you for your work"
+            title={t('pathB.flow.client.title')}
+            description={t('pathB.flow.client.desc')}
             color="steel"
           />
 
@@ -462,9 +481,9 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
                 <Wallet className="w-6 h-6" />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl font-serif text-ink-800 mb-1">You're paid directly</h3>
-                <p className="text-ink-500 mb-3">Deposit, transfer, check, cash, or app payout</p>
-                <p className="text-sm text-sage-600 italic">No withholding. Gross payment arrives in your account.</p>
+                <h3 className="text-xl font-serif text-ink-800 mb-1">{t('pathB.flow.directPayment.title')}</h3>
+                <p className="text-ink-500 mb-3">{t('pathB.flow.directPayment.desc')}</p>
+                <p className="text-sm text-sage-600 italic">{t('pathB.flow.directPayment.noWithholding')}</p>
               </div>
             </div>
           </div>
@@ -473,8 +492,7 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           <div className="p-6 bg-ink-50 border-t border-ink-100">
             <div className="max-w-xl mx-auto text-center">
               <p className="text-sm text-ink-600 leading-relaxed">
-                When you're paid directly, nothing is withheld. The income arrives gross.
-                The responsibility for tax—and the timing of paying it—moves to you.
+                {t('pathB.flow.keyInsight')}
               </p>
             </div>
           </div>
@@ -484,25 +502,25 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           {/* 1099 Forms */}
           <FlowNode
             icon={<FileText className="w-6 h-6" />}
-            title="Form you may receive"
-            description="By January 31 of the following year"
+            title={t('pathB.flow.forms.title')}
+            description={t('pathB.flow.forms.desc')}
             color="sand"
           >
             <div className="mt-4 space-y-3">
               <div className="mb-4">
-                <div className="text-sm font-medium text-ink-700 mb-2">1099-NEC (Most common)</div>
-                <p className="text-xs text-ink-500 mb-3">Client paid you $600+ for services</p>
+                <div className="text-sm font-medium text-ink-700 mb-2">{t('pathB.flow.forms.necLabel')}</div>
+                <p className="text-xs text-ink-500 mb-3">{t('pathB.flow.forms.necDesc')}</p>
                 <Form1099NECAnatomy />
               </div>
               <div className="mb-4">
-                <div className="text-sm font-medium text-ink-700 mb-2">1099-K (Platforms)</div>
-                <p className="text-xs text-ink-500 mb-3">Payment processors, gig apps, marketplaces</p>
+                <div className="text-sm font-medium text-ink-700 mb-2">{t('pathB.flow.forms.kLabel')}</div>
+                <p className="text-xs text-ink-500 mb-3">{t('pathB.flow.forms.kDesc')}</p>
                 <Form1099KAnatomy />
               </div>
               <div className="flex items-start gap-3 p-3 bg-ink-50 rounded-lg border border-ink-200">
-                <span className="font-mono text-sm font-medium text-ink-500">Nothing</span>
+                <span className="font-mono text-sm font-medium text-ink-500">{t('pathB.flow.forms.nothing')}</span>
                 <div className="text-sm text-ink-600">
-                  <span className="font-medium">Still report it.</span> Income is taxable whether you receive a form or not.
+                  <span className="font-medium">{t('pathB.flow.forms.stillReport')}</span> {t('pathB.flow.forms.stillReportDesc')}
                 </div>
               </div>
             </div>
@@ -513,8 +531,8 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           {/* Schedule C */}
           <FlowNode
             icon={<Receipt className="w-6 h-6" />}
-            title="Schedule C"
-            description="Profit or Loss From Business (Sole Proprietorship)"
+            title={t('pathB.flow.scheduleC.title')}
+            description={t('pathB.flow.scheduleC.desc')}
             color="sage"
           >
             <ScheduleCAnatomy />
@@ -525,8 +543,8 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           {/* Flow to 1040 */}
           <FlowNode
             icon={<ArrowDown className="w-6 h-6" />}
-            title="Schedule 1 → Form 1040"
-            description="Net profit adds to your total income"
+            title={t('pathB.flow.schedule1.title')}
+            description={t('pathB.flow.schedule1.desc')}
             color="steel"
           />
 
@@ -535,8 +553,8 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           {/* Two Taxes */}
           <div className="p-8 border-t border-ink-100 bg-gradient-to-br from-sage-50 to-sand-50">
             <div className="text-center mb-6">
-              <h3 className="text-lg font-serif text-ink-800 mb-2">Two taxes apply to net profit</h3>
-              <p className="text-sm text-ink-500">This is the key difference from W-2 income</p>
+              <h3 className="text-lg font-serif text-ink-800 mb-2">{t('pathB.flow.twoTaxes.title')}</h3>
+              <p className="text-sm text-ink-500">{t('pathB.flow.twoTaxes.subtitle')}</p>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-white rounded-xl p-5 border-2 border-sage-200">
@@ -545,12 +563,12 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
                     <Percent className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-medium text-ink-800">Income tax</div>
-                    <div className="text-sm text-ink-500">Federal + state</div>
+                    <div className="font-medium text-ink-800">{t('pathB.flow.twoTaxes.incomeTax')}</div>
+                    <div className="text-sm text-ink-500">{t('pathB.flow.twoTaxes.incomeTaxSub')}</div>
                   </div>
                 </div>
                 <p className="text-sm text-ink-600 leading-relaxed">
-                  Same tax that applies to W-2 wages. Rate depends on your bracket and filing status.
+                  {t('pathB.flow.twoTaxes.incomeTaxBody')}
                 </p>
               </div>
               <div className="bg-white rounded-xl p-5 border-2 border-sand-300">
@@ -559,12 +577,12 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
                     <Calculator className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-medium text-ink-800">Self-employment tax</div>
-                    <div className="text-sm text-sand-600 font-medium">15.3%</div>
+                    <div className="font-medium text-ink-800">{t('pathB.flow.twoTaxes.seTax')}</div>
+                    <div className="text-sm text-sand-600 font-medium">{t('pathB.flow.twoTaxes.seTaxRate')}</div>
                   </div>
                 </div>
                 <p className="text-sm text-ink-600 leading-relaxed mb-3">
-                  Both halves of Social Security (12.4%) and Medicare (2.9%). W-2 employees split this with their employer.
+                  {t('pathB.flow.twoTaxes.seTaxBody')}
                 </p>
                 <FormScheduleSEAnatomy />
               </div>
@@ -576,8 +594,8 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           {/* Quarterly Payments */}
           <FlowNode
             icon={<Clock className="w-6 h-6" />}
-            title="No one withheld anything"
-            description="You may need to pay quarterly estimated tax — here's when that rule applies."
+            title={t('pathB.flow.quarterly.title')}
+            description={t('pathB.flow.quarterly.desc')}
             color="sand"
             highlight
           >
@@ -588,7 +606,7 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
 
       {/* Common Confusions */}
       <div className="mb-12">
-        <h2 className="text-xl font-serif text-ink-800 mb-6">Common questions</h2>
+        <h2 className="text-xl font-serif text-ink-800 mb-6">{t('pathB.questions.header')}</h2>
 
         <div className="space-y-4">
           <div className="bg-white rounded-xl border border-ink-100 p-6">
@@ -598,14 +616,13 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
               </div>
               <div>
                 <h3 className="font-medium text-ink-800 mb-2">
-                  "If I didn't receive a 1099, do I have to report the income?"
+                  {t('pathB.questions.q1.title')}
                 </h3>
                 <p className="text-ink-600 mb-3">
-                  <span className="font-medium text-sage-700">Yes.</span> The 1099 is a copy sent to you and the IRS.
-                  It's not what creates the obligation to report.
+                  <span className="font-medium text-sage-700">{t('pathB.questions.q1.yes')}</span> {t('pathB.questions.q1.yesDetail')}
                 </p>
                 <p className="text-sm text-ink-500">
-                  You're required to report all income regardless of whether you received a form.
+                  {t('pathB.questions.q1.note')}
                 </p>
               </div>
             </div>
@@ -618,17 +635,16 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
               </div>
               <div>
                 <h3 className="font-medium text-ink-800 mb-2">
-                  "Is 1099 income the same as Schedule C income?"
+                  {t('pathB.questions.q2.title')}
                 </h3>
                 <p className="text-ink-600 mb-3">
-                  <span className="font-medium text-sage-700">Not always.</span> 1099-NEC and most 1099-K income
-                  land on Schedule C. Other 1099 forms don't.
+                  <span className="font-medium text-sage-700">{t('pathB.questions.q2.notAlways')}</span> {t('pathB.questions.q2.notAlwaysDetail')}
                 </p>
                 <button
                   onClick={() => onNavigate('form1099Tree')}
                   className="text-link text-sm"
                 >
-                  See the complete 1099 family tree
+                  {t('pathB.questions.q2.link')}
                 </button>
               </div>
             </div>
@@ -643,35 +659,34 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
             <Layers className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-lg font-serif text-ink-800 mb-3">The quiet bridge</h3>
+            <h3 className="text-lg font-serif text-ink-800 mb-3">{t('pathB.quietBridge.title')}</h3>
             <p className="text-ink-600 leading-relaxed mb-4">
-              Many people don't realize when "a little side work" has quietly become
-              "a small business." Schedule C is where that line becomes visible.
+              {t('pathB.quietBridge.body')}
             </p>
             <button
               onClick={() => onNavigate('scheduleC')}
               className="text-link text-sm"
             >
-              Learn more about Schedule C
+              {t('pathB.quietBridge.link')}
             </button>
           </div>
         </div>
       </div>
 
       <InsightBox
-        title="The key shift"
-        content="You became your own payroll department. No employer to withhold for you. The responsibility—and the timing—changed. You may need to pay estimated taxes quarterly to avoid penalties."
+        title={t('pathB.insight.title')}
+        content={t('pathB.insight.content')}
       />
 
       <div className="mt-12 p-6 bg-steel-50 rounded-2xl border border-steel-200">
         <p className="text-ink-600 mb-4">
-          Want to understand the different 1099 forms?
+          {t('pathB.explore1099.prompt')}
         </p>
         <button
           onClick={() => onNavigate('form1099Tree')}
           className="text-link px-4 py-2 rounded-lg focus-ring"
         >
-          Explore the 1099 family
+          {t('pathB.explore1099.link')}
         </button>
       </div>
     </div>
@@ -1574,6 +1589,7 @@ function ScheduleCView({ onNavigate }: { onNavigate: (view: ViewState) => void }
 }
 
 function ComparisonView({ onNavigate }: { onNavigate: (view: ViewState) => void }) {
+  const { t } = useTranslation();
   const grossIncome = 100000;
 
   const employed = {
@@ -1638,163 +1654,117 @@ function ComparisonView({ onNavigate }: { onNavigate: (view: ViewState) => void 
 
       <div className="mb-12">
         <h1 className="text-3xl md:text-4xl font-serif text-ink-900 mb-4">
-          Same work, different arrangement
+          {t('comparison.header')}
         </h1>
         <p className="text-lg text-ink-600 leading-relaxed">
-          Imagine the same person doing the same kind of work, earning the same $100,000—
-          but arranged three different ways. The tax system treats each arrangement differently,
-          and what reaches you at the end can be very different.
+          {t('comparison.intro')}
         </p>
       </div>
 
       {/* Three-Column Comparison */}
       <div className="grid lg:grid-cols-3 gap-6 mb-12">
         <ThreeWayColumn
-          title="Employed at a firm"
+          title={t('comparison.columns.employed.title')}
           subtitle="W-2"
           gross={employed.gross}
           rows={[
-            { label: 'Gross salary', amount: employed.gross, isBold: true },
-            { label: 'Pre-tax benefits', amount: -employed.preTaxBenefits, note: '401k, health insurance' },
-            { label: 'SS (employee half)', amount: -employed.socialSecurityYourHalf },
-            { label: 'Medicare (employee half)', amount: -employed.medicareYourHalf },
-            { label: 'Federal income tax', amount: -employed.federalIncomeTax, note: 'illustrative' },
-            { label: 'State income tax', amount: -employed.stateIncomeTax, note: 'illustrative' },
+            { label: t('comparison.rows.grossSalary'), amount: employed.gross, isBold: true },
+            { label: t('comparison.rows.preTaxBenefits'), amount: -employed.preTaxBenefits, note: t('comparison.rows.preTaxBenefitsNote') },
+            { label: t('comparison.rows.ssEmployeeHalf'), amount: -employed.socialSecurityYourHalf },
+            { label: t('comparison.rows.medicareEmployeeHalf'), amount: -employed.medicareYourHalf },
+            { label: t('comparison.rows.federalIncomeTax'), amount: -employed.federalIncomeTax, note: t('comparison.rows.federalNote') },
+            { label: t('comparison.rows.stateIncomeTax'), amount: -employed.stateIncomeTax, note: t('comparison.rows.stateNote') },
           ]}
           takeHome={employed.takeHome}
           savedAmount={employed.preTaxBenefits}
-          savedLabel="spent or saved"
+          savedLabel={t('comparison.columns.employed.savedLabel')}
           icon={<Briefcase className="w-6 h-6" />}
           color="steel"
-          notes="Employer pays the other half of FICA (7.65%). Benefits paid by employer. No Schedule C."
-          structure={[
-            'Employer provides office, equipment',
-            'Some benefits (health insurance, 401k)',
-            'Employer covers half of Social Security & Medicare',
-          ]}
+          notes={t('comparison.columns.employed.notes')}
+          structure={t('comparison.columns.employed.structure', { returnObjects: true }) as string[]}
         />
 
         <ThreeWayColumn
-          title="Contracted as hired expert"
+          title={t('comparison.columns.contracted.title')}
           subtitle="1099-NEC → Schedule C"
           gross={contracted.gross}
           rows={[
-            { label: 'Gross receipts', amount: contracted.gross, isBold: true },
-            { label: 'Business expenses', amount: -contracted.businessExpenses, note: 'laptop, software, minor supplies' },
-            { label: 'Net profit', amount: contracted.netProfit, isBold: true },
-            { label: 'Self-employment tax', amount: -contracted.seTaxAmount, note: '15.3% on net profit' },
-            { label: 'Federal income tax', amount: -contracted.federalIncomeTax, note: 'illustrative' },
-            { label: 'State income tax', amount: -contracted.stateIncomeTax, note: 'illustrative' },
+            { label: t('comparison.rows.grossReceipts'), amount: contracted.gross, isBold: true },
+            { label: t('comparison.rows.businessExpenses'), amount: -contracted.businessExpenses, note: t('comparison.rows.businessExpensesNote1') },
+            { label: t('comparison.rows.netProfit'), amount: contracted.netProfit, isBold: true },
+            { label: t('comparison.rows.seTax'), amount: -contracted.seTaxAmount, note: t('comparison.rows.seTaxNote') },
+            { label: t('comparison.rows.federalIncomeTax'), amount: -contracted.federalIncomeTax, note: t('comparison.rows.federalNote') },
+            { label: t('comparison.rows.stateIncomeTax'), amount: -contracted.stateIncomeTax, note: t('comparison.rows.stateNote') },
           ]}
           takeHome={contracted.takeHome}
           savedAmount={contracted.businessExpenses}
-          savedLabel="business pays"
+          savedLabel={t('comparison.columns.contracted.savedLabel')}
           icon={<PenTool className="w-6 h-6" />}
           color="sage"
-          notes="You pay both halves of FICA. No employer benefits. Quarterly estimated payments may apply."
-          structure={[
-            'Minimal overhead',
-            'You cover your own tools & software',
-            'You pay full SE tax (no split)',
-            'No employer benefits',
-          ]}
+          notes={t('comparison.columns.contracted.notes')}
+          structure={t('comparison.columns.contracted.structure', { returnObjects: true }) as string[]}
         />
 
         <ThreeWayColumn
-          title="Solo practice / small business"
+          title={t('comparison.columns.solo.title')}
           subtitle="Sometimes 1099, sometimes direct → Schedule C"
           gross={soloOwner.gross}
           rows={[
-            { label: 'Gross revenue', amount: soloOwner.gross, isBold: true },
-            { label: 'Business expenses', amount: -soloOwner.businessExpenses, note: 'office, software, insurance, marketing, supplies, CE' },
-            { label: 'Net profit', amount: soloOwner.netProfit, isBold: true },
-            { label: 'Self-employment tax', amount: -soloOwner.seTaxAmount, note: '15.3% on net profit' },
-            { label: 'Federal income tax', amount: -soloOwner.federalIncomeTax, note: 'illustrative' },
-            { label: 'State income tax', amount: -soloOwner.stateIncomeTax, note: 'illustrative' },
+            { label: t('comparison.rows.grossRevenue'), amount: soloOwner.gross, isBold: true },
+            { label: t('comparison.rows.businessExpenses'), amount: -soloOwner.businessExpenses, note: t('comparison.rows.businessExpensesNote2') },
+            { label: t('comparison.rows.netProfit'), amount: soloOwner.netProfit, isBold: true },
+            { label: t('comparison.rows.seTax'), amount: -soloOwner.seTaxAmount, note: t('comparison.rows.seTaxNote') },
+            { label: t('comparison.rows.federalIncomeTax'), amount: -soloOwner.federalIncomeTax, note: t('comparison.rows.federalNote') },
+            { label: t('comparison.rows.stateIncomeTax'), amount: -soloOwner.stateIncomeTax, note: t('comparison.rows.stateNote') },
           ]}
           takeHome={soloOwner.takeHome}
           savedAmount={soloOwner.businessExpenses}
-          savedLabel="business pays"
+          savedLabel={t('comparison.columns.solo.savedLabel')}
           icon={<Receipt className="w-6 h-6" />}
           color="sand"
-          notes="Real business overhead. You deduct the actual cost of running it. Quarterly payments likely."
-          structure={[
-            'Your business pays for infrastructure',
-            'Office or home office expense',
-            'Professional insurance & tools',
-            'Marketing & business development',
-          ]}
+          notes={t('comparison.columns.solo.notes')}
+          structure={t('comparison.columns.solo.structure', { returnObjects: true }) as string[]}
         />
       </div>
 
       {/* What the Structure Provides */}
       <div className="bg-gradient-to-br from-cream-50 to-white rounded-2xl border border-ink-100 p-8 mb-12">
-        <h2 className="text-2xl font-serif text-ink-800 mb-8 text-center">What each structure provides</h2>
+        <h2 className="text-2xl font-serif text-ink-800 mb-8 text-center">{t('comparison.whatStructureProvides')}</h2>
 
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="bg-white rounded-xl p-6 border border-steel-200">
-            <h3 className="font-serif text-lg text-steel-700 mb-4">Employed</h3>
+            <h3 className="font-serif text-lg text-steel-700 mb-4">{t('comparison.employedLabel')}</h3>
             <ul className="space-y-3 text-sm text-ink-600">
-              <li className="flex items-start gap-2">
-                <span className="text-steel-600 font-bold mt-0.5">•</span>
-                <span>Employer provides office, equipment, workspace</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-steel-600 font-bold mt-0.5">•</span>
-                <span>Employer benefits (health insurance, 401k match)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-steel-600 font-bold mt-0.5">•</span>
-                <span>Employer covers half of FICA taxes</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-steel-600 font-bold mt-0.5">•</span>
-                <span>Employer withholds taxes throughout year</span>
-              </li>
+              {(t('comparison.whatProvides.employed', { returnObjects: true }) as string[]).map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-steel-600 font-bold mt-0.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="bg-white rounded-xl p-6 border border-sage-200">
-            <h3 className="font-serif text-lg text-sage-700 mb-4">Contracted Expert</h3>
+            <h3 className="font-serif text-lg text-sage-700 mb-4">{t('comparison.contractedLabel')}</h3>
             <ul className="space-y-3 text-sm text-ink-600">
-              <li className="flex items-start gap-2">
-                <span className="text-sage-600 font-bold mt-0.5">•</span>
-                <span>Minimal overhead (mostly tools & software)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sage-600 font-bold mt-0.5">•</span>
-                <span>Personal costs remain personal (health, retirement)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sage-600 font-bold mt-0.5">•</span>
-                <span>You pay full SE tax (no employer split)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sage-600 font-bold mt-0.5">•</span>
-                <span>No withholding; you manage tax timing</span>
-              </li>
+              {(t('comparison.whatProvides.contracted', { returnObjects: true }) as string[]).map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-sage-600 font-bold mt-0.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="bg-white rounded-xl p-6 border border-sand-200">
-            <h3 className="font-serif text-lg text-sand-700 mb-4">Solo Practice / Business</h3>
+            <h3 className="font-serif text-lg text-sand-700 mb-4">{t('comparison.soloLabel')}</h3>
             <ul className="space-y-3 text-sm text-ink-600">
-              <li className="flex items-start gap-2">
-                <span className="text-sand-600 font-bold mt-0.5">•</span>
-                <span>Your business pays for infrastructure</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sand-600 font-bold mt-0.5">•</span>
-                <span>Real overhead: office, software, insurance, marketing</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sand-600 font-bold mt-0.5">•</span>
-                <span>You deduct actual costs of running it</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-sand-600 font-bold mt-0.5">•</span>
-                <span>You pay full SE tax and manage quarterly payments</span>
-              </li>
+              {(t('comparison.whatProvides.solo', { returnObjects: true }) as string[]).map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-sand-600 font-bold mt-0.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -1802,15 +1772,12 @@ function ComparisonView({ onNavigate }: { onNavigate: (view: ViewState) => void 
 
       {/* Key Insight */}
       <div className="bg-gradient-to-br from-sage-50 to-cream-50 rounded-2xl border-2 border-sage-200 p-8 mb-12">
-        <h3 className="text-xl font-serif text-ink-800 mb-4">The real difference</h3>
+        <h3 className="text-xl font-serif text-ink-800 mb-4">{t('comparison.realDifference.title')}</h3>
         <p className="text-ink-600 leading-relaxed mb-4">
-          Columns 2 and 3 use the same tax forms (1099, Schedule C, Schedule SE). The difference isn't the tax rules.
-          It's the <span className="font-medium text-sage-700">expense profile</span>.
+          {t('comparison.realDifference.body1')} <span className="font-medium text-sage-700">{t('comparison.realDifference.expenseProfile')}</span>{t('comparison.realDifference.body1end')}
         </p>
         <p className="text-ink-600 leading-relaxed">
-          A contracted expert usually has minimal overhead. A solo practice or small business—whether you offer
-          services, sell goods, or run an operation—has the costs of actually running it: workspace, tools, insurance,
-          marketing, dues, supplies.
+          {t('comparison.realDifference.body2')}
         </p>
       </div>
 
@@ -1818,13 +1785,10 @@ function ComparisonView({ onNavigate }: { onNavigate: (view: ViewState) => void 
       <div className="bg-white rounded-2xl border border-ink-100 p-8">
         <div className="max-w-3xl mx-auto">
           <p className="text-sm text-ink-600 mb-4">
-            <strong className="text-ink-800">All numbers are illustrative.</strong> Real outcomes depend on your filing status,
-            state, family situation, actual expenses, pre-tax contributions, credits, and many other factors.
+            <strong className="text-ink-800">{t('comparison.disclaimer.label')}</strong> {t('comparison.disclaimer.body1')}
           </p>
           <p className="text-sm text-ink-600">
-            This is a conceptual comparison of how the same gross income is treated under three structures—not a calculator,
-            and not a recommendation for which structure is "best" for you. Each has legitimate use cases. The structure
-            you choose changes what you can deduct, which changes what gets taxed, which changes what reaches you.
+            {t('comparison.disclaimer.body2')}
           </p>
         </div>
       </div>
@@ -2126,26 +2090,25 @@ function ExpandableSection({
 // Quarterly Payments Detail — expandable self-contained component
 function QuarterlyPaymentsDetail() {
   const [showSafeHarbor, setShowSafeHarbor] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="mt-4 space-y-4">
       {/* Level 1 — The threshold */}
       <div className="p-4 bg-sand-50 rounded-lg border border-sand-200">
-        <div className="text-sm font-semibold text-sand-700 mb-2">The threshold</div>
+        <div className="text-sm font-semibold text-sand-700 mb-2">{t('quarterly.thresholdTitle')}</div>
         <p className="text-sm text-ink-700 leading-relaxed">
-          Quarterly payments are generally required if you expect to still owe the IRS{' '}
-          <span className="font-semibold text-ink-800">$1,000 or more</span> at filing time —
-          after withholding and refundable credits.
+          {t('quarterly.thresholdBody')}
         </p>
         <p className="text-sm text-ink-600 mt-2 leading-relaxed">
-          The $1,000 is not your total tax. It's what's still owed after everything already paid in.
+          {t('quarterly.thresholdNote')}
         </p>
       </div>
 
       {/* Quarterly deadlines grid */}
       <div className="p-4 bg-sand-50 rounded-lg border border-sand-200">
         <div className="text-center mb-3">
-          <span className="text-sm font-medium text-sand-700">Quarterly deadlines</span>
+          <span className="text-sm font-medium text-sand-700">{t('quarterly.deadlinesTitle')}</span>
         </div>
         <div className="grid grid-cols-4 gap-2 text-center text-sm">
           <div className="p-2 bg-white rounded border border-ink-100">
@@ -2173,34 +2136,30 @@ function QuarterlyPaymentsDetail() {
           onClick={() => setShowSafeHarbor(!showSafeHarbor)}
           className="w-full flex items-center justify-between px-4 py-3 bg-sand-50 hover:bg-sand-100 transition-colors text-left"
         >
-          <span className="text-sm font-medium text-sand-800">The safe harbor (more detail)</span>
+          <span className="text-sm font-medium text-sand-800">{t('quarterly.safeHarborTitle')}</span>
           <ChevronDown className={`w-4 h-4 text-sand-600 transition-transform duration-200 ${showSafeHarbor ? 'rotate-180' : ''}`} />
         </button>
         {showSafeHarbor && (
           <div className="px-4 py-4 bg-white border-t border-sand-200 space-y-3">
             <p className="text-sm text-ink-700 leading-relaxed">
-              Even if you'll owe more than $1,000, you generally avoid an underpayment penalty if
-              your withholding plus estimated payments cover at least:
+              {t('quarterly.safeHarborIntro')}
             </p>
             <ul className="space-y-2 text-sm text-ink-700">
               <li className="flex items-start gap-2">
                 <span className="text-sand-500 font-bold flex-shrink-0 mt-0.5">•</span>
-                <span><span className="font-semibold">90% of this year's tax</span>, OR</span>
+                <span><span className="font-semibold">{t('quarterly.safeHarbor90')}</span>{t('quarterly.safeHarborOr')}</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-sand-500 font-bold flex-shrink-0 mt-0.5">•</span>
                 <span>
-                  <span className="font-semibold">100% of last year's tax</span>{' '}
-                  <span className="text-ink-500">(110% if prior-year AGI exceeded $150,000,
-                  or $75,000 if married filing separately)</span>
+                  <span className="font-semibold">{t('quarterly.safeHarbor100')}</span>{' '}
+                  <span className="text-ink-500">{t('quarterly.safeHarborNote')}</span>
                 </span>
               </li>
             </ul>
-            <p className="text-sm text-ink-500 italic">Whichever is smaller.</p>
+            <p className="text-sm text-ink-500 italic">{t('quarterly.safeHarborSmaller')}</p>
             <p className="text-sm text-ink-600 leading-relaxed pt-1 border-t border-sand-100">
-              This is why people with stable W-2 jobs and small side income often don't need
-              separate quarterly payments — their W-2 withholding can be enough to satisfy the
-              safe harbor on its own.
+              {t('quarterly.safeHarborW2Note')}
             </p>
           </div>
         )}
@@ -2208,21 +2167,19 @@ function QuarterlyPaymentsDetail() {
 
       {/* Level 3 — Common confusion callout */}
       <div className="p-4 bg-amber-50 rounded-lg border border-amber-200">
-        <div className="text-sm font-semibold text-amber-800 mb-2">Common confusion</div>
+        <div className="text-sm font-semibold text-amber-800 mb-2">{t('quarterly.confusionTitle')}</div>
         <p className="text-sm text-ink-600 italic mb-2 leading-relaxed">
-          "My total tax will be way more than $1,000. Do I need to pay quarterly?"
+          {t('quarterly.confusionQ')}
         </p>
         <p className="text-sm text-ink-700 leading-relaxed">
-          Not necessarily. The $1,000 threshold is about what's still owed{' '}
-          <span className="font-semibold">after withholding</span>. If your W-2 withholding
-          already covers most of your tax, you may be fine even with significant side income.
+          {t('quarterly.confusionA')}{' '}
+          <span className="font-semibold">{t('quarterly.afterWithholding')}</span>{t('quarterly.confusionAEnd')}
         </p>
       </div>
 
       {/* Disclaimer */}
       <p className="text-xs text-ink-400 italic leading-relaxed">
-        Simplified for clarity. Actual requirements depend on your full picture: withholding,
-        credits, prior-year tax, and safe harbor rules.
+        {t('quarterly.disclaimer')}
       </p>
     </div>
   );
@@ -2231,86 +2188,87 @@ function QuarterlyPaymentsDetail() {
 // Schedule C Anatomy — section-grouped interactive component
 function ScheduleCAnatomy() {
   const [activeTip, setActiveTip] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const sections: Array<{
     name: string;
     items: Array<{ line: string; label: string; value: string; desc: string; where: string }>;
   }> = [
     {
-      name: 'Part I — Income',
+      name: t('anatomy.scheduleC.partI'),
       items: [
         {
           line: 'Line 1',
-          label: 'Gross receipts or sales',
+          label: t('anatomy.scheduleC.line1.label'),
           value: '$42,500',
-          desc: 'Total income received from your business before any deductions. Includes all 1099-NEC amounts, 1099-K amounts, direct payments, and any other business revenue — whether or not you received a form.',
-          where: 'Starting point for Schedule C income. Platform fees and refunds are deducted as Part II expenses.',
+          desc: t('anatomy.scheduleC.line1.desc'),
+          where: t('anatomy.scheduleC.line1.where'),
         },
         {
           line: 'Line 7',
-          label: 'Gross income',
+          label: t('anatomy.scheduleC.line7.label'),
           value: '$42,500',
-          desc: 'Gross receipts minus cost of goods sold (if applicable). For most service-based freelancers, this equals Line 1 — cost of goods sold only applies if you sell physical products.',
-          where: 'Carries into Part II as the income figure against which expenses are subtracted.',
+          desc: t('anatomy.scheduleC.line7.desc'),
+          where: t('anatomy.scheduleC.line7.where'),
         },
       ],
     },
     {
-      name: 'Part II — Expenses',
+      name: t('anatomy.scheduleC.partII'),
       items: [
         {
           line: 'Line 8',
-          label: 'Advertising',
+          label: t('anatomy.scheduleC.line8.label'),
           value: '$600',
-          desc: 'Business promotion costs — website hosting, paid ads, business cards, social media promotion, print materials. Must be ordinary and necessary for the business.',
-          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+          desc: t('anatomy.scheduleC.line8.desc'),
+          where: t('anatomy.scheduleC.line8.where'),
         },
         {
           line: 'Line 18',
-          label: 'Office expense',
+          label: t('anatomy.scheduleC.line18.label'),
           value: '$840',
-          desc: 'Office supplies used directly in your business — printer paper, pens, folders, toner. Separate from home office (Line 30) and from equipment over $2,500 (which may need depreciation).',
-          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+          desc: t('anatomy.scheduleC.line18.desc'),
+          where: t('anatomy.scheduleC.line18.where'),
         },
         {
           line: 'Line 22',
-          label: 'Supplies',
+          label: t('anatomy.scheduleC.line22.label'),
           value: '$1,200',
-          desc: 'Materials and supplies used in delivering your service — tools, client materials, project-specific purchases. The line between Line 18 and Line 22 is fuzzy; the IRS cares more that you claim it somewhere than exactly which line.',
-          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+          desc: t('anatomy.scheduleC.line22.desc'),
+          where: t('anatomy.scheduleC.line22.where'),
         },
         {
           line: 'Line 25',
-          label: 'Utilities',
+          label: t('anatomy.scheduleC.line25.label'),
           value: '$480',
-          desc: 'Business-portion utility costs — phone (business use percentage), internet (business use percentage), electricity for a dedicated home office. You may need to allocate based on square footage or usage.',
-          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+          desc: t('anatomy.scheduleC.line25.desc'),
+          where: t('anatomy.scheduleC.line25.where'),
         },
         {
           line: 'Line 27a',
-          label: 'Other expenses',
+          label: t('anatomy.scheduleC.line27a.label'),
           value: '$920',
-          desc: 'Ordinary and necessary business expenses not listed on Lines 8–26 — software subscriptions, professional dues, continuing education, bank fees, business books, reference materials.',
-          where: 'Part II total → subtracted from Line 7 to reach net profit on Line 31.',
+          desc: t('anatomy.scheduleC.line27a.desc'),
+          where: t('anatomy.scheduleC.line27a.where'),
         },
       ],
     },
     {
-      name: 'Part II — Bottom Line',
+      name: t('anatomy.scheduleC.partIIBottom'),
       items: [
         {
           line: 'Line 28',
-          label: 'Total expenses',
+          label: t('anatomy.scheduleC.line28.label'),
           value: '$4,040',
-          desc: 'Sum of all business expenses from Lines 8 through 27b. This is the total deductible amount against your gross income — every dollar here reduces your taxable profit.',
-          where: 'Subtracted from Line 7 (gross income) to calculate net profit on Line 31.',
+          desc: t('anatomy.scheduleC.line28.desc'),
+          where: t('anatomy.scheduleC.line28.where'),
         },
         {
           line: 'Line 31',
-          label: 'Net profit or (loss)',
+          label: t('anatomy.scheduleC.line31.label'),
           value: '$38,460',
-          desc: 'Your business bottom line — gross income minus total expenses. This single number does two things: it flows to Schedule 1 as ordinary income (subject to income tax), and it also becomes the base for Schedule SE (self-employment tax). Every dollar of legitimate expense reduces both taxes simultaneously.',
-          where: 'Schedule 1, Line 3 → Form 1040, Line 8 (ordinary income). Also base for Schedule SE self-employment tax.',
+          desc: t('anatomy.scheduleC.line31.desc'),
+          where: t('anatomy.scheduleC.line31.where'),
         },
       ],
     },
@@ -2321,12 +2279,12 @@ function ScheduleCAnatomy() {
 
   return (
     <div className="mt-4">
-      <p className="text-xs text-ink-500 mb-3">Hover or focus any line to see what it reports and where it lands.</p>
+      <p className="text-xs text-ink-500 mb-3">{t('anatomy.scheduleC.hoverPrompt')}</p>
 
       <div className="bg-cream-50 rounded-xl border-2 border-sage-200 overflow-hidden mb-4">
         <div className="bg-sage-50 px-4 py-3 border-b border-sage-200 flex justify-between items-baseline">
-          <span className="text-sm font-medium text-ink-700">Schedule C · Profit or Loss From Business</span>
-          <span className="text-xs text-ink-400">Filed with Form 1040</span>
+          <span className="text-sm font-medium text-ink-700">{t('anatomy.scheduleC.formTitle')}</span>
+          <span className="text-xs text-ink-400">{t('anatomy.scheduleC.filedWith')}</span>
         </div>
 
         {sections.map((section) => (
@@ -2357,7 +2315,7 @@ function ScheduleCAnatomy() {
 
       <div className="bg-sage-50 rounded-xl p-4 border border-sage-200">
         {!activeTip ? (
-          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a line above</p>
+          <p className="text-sm text-ink-400 italic text-center py-4">{t('anatomy.hoverCtaLine')}</p>
         ) : activeTipData ? (
           <div className="space-y-3">
             <div className="text-xs font-medium text-sage-600 uppercase tracking-wide">
@@ -2365,7 +2323,7 @@ function ScheduleCAnatomy() {
             </div>
             <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
             <div className="pt-3 border-t border-sage-200">
-              <div className="text-xs font-medium text-sage-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <div className="text-xs font-medium text-sage-700 uppercase tracking-wide mb-1">{t('anatomy.whereItLands')}</div>
               <p className="text-sm text-ink-600">{activeTipData.where}</p>
             </div>
           </div>
@@ -2386,56 +2344,57 @@ interface FormBoxData {
 
 function FormW2Anatomy() {
   const [activeTip, setActiveTip] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const boxes: FormBoxData[] = [
     {
       box: 'Box 1',
-      label: 'Wages, tips, other compensation',
+      label: t('anatomy.w2.box1.label'),
       value: '$52,400.00',
-      desc: 'Your taxable wages — gross pay reduced by 401(k), HSA, and pre-tax health insurance.',
-      where: 'Form 1040, line 1a (wages, salaries, tips)',
+      desc: t('anatomy.w2.box1.desc'),
+      where: t('anatomy.w2.box1.where'),
     },
     {
       box: 'Box 2',
-      label: 'Federal income tax withheld',
+      label: t('anatomy.w2.box2.label'),
       value: '$5,234.00',
-      desc: 'Federal income tax already paid to the IRS on your behalf. Counts against what you owe at filing.',
-      where: 'Form 1040, line 25a (federal tax withheld)',
+      desc: t('anatomy.w2.box2.desc'),
+      where: t('anatomy.w2.box2.where'),
     },
     {
       box: 'Box 3',
-      label: 'Social Security wages',
+      label: t('anatomy.w2.box3.label'),
       value: '$54,000.00',
-      desc: 'Wages subject to Social Security tax. Usually equals gross pay minus pre-tax health insurance. 401(k) does NOT reduce this.',
-      where: 'Internal — basis for Box 4 calculation',
+      desc: t('anatomy.w2.box3.desc'),
+      where: t('anatomy.w2.box3.where'),
     },
     {
       box: 'Box 4',
-      label: 'Social Security tax withheld',
+      label: t('anatomy.w2.box4.label'),
       value: '$3,348.00',
-      desc: 'Social Security tax already withheld — your half of the 12.4% SS tax (6.2% of Box 3).',
-      where: 'Internal — already remitted by employer',
+      desc: t('anatomy.w2.box4.desc'),
+      where: t('anatomy.w2.box4.where'),
     },
     {
       box: 'Box 5',
-      label: 'Medicare wages and tips',
+      label: t('anatomy.w2.box5.label'),
       value: '$54,000.00',
-      desc: 'Wages subject to Medicare tax. Like Box 3, but no wage cap applies.',
-      where: 'Internal — basis for Box 6 calculation',
+      desc: t('anatomy.w2.box5.desc'),
+      where: t('anatomy.w2.box5.where'),
     },
     {
       box: 'Box 6',
-      label: 'Medicare tax withheld',
+      label: t('anatomy.w2.box6.label'),
       value: '$783.00',
-      desc: 'Medicare tax already withheld — your half of the 2.9% Medicare tax (1.45% of Box 5).',
-      where: 'Internal — already remitted by employer',
+      desc: t('anatomy.w2.box6.desc'),
+      where: t('anatomy.w2.box6.where'),
     },
     {
       box: 'Box 17',
-      label: 'State income tax',
+      label: t('anatomy.w2.box17.label'),
       value: '$1,623.00',
-      desc: 'State income tax already withheld and remitted by your employer.',
-      where: 'Your state tax return — state tax withheld line',
+      desc: t('anatomy.w2.box17.desc'),
+      where: t('anatomy.w2.box17.where'),
     },
   ];
 
@@ -2443,12 +2402,12 @@ function FormW2Anatomy() {
 
   return (
     <div className="mt-4">
-      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands on your return.</p>
+      <p className="text-xs text-ink-500 mb-3">{t('anatomy.hoverPromptReturn')}</p>
 
       <div className="bg-cream-50 rounded-xl border-2 border-sand-200 overflow-hidden mb-4">
         <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
-          <span className="text-sm font-medium text-ink-700">Wage and Tax Statement</span>
-          <span className="text-xs text-ink-400">Arrives by January 31</span>
+          <span className="text-sm font-medium text-ink-700">{t('anatomy.w2.formTitle')}</span>
+          <span className="text-xs text-ink-400">{t('anatomy.w2.arrivesBy')}</span>
         </div>
 
         <div className="grid grid-cols-2 divide-x divide-sand-200">
@@ -2472,7 +2431,7 @@ function FormW2Anatomy() {
 
       <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
         {!activeTip ? (
-          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a box above</p>
+          <p className="text-sm text-ink-400 italic text-center py-4">{t('anatomy.hoverCta')}</p>
         ) : activeTipData ? (
           <div className="space-y-3">
             <div className="text-xs font-medium text-sand-600 uppercase tracking-wide">
@@ -2480,7 +2439,7 @@ function FormW2Anatomy() {
             </div>
             <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
             <div className="pt-3 border-t border-sand-200">
-              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">{t('anatomy.whereItLands')}</div>
               <p className="text-sm text-ink-600">{activeTipData.where}</p>
             </div>
           </div>
@@ -2492,42 +2451,43 @@ function FormW2Anatomy() {
 
 function Form1099NECAnatomy() {
   const [activeTip, setActiveTip] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const boxes: FormBoxData[] = [
     {
       box: 'Box 1',
-      label: 'Nonemployee compensation',
+      label: t('anatomy.1099nec.box1.label'),
       value: '$8,750.00',
-      desc: 'Gross amount paid to you for services. Your client sends this when they paid you $600 or more during the year — it arrives by January 31. This number goes directly to Schedule C, Part I, Line 1 as gross receipts before any expense deductions.',
-      where: 'Schedule C, Part I, Line 1 (gross receipts or sales)',
+      desc: t('anatomy.1099nec.box1.desc'),
+      where: t('anatomy.1099nec.box1.where'),
     },
     {
       box: 'Box 4',
-      label: 'Federal income tax withheld',
+      label: t('anatomy.1099nec.box4.label'),
       value: '$0.00',
-      desc: 'Backup withholding — nearly always $0 for 1099-NEC. You receive the full payment amount and are responsible for estimating and paying your own taxes quarterly. If you see a non-zero amount here, it means your tax ID was flagged for backup withholding.',
-      where: 'Form 1040, Line 25a (federal tax withheld) — offsets what you owe at filing',
+      desc: t('anatomy.1099nec.box4.desc'),
+      where: t('anatomy.1099nec.box4.where'),
     },
     {
       box: 'Box 5',
-      label: 'State tax withheld',
+      label: t('anatomy.1099nec.box5.label'),
       value: '$0.00',
-      desc: 'State income tax withheld by the payer, if any. Nearly always $0 — self-employed workers are responsible for paying their own state estimated taxes.',
-      where: 'Your state income tax return — state tax withheld line',
+      desc: t('anatomy.1099nec.box5.desc'),
+      where: t('anatomy.1099nec.box5.where'),
     },
     {
       box: 'Box 6',
-      label: "State / Payer's state no.",
+      label: t('anatomy.1099nec.box6.label'),
       value: 'FL / —',
-      desc: "The state where the income was earned and the payer's state tax ID number. Used to match the income to the correct state filing jurisdiction.",
-      where: 'State return — identifies the filing state',
+      desc: t('anatomy.1099nec.box6.desc'),
+      where: t('anatomy.1099nec.box6.where'),
     },
     {
       box: 'Box 7',
-      label: 'State income',
+      label: t('anatomy.1099nec.box7.label'),
       value: '$8,750.00',
-      desc: 'The amount of compensation attributable to the state listed in Box 6. Usually equals Box 1 if you work in a single state.',
-      where: 'State income tax return — same figure as Box 1 in single-state situations',
+      desc: t('anatomy.1099nec.box7.desc'),
+      where: t('anatomy.1099nec.box7.where'),
     },
   ];
 
@@ -2535,12 +2495,12 @@ function Form1099NECAnatomy() {
 
   return (
     <div className="mt-4">
-      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands.</p>
+      <p className="text-xs text-ink-500 mb-3">{t('anatomy.hoverPrompt')}</p>
 
       <div className="bg-cream-50 rounded-xl border-2 border-sage-200 overflow-hidden mb-4">
         <div className="bg-sage-50 px-4 py-3 border-b border-sage-200 flex justify-between items-baseline">
-          <span className="text-sm font-medium text-ink-700">1099-NEC · Nonemployee Compensation</span>
-          <span className="text-xs text-ink-400">Arrives by Jan 31</span>
+          <span className="text-sm font-medium text-ink-700">{t('anatomy.1099nec.formTitle')}</span>
+          <span className="text-xs text-ink-400">{t('anatomy.1099nec.arrivesBy')}</span>
         </div>
 
         <div className="grid grid-cols-2 divide-x divide-sage-200">
@@ -2564,7 +2524,7 @@ function Form1099NECAnatomy() {
 
       <div className="bg-sage-50 rounded-xl p-4 border border-sage-200">
         {!activeTip ? (
-          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a box above</p>
+          <p className="text-sm text-ink-400 italic text-center py-4">{t('anatomy.hoverCta')}</p>
         ) : activeTipData ? (
           <div className="space-y-3">
             <div className="text-xs font-medium text-sage-600 uppercase tracking-wide">
@@ -2572,7 +2532,7 @@ function Form1099NECAnatomy() {
             </div>
             <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
             <div className="pt-3 border-t border-sage-200">
-              <div className="text-xs font-medium text-sage-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <div className="text-xs font-medium text-sage-700 uppercase tracking-wide mb-1">{t('anatomy.whereItLands')}</div>
               <p className="text-sm text-ink-600">{activeTipData.where}</p>
             </div>
           </div>
@@ -2584,42 +2544,43 @@ function Form1099NECAnatomy() {
 
 function Form1099KAnatomy() {
   const [activeTip, setActiveTip] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   const boxes: FormBoxData[] = [
     {
       box: 'Box 1a',
-      label: 'Gross amount of payment card/third party network transactions',
+      label: t('anatomy.1099k.box1a.label'),
       value: '$24,300.00',
-      desc: 'Total gross receipts reported to the IRS — this is before platform fees, refunds, chargebacks, or any deductions. Your actual taxable amount on Schedule C will usually be lower: you deduct platform fees and other expenses in Part II. Do not assume Box 1a equals your profit.',
-      where: 'Schedule C, Part I, Line 1 (gross receipts) — then deduct fees and refunds as expenses in Part II',
+      desc: t('anatomy.1099k.box1a.desc'),
+      where: t('anatomy.1099k.box1a.where'),
     },
     {
       box: 'Box 4',
-      label: 'Federal income tax withheld',
+      label: t('anatomy.1099k.box4.label'),
       value: '$0.00',
-      desc: 'Backup withholding — nearly always $0. You are responsible for paying your own taxes through quarterly estimated payments (April 15, June 16, Sept 15, Jan 15).',
-      where: 'Form 1040, Line 25a — offsets what you owe at filing',
+      desc: t('anatomy.1099k.box4.desc'),
+      where: t('anatomy.1099k.box4.where'),
     },
     {
       box: 'Box 5a',
-      label: 'January transactions',
+      label: t('anatomy.1099k.box5a.label'),
       value: '$1,840.00',
-      desc: 'Gross payment volume processed in January. Boxes 5a–5l break down the annual Box 1a total by month — useful for estimating quarterly tax payments.',
-      where: 'Reference — the 12-month total (5a through 5l) equals Box 1a',
+      desc: t('anatomy.1099k.box5a.desc'),
+      where: t('anatomy.1099k.box5a.where'),
     },
     {
       box: 'Box 5b',
-      label: 'February transactions',
+      label: t('anatomy.1099k.box5b.label'),
       value: '$2,100.00',
-      desc: 'Gross payment volume processed in February.',
-      where: 'Reference — the 12-month total equals Box 1a',
+      desc: t('anatomy.1099k.box5b.desc'),
+      where: t('anatomy.1099k.box5b.where'),
     },
     {
       box: 'Box 5c',
-      label: 'March transactions',
+      label: t('anatomy.1099k.box5c.label'),
       value: '$1,950.00',
-      desc: 'Gross payment volume for March. Q1 total (5a + 5b + 5c) helps you estimate how much to pay by April 15 for your first quarterly payment.',
-      where: 'Reference — the 12-month total equals Box 1a',
+      desc: t('anatomy.1099k.box5c.desc'),
+      where: t('anatomy.1099k.box5c.where'),
     },
   ];
 
@@ -2627,12 +2588,12 @@ function Form1099KAnatomy() {
 
   return (
     <div className="mt-4">
-      <p className="text-xs text-ink-500 mb-3">Hover or focus any box to see what it reports and where it lands.</p>
+      <p className="text-xs text-ink-500 mb-3">{t('anatomy.hoverPrompt')}</p>
 
       <div className="bg-cream-50 rounded-xl border-2 border-sand-200 overflow-hidden mb-4">
         <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
-          <span className="text-sm font-medium text-ink-700">1099-K · Payment Card & Third Party Network</span>
-          <span className="text-xs text-ink-400">Arrives by Jan 31</span>
+          <span className="text-sm font-medium text-ink-700">{t('anatomy.1099k.formTitle')}</span>
+          <span className="text-xs text-ink-400">{t('anatomy.1099k.arrivesBy')}</span>
         </div>
 
         <div className="grid grid-cols-2 divide-x divide-sand-200">
@@ -2656,7 +2617,7 @@ function Form1099KAnatomy() {
 
       <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
         {!activeTip ? (
-          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a box above</p>
+          <p className="text-sm text-ink-400 italic text-center py-4">{t('anatomy.hoverCta')}</p>
         ) : activeTipData ? (
           <div className="space-y-3">
             <div className="text-xs font-medium text-sand-600 uppercase tracking-wide">
@@ -2664,7 +2625,7 @@ function Form1099KAnatomy() {
             </div>
             <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
             <div className="pt-3 border-t border-sand-200">
-              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">{t('anatomy.whereItLands')}</div>
               <p className="text-sm text-ink-600">{activeTipData.where}</p>
             </div>
           </div>
@@ -2854,34 +2815,36 @@ function Form1099RAnatomy() {
 function FormScheduleSEAnatomy() {
   const [activeTip, setActiveTip] = useState<string | null>(null);
 
+  const { t } = useTranslation();
+
   const steps: Array<{ id: string; label: string; value: string; desc: string; where: string }> = [
     {
       id: 'net',
-      label: 'Net SE earnings',
-      value: 'From Schedule C, Line 31',
-      desc: 'Your net profit from Schedule C — gross receipts minus all allowable business expenses. This is the starting number for the entire self-employment tax calculation.',
-      where: 'Schedule SE, Line 2 or Line 3 (depending on method)',
+      label: t('anatomy.scheduleSE.net.label'),
+      value: t('anatomy.scheduleSE.net.value'),
+      desc: t('anatomy.scheduleSE.net.desc'),
+      where: t('anatomy.scheduleSE.net.where'),
     },
     {
       id: 'adjustment',
       label: '× 92.35%',
-      value: 'SE income reduction',
-      desc: 'Multiply net earnings by 92.35% (that is, 100% minus 7.65%). This removes the employer-equivalent half of SE tax from the taxable base — mirroring how W-2 employees are not taxed on the employer share of FICA that their employer pays on their behalf.',
-      where: 'Schedule SE, Line 4a — this becomes your SE income subject to tax',
+      value: t('anatomy.scheduleSE.adjustment.value'),
+      desc: t('anatomy.scheduleSE.adjustment.desc'),
+      where: t('anatomy.scheduleSE.adjustment.where'),
     },
     {
       id: 'rate',
       label: '× 15.3%',
       value: '12.4% SS + 2.9% Medicare',
-      desc: 'This is the combined employee AND employer share of FICA. A W-2 employee pays 7.65% and their employer quietly pays the other 7.65% — but as self-employed you pay both halves yourself. The rate applies to the 92.35%-adjusted amount, not your full net profit.',
-      where: 'Schedule SE, Line 12 (SS) + Line 13 (Medicare) = Line 15 total → Form 1040 Schedule 2, Line 4',
+      desc: t('anatomy.scheduleSE.rate.desc'),
+      where: t('anatomy.scheduleSE.rate.where'),
     },
     {
       id: 'deductible',
-      label: '÷ 2 = Deductible half',
-      value: 'Above-the-line deduction',
-      desc: 'Half of your SE tax is deductible as an above-the-line adjustment on Schedule 1. This partially compensates for paying both halves of FICA — it reduces your adjusted gross income and therefore your income tax base, even though the SE tax itself is still fully owed.',
-      where: 'Schedule 1, Line 15 → reduces Form 1040 adjusted gross income before the standard deduction',
+      label: t('anatomy.scheduleSE.deductible.label'),
+      value: t('anatomy.scheduleSE.deductible.value'),
+      desc: t('anatomy.scheduleSE.deductible.desc'),
+      where: t('anatomy.scheduleSE.deductible.where'),
     },
   ];
 
@@ -2889,12 +2852,12 @@ function FormScheduleSEAnatomy() {
 
   return (
     <div className="mt-4">
-      <p className="text-xs text-ink-500 mb-3">Hover or focus any step to see how the calculation works.</p>
+      <p className="text-xs text-ink-500 mb-3">{t('anatomy.hoverPromptCalc')}</p>
 
       <div className="bg-cream-50 rounded-xl border-2 border-sand-300 overflow-hidden mb-4">
         <div className="bg-sand-50 px-4 py-3 border-b border-sand-200 flex justify-between items-baseline">
-          <span className="text-sm font-medium text-ink-700">Schedule SE · Self-Employment Tax</span>
-          <span className="text-xs text-ink-400">Calculated on Schedule SE</span>
+          <span className="text-sm font-medium text-ink-700">{t('anatomy.scheduleSE.formTitle')}</span>
+          <span className="text-xs text-ink-400">{t('anatomy.scheduleSE.calculated')}</span>
         </div>
 
         <div className="divide-y divide-sand-100">
@@ -2917,7 +2880,7 @@ function FormScheduleSEAnatomy() {
 
       <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
         {!activeTip ? (
-          <p className="text-sm text-ink-400 italic text-center py-4">Hover or focus a step above</p>
+          <p className="text-sm text-ink-400 italic text-center py-4">{t('anatomy.hoverCtaStep')}</p>
         ) : activeTipData ? (
           <div className="space-y-3">
             <div className="text-xs font-medium text-sand-600 uppercase tracking-wide">
@@ -2925,7 +2888,7 @@ function FormScheduleSEAnatomy() {
             </div>
             <p className="text-sm text-ink-700 leading-relaxed">{activeTipData.desc}</p>
             <div className="pt-3 border-t border-sand-200">
-              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">Where it lands</div>
+              <div className="text-xs font-medium text-sand-700 uppercase tracking-wide mb-1">{t('anatomy.whereItLands')}</div>
               <p className="text-sm text-ink-600">{activeTipData.where}</p>
             </div>
           </div>
@@ -3106,6 +3069,7 @@ function Form1099DIVAnatomy() {
 }
 
 function RaiseVisualizer() {
+  const { t } = useTranslation();
   const [salary, setSalary] = useState(73000);
   const [filingStatus, setFilingStatus] = useState<'single' | 'mfj' | 'mfs' | 'hoh'>('single');
   const [showBeforeAfter, setShowBeforeAfter] = useState(false);
@@ -3176,17 +3140,14 @@ function RaiseVisualizer() {
   return (
     <div id="raise-calculator" className="mb-16 bg-white rounded-2xl border border-ink-100 overflow-hidden">
       <div className="p-8 bg-gradient-to-br from-steel-50 to-sage-50 border-b border-ink-100">
-        <h2 className="text-2xl font-serif text-ink-800 mb-2">What happens after a raise?</h2>
+        <h2 className="text-2xl font-serif text-ink-800 mb-2">{t('raiseCalc.header')}</h2>
         <p className="text-ink-600 mb-6 leading-relaxed">
-          Sometimes a raise feels smaller than it looks. People often hear "I moved into the 22% bracket" and assume
-          the new rate now applies to all their income. It doesn't. The US uses a progressive system—income is stacked
-          into layers, and each layer is taxed at its own rate. Only the portion above the bracket boundary gets the
-          new rate. The rest stays where it was.
+          {t('raiseCalc.subtitle')}
         </p>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-ink-700 mb-2">Your salary:</label>
+            <label className="block text-sm font-medium text-ink-700 mb-2">{t('raiseCalc.salaryLabel')}</label>
             <div className="flex gap-3">
               <input
                 type="range"
@@ -3209,7 +3170,7 @@ function RaiseVisualizer() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-ink-700 mb-2">Filing status:</label>
+            <label className="block text-sm font-medium text-ink-700 mb-2">{t('raiseCalc.filingStatusLabel')}</label>
             <div className="flex gap-2">
               {(['single', 'mfj', 'mfs', 'hoh'] as const).map((status) => (
                 <button
@@ -3235,7 +3196,7 @@ function RaiseVisualizer() {
       <div className="p-8">
         <div className="grid lg:grid-cols-2 gap-8">
           <div>
-            <h3 className="font-serif text-lg text-ink-800 mb-4">Tax brackets (stacked)</h3>
+            <h3 className="font-serif text-lg text-ink-800 mb-4">{t('raiseCalc.bracketsHeader')}</h3>
 
             <div className="space-y-2 mb-6">
               {[...current.layers].reverse().map((layer, idx) => (
@@ -3250,31 +3211,31 @@ function RaiseVisualizer() {
               ))}
               <div className="flex items-center gap-3">
                 <div className="flex-1 h-8 bg-gradient-to-r from-ink-100 to-ink-200 rounded-lg flex items-center justify-center text-xs font-medium text-ink-500">
-                  ${standardDeductions[filingStatus].toLocaleString()} — Standard deduction (0%)
+                  ${standardDeductions[filingStatus].toLocaleString()} — {t('raiseCalc.stdDeductionBar')}
                 </div>
                 <div className="w-20 text-right font-mono text-sm text-ink-400">$0</div>
               </div>
               <div className="flex items-center justify-end gap-3 pt-1 border-t border-ink-100">
-                <span className="text-xs text-ink-500">Total: ${salary.toLocaleString()} = your gross salary</span>
+                <span className="text-xs text-ink-500">{t('raiseCalc.totalLabel', { amount: salary.toLocaleString() })}</span>
               </div>
             </div>
 
             <div className="bg-cream-50 rounded-xl p-4 border border-ink-100">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-ink-600">Gross salary:</span>
+                  <span className="text-ink-600">{t('raiseCalc.grossSalaryLabel')}</span>
                   <span className="font-mono font-medium text-ink-800">${salary.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-ink-600">Standard deduction:</span>
+                  <span className="text-ink-600">{t('raiseCalc.stdDeductionLabel')}</span>
                   <span className="font-mono text-ink-600">${standardDeductions[filingStatus].toLocaleString()}</span>
                 </div>
                 <div className="border-t border-ink-200 pt-2 flex justify-between text-sm">
-                  <span className="text-ink-600">Taxable income:</span>
+                  <span className="text-ink-600">{t('raiseCalc.taxableIncomeLabel')}</span>
                   <span className="font-mono font-medium text-ink-800">${Math.round(current.taxableIncome).toLocaleString()}</span>
                 </div>
                 <div className="border-t border-ink-200 pt-2 flex justify-between">
-                  <span className="font-medium text-ink-800">Federal income tax:</span>
+                  <span className="font-medium text-ink-800">{t('raiseCalc.federalIncomeTaxLabel')}</span>
                   <span className="font-mono font-bold text-steel-700">${Math.round(current.tax).toLocaleString()}</span>
                 </div>
               </div>
@@ -3282,26 +3243,25 @@ function RaiseVisualizer() {
           </div>
 
           <div>
-            <h3 className="font-serif text-lg text-ink-800 mb-4">Key rates</h3>
+            <h3 className="font-serif text-lg text-ink-800 mb-4">{t('raiseCalc.keyRatesHeader')}</h3>
 
             <div className="space-y-4 mb-6">
               <div className="bg-sage-50 rounded-xl p-4 border border-sage-200">
-                <div className="text-sm text-sage-600 mb-1">Marginal rate (rate on next dollar)</div>
+                <div className="text-sm text-sage-600 mb-1">{t('raiseCalc.marginalRateLabel')}</div>
                 <div className="text-3xl font-bold text-sage-700">{Math.round(current.marginalRate * 100)}%</div>
-                <div className="text-xs text-sage-600 mt-2">This is the bracket people talk about</div>
+                <div className="text-xs text-sage-600 mt-2">{t('raiseCalc.marginalRateNote')}</div>
               </div>
 
               <div className="bg-steel-50 rounded-xl p-4 border border-steel-200">
-                <div className="text-sm text-steel-600 mb-1">Effective rate (overall burden)</div>
+                <div className="text-sm text-steel-600 mb-1">{t('raiseCalc.effectiveRateLabel')}</div>
                 <div className="text-3xl font-bold text-steel-700">{current.effectiveRate.toFixed(1)}%</div>
-                <div className="text-xs text-steel-600 mt-2">Total tax ÷ gross salary</div>
+                <div className="text-xs text-steel-600 mt-2">{t('raiseCalc.effectiveRateNote')}</div>
               </div>
             </div>
 
             <div className="bg-sand-50 rounded-xl p-4 border border-sand-200">
               <p className="text-sm text-ink-600 mb-3">
-                <span className="font-medium text-sand-700">Why the difference?</span> You don't pay 22% on your entire salary.
-                Most of it is in lower brackets. Only the money above the $48,475 threshold is taxed at 22%.
+                <span className="font-medium text-sand-700">{t('raiseCalc.whyDiff')}</span> {t('raiseCalc.whyDiffBody')}
               </p>
             </div>
           </div>
@@ -3317,13 +3277,13 @@ function RaiseVisualizer() {
                 : 'bg-steel-100 text-steel-700 hover:bg-steel-200'
             }`}
           >
-            {showBeforeAfter ? '✓ Before/After enabled' : 'Show me before/after a raise'}
+            {showBeforeAfter ? t('raiseCalc.beforeAfterEnabled') : t('raiseCalc.showBeforeAfter')}
           </button>
 
           {showBeforeAfter && (
             <div className="mt-6">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-ink-700 mb-2">Before (previous salary):</label>
+                <label className="block text-sm font-medium text-ink-700 mb-2">{t('raiseCalc.beforeLabel')}</label>
                 <input
                   type="number"
                   value={prevSalary}
@@ -3334,7 +3294,7 @@ function RaiseVisualizer() {
 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div className="bg-steel-50 rounded-xl p-5 border border-steel-200">
-                  <h4 className="font-medium text-ink-800 mb-3">Before: ${prevSalary.toLocaleString()}</h4>
+                  <h4 className="font-medium text-ink-800 mb-3">{t('raiseCalc.beforeHeader', { amount: prevSalary.toLocaleString() })}</h4>
                   <div className="space-y-3">
                     <div className="space-y-1">
                       {[...calculateTax(prevSalary).layers].reverse().map((layer, idx) => (
@@ -3349,21 +3309,21 @@ function RaiseVisualizer() {
                       ))}
                       <div className="flex items-center gap-2 text-xs">
                         <div className="flex-1 h-6 bg-ink-100 rounded flex items-center justify-center font-medium text-ink-500">
-                          ${standardDeductions[filingStatus].toLocaleString()} — Std deduction (0%)
+                          ${standardDeductions[filingStatus].toLocaleString()} — {t('raiseCalc.stdDeductionBar')}
                         </div>
                         <div className="w-16 text-right font-mono text-ink-400">$0</div>
                       </div>
                       <div className="pt-0.5 text-right">
-                        <span className="text-xs text-ink-400">Total: ${prevSalary.toLocaleString()} = gross salary</span>
+                        <span className="text-xs text-ink-400">{t('raiseCalc.totalLabel', { amount: prevSalary.toLocaleString() })}</span>
                       </div>
                     </div>
                     <div className="pt-2 border-t border-steel-300 space-y-1 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-ink-600">Taxable income:</span>
+                        <span className="text-ink-600">{t('raiseCalc.taxableIncome')}</span>
                         <span className="font-mono">${Math.round(calculateTax(prevSalary).taxableIncome).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-ink-600">Federal tax:</span>
+                        <span className="text-ink-600">{t('raiseCalc.federalTax')}</span>
                         <span className="font-mono font-bold text-steel-700">${Math.round(calculateTax(prevSalary).tax).toLocaleString()}</span>
                       </div>
                     </div>
@@ -3371,7 +3331,7 @@ function RaiseVisualizer() {
                 </div>
 
                 <div className="bg-sage-50 rounded-xl p-5 border border-sage-200">
-                  <h4 className="font-medium text-ink-800 mb-3">After: ${salary.toLocaleString()}</h4>
+                  <h4 className="font-medium text-ink-800 mb-3">{t('raiseCalc.afterHeader', { amount: salary.toLocaleString() })}</h4>
                   <div className="space-y-3">
                     <div className="space-y-1">
                       {[...current.layers].reverse().map((layer, idx) => (
@@ -3386,21 +3346,21 @@ function RaiseVisualizer() {
                       ))}
                       <div className="flex items-center gap-2 text-xs">
                         <div className="flex-1 h-6 bg-ink-100 rounded flex items-center justify-center font-medium text-ink-500">
-                          ${standardDeductions[filingStatus].toLocaleString()} — Std deduction (0%)
+                          ${standardDeductions[filingStatus].toLocaleString()} — {t('raiseCalc.stdDeductionBar')}
                         </div>
                         <div className="w-16 text-right font-mono text-ink-400">$0</div>
                       </div>
                       <div className="pt-0.5 text-right">
-                        <span className="text-xs text-ink-400">Total: ${salary.toLocaleString()} = gross salary</span>
+                        <span className="text-xs text-ink-400">{t('raiseCalc.totalLabel', { amount: salary.toLocaleString() })}</span>
                       </div>
                     </div>
                     <div className="pt-2 border-t border-sage-300 space-y-1 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-ink-600">Taxable income:</span>
+                        <span className="text-ink-600">{t('raiseCalc.taxableIncome')}</span>
                         <span className="font-mono">${Math.round(current.taxableIncome).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-ink-600">Federal tax:</span>
+                        <span className="text-ink-600">{t('raiseCalc.federalTax')}</span>
                         <span className="font-mono font-bold text-sage-700">${Math.round(current.tax).toLocaleString()}</span>
                       </div>
                     </div>
@@ -3409,24 +3369,24 @@ function RaiseVisualizer() {
               </div>
 
               <div className="bg-gradient-to-r from-steel-50 to-sage-50 rounded-xl p-6 border border-ink-200">
-                <h4 className="font-medium text-ink-800 mb-4">What changed</h4>
+                <h4 className="font-medium text-ink-800 mb-4">{t('raiseCalc.whatChanged')}</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-ink-600">Salary increase:</span>
+                    <span className="text-ink-600">{t('raiseCalc.salaryIncrease')}</span>
                     <span className="font-mono font-bold text-sage-700">+${(salary - prevSalary).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ink-600">Additional federal tax:</span>
+                    <span className="text-ink-600">{t('raiseCalc.additionalTax')}</span>
                     <span className="font-mono text-red-600">+${Math.round(current.tax - calculateTax(prevSalary).tax).toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-ink-600">Estimated take-home increase:</span>
+                    <span className="text-ink-600">{t('raiseCalc.takeHomeIncrease')}</span>
                     <span className="font-mono font-bold text-sage-700">+${Math.round((salary - prevSalary) - (current.tax - calculateTax(prevSalary).tax)).toLocaleString()}</span>
                   </div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-ink-200">
                   <p className="text-xs text-ink-500 italic">
-                    Your raise kept ~{Math.round(((salary - prevSalary) - (current.tax - calculateTax(prevSalary).tax)) / (salary - prevSalary) * 100)}% of itself after federal income tax.
+                    {t('raiseCalc.keptPercent', { pct: Math.round(((salary - prevSalary) - (current.tax - calculateTax(prevSalary).tax)) / (salary - prevSalary) * 100) })}
                   </p>
                 </div>
               </div>
@@ -3437,8 +3397,7 @@ function RaiseVisualizer() {
 
       <div className="p-6 bg-sand-50 border-t border-sand-100">
         <p className="text-xs text-ink-600">
-          <strong className="text-sand-700">Disclaimer:</strong> This shows federal income tax only for 2025 tax year estimates.
-          It excludes FICA (7.65%), state tax, pre-tax deductions, and credits. Your actual take-home will be lower.
+          <strong className="text-sand-700">{t('raiseCalc.disclaimerLabel')}</strong> {t('raiseCalc.disclaimer')}
         </p>
       </div>
     </div>

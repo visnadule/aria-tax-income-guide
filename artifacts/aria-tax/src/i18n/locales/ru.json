@@ -1,0 +1,616 @@
+{
+  "nav": {
+    "guide": "",
+    "guideTitle": "",
+    "family1099": "",
+    "scheduleC": "",
+    "compare": ""
+  },
+  "footer": {
+    "disclaimer": "",
+    "about": "",
+    "contact": "",
+    "copyright": ""
+  },
+  "common": {
+    "backToStart": "",
+    "explorePath": "",
+    "hoverToSee": "",
+    "hoverToSeeReturn": "",
+    "hoverToSeeCalc": "",
+    "hoverPrompt": "",
+    "whereItLands": "",
+    "taxNotes": "",
+    "arrivesJan31": "",
+    "arrivesBy": "",
+    "selectFormDetails": ""
+  },
+  "entry": {
+    "header": "",
+    "subhead": "",
+    "cards": {
+      "w2": {
+        "title": "",
+        "subtitle": ""
+      },
+      "freelance": {
+        "title": "",
+        "subtitle": ""
+      },
+      "mixed": {
+        "title": "",
+        "subtitle": ""
+      },
+      "investment": {
+        "title": "",
+        "subtitle": ""
+      }
+    }
+  },
+  "pathA": {
+    "badge": "",
+    "header": "",
+    "intro": "",
+    "introItalic": "",
+    "confusion": {
+      "title": "",
+      "body": "",
+      "overpaid": "",
+      "bodyEnd": ""
+    },
+    "flow": {
+      "employer": {
+        "title": "",
+        "desc": ""
+      },
+      "paycheck": {
+        "title": "",
+        "desc": "",
+        "detail": "",
+        "paystub": "",
+        "grossPay": "",
+        "grossPayValue": "",
+        "preTaxDeductions": "",
+        "preTaxValue": "",
+        "taxWithholdings": "",
+        "taxWithholdingsValue": "",
+        "netPay": "",
+        "netPayValue": ""
+      },
+      "w2Form": {
+        "title": "",
+        "desc": ""
+      },
+      "form1040": {
+        "title": "",
+        "desc": "",
+        "noScheduleC": "",
+        "noScheduleSE": "",
+        "noEstimated": ""
+      },
+      "reconciliation": {
+        "title": "",
+        "subtitle": "",
+        "refund": "",
+        "refundDesc": "",
+        "balanceDue": "",
+        "balanceDueDesc": "",
+        "even": "",
+        "evenDesc": ""
+      }
+    },
+    "complicated": {
+      "title": "",
+      "body": "",
+      "link": ""
+    },
+    "insight": {
+      "title": "",
+      "content": ""
+    },
+    "compare": {
+      "prompt": "",
+      "freelanceLink": "",
+      "compareLink": ""
+    }
+  },
+  "pathB": {
+    "badge": "",
+    "header": "",
+    "intro": "",
+    "flow": {
+      "client": {
+        "title": "",
+        "desc": ""
+      },
+      "directPayment": {
+        "title": "",
+        "desc": "",
+        "noWithholding": ""
+      },
+      "keyInsight": "",
+      "forms": {
+        "title": "",
+        "desc": "",
+        "necLabel": "",
+        "necDesc": "",
+        "kLabel": "",
+        "kDesc": "",
+        "nothing": "",
+        "stillReport": "",
+        "stillReportDesc": ""
+      },
+      "scheduleC": {
+        "title": "",
+        "desc": ""
+      },
+      "schedule1": {
+        "title": "",
+        "desc": ""
+      },
+      "twoTaxes": {
+        "title": "",
+        "subtitle": "",
+        "incomeTax": "",
+        "incomeTaxSub": "",
+        "incomeTaxBody": "",
+        "seTax": "",
+        "seTaxRate": "",
+        "seTaxBody": ""
+      },
+      "quarterly": {
+        "title": "",
+        "desc": ""
+      }
+    },
+    "questions": {
+      "header": "",
+      "q1": {
+        "title": "",
+        "yes": "",
+        "yesDetail": "",
+        "note": ""
+      },
+      "q2": {
+        "title": "",
+        "notAlways": "",
+        "notAlwaysDetail": "",
+        "link": ""
+      }
+    },
+    "quietBridge": {
+      "title": "",
+      "body": "",
+      "link": ""
+    },
+    "insight": {
+      "title": "",
+      "content": ""
+    },
+    "explore1099": {
+      "prompt": "",
+      "link": ""
+    }
+  },
+  "pathC": {
+    "badge": "",
+    "header": "",
+    "intro": "",
+    "flow": {
+      "w2Side": "",
+      "sideIncomeSide": "",
+      "clients": "",
+      "paycheck": "",
+      "paycheckDesc": "",
+      "directPayment": "",
+      "directPaymentDesc": "",
+      "withholdingDone": "",
+      "withholdingDoneDesc": "",
+      "nothingWithheld": "",
+      "nothingWithheldDesc": "",
+      "bothLand": "",
+      "bothLandDesc": "",
+      "sideIncomeOnly": "",
+      "flowsThrough": "",
+      "scheduleC": {
+        "title": "",
+        "desc": ""
+      },
+      "seTax": {
+        "title": "",
+        "rate": "",
+        "inAddition": ""
+      },
+      "nothingTag": ""
+    },
+    "surprise": {
+      "title": "",
+      "body": "",
+      "tagLine": "",
+      "result": ""
+    },
+    "refundGone": {
+      "title": "",
+      "body": ""
+    },
+    "solutions": {
+      "title": "",
+      "w4": {
+        "title": "",
+        "body": ""
+      },
+      "quarterly": {
+        "title": "",
+        "body": ""
+      },
+      "bothValid": ""
+    },
+    "insight": {
+      "title": "",
+      "content": ""
+    }
+  },
+  "pathD": {
+    "badge": "",
+    "header": "",
+    "intro": "",
+    "flow": {
+      "account": {
+        "title": "",
+        "desc": ""
+      },
+      "receive": {
+        "title": "",
+        "desc": ""
+      },
+      "formsTitle": "",
+      "formsSubtitle": "",
+      "intLabel": "",
+      "intSublabel": "",
+      "divLabel": "",
+      "divSublabel": "",
+      "bLabel": "",
+      "bSublabel": "",
+      "rLabel": "",
+      "rSublabel": "",
+      "noSETax": "",
+      "passive": ""
+    },
+    "insight": {
+      "title": "",
+      "content": ""
+    },
+    "confused": "",
+    "familyTreeLink": ""
+  },
+  "family1099": {
+    "header": "",
+    "intro": "",
+    "categories": {
+      "selfEmployment": "",
+      "otherIncome": "",
+      "investment": "",
+      "retirement": ""
+    },
+    "forms": {
+      "nec": {
+        "fullName": "",
+        "description": "",
+        "landingSpot": "",
+        "taxNotes": ""
+      },
+      "k": {
+        "fullName": "",
+        "description": "",
+        "landingSpot": "",
+        "taxNotes": ""
+      },
+      "misc": {
+        "fullName": "",
+        "description": "",
+        "landingSpot": "",
+        "taxNotes": ""
+      },
+      "g": {
+        "fullName": "",
+        "description": "",
+        "landingSpot": "",
+        "taxNotes": ""
+      },
+      "int": {
+        "fullName": "",
+        "description": "",
+        "landingSpot": "",
+        "taxNotes": ""
+      },
+      "div": {
+        "fullName": "",
+        "description": "",
+        "landingSpot": "",
+        "taxNotes": ""
+      },
+      "b": {
+        "fullName": "",
+        "description": "",
+        "landingSpot": "",
+        "taxNotes": ""
+      },
+      "r": {
+        "fullName": "",
+        "description": "",
+        "landingSpot": "",
+        "taxNotes": ""
+      }
+    },
+    "scheduleC": "",
+    "usuallyScheduleC": "",
+    "dependsOnBox": "",
+    "sidePanel": {
+      "whereItLands": "",
+      "taxNotes": "",
+      "selectPrompt": ""
+    },
+    "insight": {
+      "title": "",
+      "content": ""
+    }
+  },
+  "scheduleCView": {
+    "badge": "",
+    "header": "",
+    "intro": "",
+    "sections": {
+      "what": {
+        "title": "",
+        "body": "",
+        "items": [],
+        "footer": ""
+      },
+      "when": {
+        "title": "",
+        "body": "",
+        "items": [],
+        "footer": ""
+      },
+      "line": {
+        "title": "",
+        "body": "",
+        "items": [],
+        "footer": ""
+      },
+      "expenses": {
+        "title": "",
+        "body": "",
+        "items": [],
+        "footer": ""
+      },
+      "selfemp": {
+        "title": "",
+        "body": "",
+        "items": [],
+        "footer": ""
+      }
+    },
+    "insight": {
+      "title": "",
+      "content": ""
+    }
+  },
+  "comparison": {
+    "header": "",
+    "intro": "",
+    "columns": {
+      "employed": {
+        "title": "",
+        "savedLabel": "",
+        "notes": "",
+        "structure": []
+      },
+      "contracted": {
+        "title": "",
+        "savedLabel": "",
+        "notes": "",
+        "structure": []
+      },
+      "solo": {
+        "title": "",
+        "savedLabel": "",
+        "notes": "",
+        "structure": []
+      }
+    },
+    "rows": {
+      "grossSalary": "",
+      "preTaxBenefits": "",
+      "preTaxBenefitsNote": "",
+      "ssEmployeeHalf": "",
+      "medicareEmployeeHalf": "",
+      "federalIncomeTax": "",
+      "federalNote": "",
+      "stateIncomeTax": "",
+      "stateNote": "",
+      "grossReceipts": "",
+      "businessExpenses": "",
+      "businessExpensesNote1": "",
+      "businessExpensesNote2": "",
+      "netProfit": "",
+      "seTax": "",
+      "seTaxNote": "",
+      "grossRevenue": "",
+      "estimatedTakeHome": "",
+      "taxes": "",
+      "reachesYou": ""
+    },
+    "whatStructureProvides": "",
+    "employedLabel": "",
+    "contractedLabel": "",
+    "soloLabel": "",
+    "whatProvides": {
+      "employed": ["", "", "", ""],
+      "contracted": ["", "", "", ""],
+      "solo": ["", "", "", ""]
+    },
+    "realDifference": {
+      "title": "",
+      "body1": "",
+      "expenseProfile": "",
+      "body1end": "",
+      "body2": ""
+    },
+    "disclaimer": {
+      "label": "",
+      "body1": "",
+      "body2": ""
+    }
+  },
+  "raiseCalc": {
+    "header": "",
+    "subtitle": "",
+    "salaryLabel": "",
+    "filingStatusLabel": "",
+    "bracketsHeader": "",
+    "totalLabel": "",
+    "grossSalaryLabel": "",
+    "stdDeductionLabel": "",
+    "taxableIncomeLabel": "",
+    "federalIncomeTaxLabel": "",
+    "keyRatesHeader": "",
+    "marginalRateLabel": "",
+    "marginalRateNote": "",
+    "effectiveRateLabel": "",
+    "effectiveRateNote": "",
+    "whyDiff": "",
+    "whyDiffBody": "",
+    "showBeforeAfter": "",
+    "beforeAfterEnabled": "",
+    "beforeLabel": "",
+    "beforeHeader": "",
+    "afterHeader": "",
+    "stdDeductionBar": "",
+    "whatChanged": "",
+    "salaryIncrease": "",
+    "additionalTax": "",
+    "takeHomeIncrease": "",
+    "keptPercent": "",
+    "taxableIncome": "",
+    "federalTax": "",
+    "disclaimerLabel": "",
+    "disclaimer": ""
+  },
+  "quarterly": {
+    "thresholdTitle": "",
+    "thresholdBody": "",
+    "thresholdNote": "",
+    "deadlinesTitle": "",
+    "safeHarborTitle": "",
+    "safeHarborIntro": "",
+    "safeHarbor90": "",
+    "safeHarborOr": "",
+    "safeHarbor100": "",
+    "safeHarborNote": "",
+    "safeHarborSmaller": "",
+    "safeHarborW2Note": "",
+    "confusionTitle": "",
+    "confusionQ": "",
+    "confusionA": "",
+    "afterWithholding": "",
+    "confusionAEnd": "",
+    "disclaimer": ""
+  },
+  "anatomy": {
+    "hoverPrompt": "",
+    "hoverPromptReturn": "",
+    "hoverPromptCalc": "",
+    "hoverCta": "",
+    "hoverCtaStep": "",
+    "hoverCtaLine": "",
+    "whereItLands": "",
+    "w2": {
+      "formTitle": "",
+      "arrivesBy": "",
+      "box1": { "label": "", "desc": "", "where": "" },
+      "box2": { "label": "", "desc": "", "where": "" },
+      "box3": { "label": "", "desc": "", "where": "" },
+      "box4": { "label": "", "desc": "", "where": "" },
+      "box5": { "label": "", "desc": "", "where": "" },
+      "box6": { "label": "", "desc": "", "where": "" },
+      "box17": { "label": "", "desc": "", "where": "" }
+    },
+    "1099nec": {
+      "formTitle": "",
+      "arrivesBy": "",
+      "box1": { "label": "", "desc": "", "where": "" },
+      "box4": { "label": "", "desc": "", "where": "" },
+      "box5": { "label": "", "desc": "", "where": "" },
+      "box6": { "label": "", "desc": "", "where": "" },
+      "box7": { "label": "", "desc": "", "where": "" }
+    },
+    "1099k": {
+      "formTitle": "",
+      "arrivesBy": "",
+      "box1a": { "label": "", "desc": "", "where": "" },
+      "box4": { "label": "", "desc": "", "where": "" },
+      "box5a": { "label": "", "desc": "", "where": "" },
+      "box5b": { "label": "", "desc": "", "where": "" },
+      "box5c": { "label": "", "desc": "", "where": "" }
+    },
+    "scheduleC": {
+      "formTitle": "",
+      "filedWith": "",
+      "hoverPrompt": "",
+      "partI": "",
+      "partII": "",
+      "partIIBottom": "",
+      "line1": { "label": "", "desc": "", "where": "" },
+      "line7": { "label": "", "desc": "", "where": "" },
+      "line8": { "label": "", "desc": "", "where": "" },
+      "line18": { "label": "", "desc": "", "where": "" },
+      "line22": { "label": "", "desc": "", "where": "" },
+      "line25": { "label": "", "desc": "", "where": "" },
+      "line27a": { "label": "", "desc": "", "where": "" },
+      "line28": { "label": "", "desc": "", "where": "" },
+      "line31": { "label": "", "desc": "", "where": "" }
+    },
+    "scheduleSE": {
+      "formTitle": "",
+      "calculated": "",
+      "net": { "label": "", "value": "", "desc": "", "where": "" },
+      "adjustment": { "label": "", "value": "", "desc": "", "where": "" },
+      "rate": { "label": "", "value": "", "desc": "", "where": "" },
+      "deductible": { "label": "", "value": "", "desc": "", "where": "" }
+    },
+    "1099int": {
+      "formTitle": "",
+      "arrivesBy": "",
+      "box1": { "label": "", "desc": "", "where": "" },
+      "box2": { "label": "", "desc": "", "where": "" },
+      "box3": { "label": "", "desc": "", "where": "" },
+      "box4": { "label": "", "desc": "", "where": "" }
+    },
+    "1099div": {
+      "formTitle": "",
+      "arrivesBy": "",
+      "box1a": { "label": "", "desc": "", "where": "" },
+      "box1b": { "label": "", "desc": "", "where": "" },
+      "box2a": { "label": "", "desc": "", "where": "" },
+      "box4": { "label": "", "desc": "", "where": "" }
+    },
+    "1099b": {
+      "formTitle": "",
+      "arrivesBy": "",
+      "box1a": { "label": "", "desc": "", "where": "" },
+      "box1c": { "label": "", "desc": "", "where": "" },
+      "box1d": { "label": "", "desc": "", "where": "" },
+      "box1e": { "label": "", "desc": "", "where": "" },
+      "box2": { "label": "", "desc": "", "where": "" }
+    },
+    "1099r": {
+      "formTitle": "",
+      "arrivesBy": "",
+      "box1": { "label": "", "desc": "", "where": "" },
+      "box2a": { "label": "", "desc": "", "where": "" },
+      "box4": { "label": "", "desc": "", "where": "" },
+      "box7": { "label": "", "desc": "", "where": "" }
+    }
+  }
+}

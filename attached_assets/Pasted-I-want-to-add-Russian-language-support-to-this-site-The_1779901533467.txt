@@ -1,0 +1,204 @@
+I want to add Russian language support to this site. The approach 
+is intentional: I am NOT translating tax terminology, only the 
+surrounding narrative and explanations. Tax form names, line 
+numbers, schedules, and IRS-specific terms must remain in English 
+because they refer to real IRS documents users will encounter.
+
+Please set up internationalization (i18n) for this React project 
+using react-i18next.
+
+═══════════════════════════════════════════════════════════════
+SETUP
+═══════════════════════════════════════════════════════════════
+
+1. Install react-i18next and i18next packages.
+
+2. Create a translations folder structure:
+   src/i18n/
+     ├── index.ts (or .js) — i18n configuration
+     ├── locales/
+     │   ├── en.json — all English strings (current content)
+     │   └── ru.json — Russian translations (empty for now, 
+                       I will fill in)
+
+3. Configure i18next to:
+   - Default language: English (en)
+   - Fallback language: English (en)
+   - Available languages: en, ru
+   - Detection: localStorage first, then browser language, 
+     then default to English
+
+4. Add a language toggle in the top navigation, next to the 
+   existing nav items (1099 Family / Schedule C / Compare / 
+   Estimated Tax / Aria Tax Services logo).
+   
+   Visual: a small text-based toggle "EN | RU" — when on EN, 
+   "EN" is highlighted; when on RU, "RU" is highlighted. 
+   Clicking switches the language.
+   
+   Selected language persists in localStorage so user's choice 
+   is remembered.
+
+═══════════════════════════════════════════════════════════════
+EXTRACTION RULES
+═══════════════════════════════════════════════════════════════
+
+EXTRACT TO i18n (translate to Russian):
+  - All narrative text in headers, subheaders, paragraphs
+  - All callout content (common confusion boxes, sidebars)
+  - All button labels and UI microcopy
+  - All page titles, section titles
+  - All explanatory text about concepts
+  - All disclaimers and footnotes
+  - "Where it lands" descriptions in tooltips
+
+DO NOT EXTRACT (keep in English, hardcoded):
+  - Form names: W-2, 1099-NEC, 1099-K, 1099-INT, 1099-DIV, 
+    1099-B, 1099-R, 1099-G, 1099-MISC
+  - Schedule names: Schedule C, Schedule SE, Schedule B, 
+    Schedule D, Schedule 1
+  - Form 1040 and all numerical references (Box 1, Box 2, 
+    Line 31, etc.)
+  - Specific IRS terms that have no good Russian equivalent:
+      Withholding
+      FICA  
+      Self-employment tax (or "SE tax")
+      Qualified Business Income (QBI) deduction
+      Standard deduction
+      Estimated tax
+      Safe harbor
+      Nonemployee compensation
+      Schedule C income / Schedule C earner
+      Gross receipts
+      Net profit
+  - Filing status labels: Single, MFJ, MFS, HoH (these are 
+    technical IRS terms, leave in English)
+  - All numerical values
+  - Quarterly deadlines (Apr 15, Jun 15, Sep 15, Jan 15)
+
+═══════════════════════════════════════════════════════════════
+STRUCTURE OF en.json AND ru.json
+═══════════════════════════════════════════════════════════════
+
+Organize translations hierarchically by screen/component, e.g.:
+
+{
+  "entry": {
+    "header": "What kind of earner are you?",
+    "subhead": "Income doesn't fit into two neat boxes...",
+    "cards": {
+      "w2": {
+        "title": "I'm a W-2 employee",
+        "subtitle": "I get a paycheck with taxes already taken out."
+      },
+      ...
+    },
+    "footer": "This is an educational guide, not tax advice."
+  },
+  "pathA": {
+    "header": "Your income follows a linear path",
+    "intro": "As an employee, your income is reported through your 
+              employer's payroll system. Taxes are withheld before 
+              you ever see the money.",
+    ...
+  },
+  ...
+}
+
+Hardcoded English terms within translated strings should remain 
+in English in BOTH en.json and ru.json. For example:
+
+  en.json:
+    "pathB": {
+      "intro": "When you're paid directly, no withholding happens. 
+                The income arrives gross."
+    }
+
+  ru.json:
+    "pathB": {
+      "intro": "Когда вам платят напрямую, withholding не 
+                происходит. Доход приходит в полной сумме (gross)."
+    }
+
+The word "withholding" stays in English in the Russian version 
+because that's the term users need to recognize. The Russian 
+text around it is natural Russian.
+
+═══════════════════════════════════════════════════════════════
+GLOSSARY TOOLTIP COMPONENT
+═══════════════════════════════════════════════════════════════
+
+Create a new component <GlossaryTerm term="..." /> that:
+  - Wraps English tax terms in Russian text
+  - Adds a subtle dotted underline to indicate it's interactive
+  - On hover (desktop) or tap (mobile), shows a tooltip with 
+    a brief Russian explanation of the term
+  - Uses the same tooltip pattern as the existing form anatomies
+
+Example usage in the Russian version of Path B:
+
+  <p>
+    Когда вам платят напрямую, никакого 
+    <GlossaryTerm term="withholding" /> не происходит.
+  </p>
+
+When hovered, the tooltip shows:
+  "Withholding — удержание налогов работодателем из вашей 
+   зарплаты до того, как вы её получите. На W-2 это есть, 
+   на 1099 — нет."
+
+The glossary content should be in a separate file:
+  src/i18n/glossary/ru.json
+  
+Example structure:
+{
+  "withholding": "Удержание налогов работодателем из вашей 
+                  зарплаты до того, как вы её получите...",
+  "FICA": "FICA — федеральный взнос на социальное страхование...",
+  "SE tax": "Self-employment tax — налог на самозанятость 15.3%...",
+  ...
+}
+
+Each glossary term should have a 1-2 sentence explanation, 
+not a textbook definition.
+
+═══════════════════════════════════════════════════════════════
+INITIAL TASK
+═══════════════════════════════════════════════════════════════
+
+For this first pass, please do:
+
+1. Full i18n setup (config, packages, language toggle in nav, 
+   localStorage persistence)
+2. Extract ALL translatable strings into en.json (this gives 
+   me a complete list of what to translate)
+3. Create ru.json with the same keys but all values empty 
+   strings (so I can fill them in myself one section at a time)
+4. Create the GlossaryTerm component and an empty 
+   src/i18n/glossary/ru.json file
+5. Wire up the existing components to use t() from useTranslation 
+   hook for all extracted strings
+
+After you finish, the site should work identically in English 
+(since en.json contains the original content). The Russian 
+toggle should also work, but everything will be blank/fallback 
+to English until I fill in ru.json myself.
+
+This way, you do the technical setup, and I do the content 
+translation work — which only I can do correctly as a CPA who 
+knows both languages.
+
+═══════════════════════════════════════════════════════════════
+SCOPE FOR FIRST PASS
+═══════════════════════════════════════════════════════════════
+
+Extract and prepare for translation in this order:
+  Priority 1: Entry screen, Path A (W-2), Path B (Freelance), 
+              Compare
+  Priority 2: Path C (Mixed), Path D (Investment)
+  Priority 3: Family Tree, Schedule C explainer
+
+If you run out of credits, complete the i18n setup + Priority 1 
+first. Lower-priority pages can stay English-only for now.
+
+Do not deploy yet. I will review the setup first.

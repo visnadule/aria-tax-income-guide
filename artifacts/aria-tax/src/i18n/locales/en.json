@@ -1,0 +1,860 @@
+{
+  "nav": {
+    "guide": "/ Guide",
+    "guideTitle": "Back to guide home",
+    "family1099": "1099 Family",
+    "scheduleC": "Schedule C",
+    "compare": "Compare"
+  },
+  "footer": {
+    "disclaimer": "This is an educational guide, not tax advice. No data is collected. Nothing is filed.",
+    "about": "About Aria Tax Services",
+    "contact": "Contact",
+    "copyright": "© {{year}} Aria Tax Services PA. All rights reserved."
+  },
+  "common": {
+    "backToStart": "Back to start",
+    "explorePath": "Explore this path",
+    "hoverToSee": "Hover or focus any box to see what it reports and where it lands.",
+    "hoverToSeeReturn": "Hover or focus any box to see what it reports and where it lands on your return.",
+    "hoverToSeeCalc": "Hover or focus any step to see how the calculation works.",
+    "hoverPrompt": "Hover or focus a box above",
+    "whereItLands": "Where it lands",
+    "taxNotes": "Tax notes",
+    "arrivesJan31": "Arrives by Jan 31",
+    "arrivesBy": "Arrives by January 31 of the following year",
+    "selectFormDetails": "Select a form to see details"
+  },
+  "entry": {
+    "header": "What kind of earner are you?",
+    "subhead": "Income doesn't fit into two neat boxes. Find where you fit, and see how the tax system actually sees you.",
+    "cards": {
+      "w2": {
+        "title": "I'm a W-2 employee",
+        "subtitle": "I get a paycheck with taxes already taken out."
+      },
+      "freelance": {
+        "title": "I do freelance or contract work",
+        "subtitle": "I'm paid directly by clients, customers, or platforms."
+      },
+      "mixed": {
+        "title": "I have a job AND side income",
+        "subtitle": "I'm an employee, but I also earn on the side."
+      },
+      "investment": {
+        "title": "I have investment, interest, or retirement income",
+        "subtitle": "Money comes from accounts, not from work."
+      }
+    }
+  },
+  "pathA": {
+    "badge": "W-2 Employee",
+    "header": "Your income follows a linear path",
+    "intro": "As an employee, your income is reported through your employer's payroll system. Taxes are withheld before you ever see the money.",
+    "introItalic": "Most of your tax is handled before you file. Your employer withholds, deposits with the IRS, and reports the totals on your W-2. Filing reconciles the math.",
+    "confusion": {
+      "title": "Understanding refunds",
+      "body": "A refund doesn't mean you didn't pay tax. It means you",
+      "overpaid": "overpaid",
+      "bodyEnd": "through the year and the IRS is returning the difference."
+    },
+    "flow": {
+      "employer": {
+        "title": "Employer",
+        "desc": "Your company or organization"
+      },
+      "paycheck": {
+        "title": "You receive a paycheck",
+        "desc": "Direct deposit or paper check",
+        "detail": "Payroll system processes your pay and withholds taxes automatically.",
+        "paystub": "Your pay stub shows:",
+        "grossPay": "Gross pay",
+        "grossPayValue": "Your full wages",
+        "preTaxDeductions": "Pre-tax deductions",
+        "preTaxValue": "401k, health insurance",
+        "taxWithholdings": "Tax withholdings",
+        "taxWithholdingsValue": "Federal, state, FICA",
+        "netPay": "Net pay",
+        "netPayValue": "What hits your account"
+      },
+      "w2Form": {
+        "title": "Form W-2",
+        "desc": "Arrives by January 31 of the following year"
+      },
+      "form1040": {
+        "title": "Form 1040, Line 1",
+        "desc": "Wages, salaries, tips",
+        "noScheduleC": "No Schedule C",
+        "noScheduleSE": "No Schedule SE",
+        "noEstimated": "No estimated payments"
+      },
+      "reconciliation": {
+        "title": "Reconciliation happens",
+        "subtitle": "The IRS compares what was withheld against what you owe",
+        "refund": "Refund",
+        "refundDesc": "Withholding exceeded liability",
+        "balanceDue": "Balance due",
+        "balanceDueDesc": "Underpaid during the year",
+        "even": "Even",
+        "evenDesc": "Withholding matched obligation"
+      }
+    },
+    "complicated": {
+      "title": "When this gets more complicated",
+      "body": "If you also have side income, your W-2 withholding usually isn't enough to cover the tax on that side income.",
+      "link": "See mixed income path"
+    },
+    "insight": {
+      "title": "What makes W-2 different",
+      "content": "Your employer acts as a tax collector. They calculate, withhold, and remit taxes on your behalf. You don't make estimated payments. Self-employment tax doesn't apply. Your responsibility begins when you file."
+    },
+    "compare": {
+      "prompt": "Curious how this compares to other income types?",
+      "freelanceLink": "See freelance income path",
+      "compareLink": "Compare income types"
+    }
+  },
+  "pathB": {
+    "badge": "Freelance / Contract",
+    "header": "You're part of the tax system now",
+    "intro": "When you're paid directly by clients without an employer intermediary, the tax responsibilities shift entirely to you.",
+    "flow": {
+      "client": {
+        "title": "Client / Customer / Platform",
+        "desc": "A person or business pays you for your work"
+      },
+      "directPayment": {
+        "title": "You're paid directly",
+        "desc": "Deposit, transfer, check, cash, or app payout",
+        "noWithholding": "No withholding. Gross payment arrives in your account."
+      },
+      "keyInsight": "When you're paid directly, nothing is withheld. The income arrives gross. The responsibility for tax—and the timing of paying it—moves to you.",
+      "forms": {
+        "title": "Form you may receive",
+        "desc": "By January 31 of the following year",
+        "necLabel": "1099-NEC (Most common)",
+        "necDesc": "Client paid you $600+ for services",
+        "kLabel": "1099-K (Platforms)",
+        "kDesc": "Payment processors, gig apps, marketplaces",
+        "nothing": "Nothing",
+        "stillReport": "Still report it.",
+        "stillReportDesc": "Income is taxable whether you receive a form or not."
+      },
+      "scheduleC": {
+        "title": "Schedule C",
+        "desc": "Profit or Loss From Business (Sole Proprietorship)"
+      },
+      "schedule1": {
+        "title": "Schedule 1 → Form 1040",
+        "desc": "Net profit adds to your total income"
+      },
+      "twoTaxes": {
+        "title": "Two taxes apply to net profit",
+        "subtitle": "This is the key difference from W-2 income",
+        "incomeTax": "Income tax",
+        "incomeTaxSub": "Federal + state",
+        "incomeTaxBody": "Same tax that applies to W-2 wages. Rate depends on your bracket and filing status.",
+        "seTax": "Self-employment tax",
+        "seTaxRate": "15.3%",
+        "seTaxBody": "Both halves of Social Security (12.4%) and Medicare (2.9%). W-2 employees split this with their employer."
+      },
+      "quarterly": {
+        "title": "No one withheld anything",
+        "desc": "You may need to pay quarterly estimated tax — here's when that rule applies."
+      }
+    },
+    "questions": {
+      "header": "Common questions",
+      "q1": {
+        "title": "\"If I didn't receive a 1099, do I have to report the income?\"",
+        "yes": "Yes.",
+        "yesDetail": "The 1099 is a copy sent to you and the IRS. It's not what creates the obligation to report.",
+        "note": "You're required to report all income regardless of whether you received a form."
+      },
+      "q2": {
+        "title": "\"Is 1099 income the same as Schedule C income?\"",
+        "notAlways": "Not always.",
+        "notAlwaysDetail": "1099-NEC and most 1099-K income land on Schedule C. Other 1099 forms don't.",
+        "link": "See the complete 1099 family tree"
+      }
+    },
+    "quietBridge": {
+      "title": "The quiet bridge",
+      "body": "Many people don't realize when \"a little side work\" has quietly become \"a small business.\" Schedule C is where that line becomes visible.",
+      "link": "Learn more about Schedule C"
+    },
+    "insight": {
+      "title": "The key shift",
+      "content": "You became your own payroll department. No employer to withhold for you. The responsibility—and the timing—changed. You may need to pay estimated taxes quarterly to avoid penalties."
+    },
+    "explore1099": {
+      "prompt": "Want to understand the different 1099 forms?",
+      "link": "Explore the 1099 family"
+    }
+  },
+  "pathC": {
+    "badge": "Mixed Income",
+    "header": "Two systems, one return",
+    "intro": "This is increasingly common. You have a job with a W-2 and also earn money independently. Your tax return reflects both—and the side income can change your outcome.",
+    "flow": {
+      "w2Side": "W-2 Side",
+      "sideIncomeSide": "Side Income Side",
+      "clients": "Clients, Platforms",
+      "paycheck": "Paycheck",
+      "paycheckDesc": "With taxes already withheld",
+      "directPayment": "Direct payment",
+      "directPaymentDesc": "Gross amount, no withholding",
+      "withholdingDone": "Withholding done",
+      "withholdingDoneDesc": "Federal, state, FICA already taken",
+      "nothingWithheld": "Nothing withheld",
+      "nothingWithheldDesc": "Full responsibility shifts to you",
+      "bothLand": "Both land on Form 1040",
+      "bothLandDesc": "W-2 wages + Schedule C net profit combined",
+      "sideIncomeOnly": "Side income only:",
+      "flowsThrough": "Flows through Schedule C first",
+      "scheduleC": {
+        "title": "Schedule C",
+        "desc": "Report income, expenses, calculate net profit"
+      },
+      "seTax": {
+        "title": "Self-employment tax applies",
+        "rate": "15.3% on net profit",
+        "inAddition": "In addition to income tax"
+      },
+      "nothingTag": "Nothing (still report)"
+    },
+    "surprise": {
+      "title": "Withholding from W-2 may not be enough",
+      "body": "Your job's withholding was set for your W-2 income alone. Side income brings additional tax—with no withholding to cover it.",
+      "tagLine": "This is why \"I had a job AND a side gig\"",
+      "result": "can produce a surprise balance due"
+    },
+    "refundGone": {
+      "title": "\"My refund disappeared\"",
+      "body": "If you had a refund before you started a side gig—and now you don't—this is usually why. The W-2 side hasn't changed. The side income brought its own taxes."
+    },
+    "solutions": {
+      "title": "Two valid approaches",
+      "w4": {
+        "title": "Adjust W-4",
+        "body": "Increase withholding from your paycheck to cover side income tax too. One change, no extra forms. Set it and forget it."
+      },
+      "quarterly": {
+        "title": "Quarterly payments",
+        "body": "Make estimated tax payments on your side income using Form 1040-ES. More bookkeeping, but keeps side and job separate."
+      },
+      "bothValid": "Both are valid. Both prevent surprises."
+    },
+    "insight": {
+      "title": "You're running two tax profiles",
+      "content": "The W-2 side is handled for you. The side-income side requires your attention. They meet on one 1040. Many people in this situation underwithhold because they don't account for self-employment tax on side income."
+    }
+  },
+  "pathD": {
+    "badge": "Investment / Interest",
+    "header": "Passive income has its own forms",
+    "intro": "When money comes from accounts—not from work—a different family of 1099s reports it. These are not self-employment. No Schedule C.",
+    "flow": {
+      "account": {
+        "title": "Account",
+        "desc": "Bank, brokerage, retirement account"
+      },
+      "receive": {
+        "title": "You receive...",
+        "desc": "Distribution, interest, dividend, or proceeds from a sale"
+      },
+      "formsTitle": "Form you receive",
+      "formsSubtitle": "Each type of income has its own 1099",
+      "intLabel": "Interest income",
+      "intSublabel": "Bank accounts, savings, bonds",
+      "divLabel": "Dividends",
+      "divSublabel": "Stocks, mutual funds",
+      "bLabel": "Capital gains / losses",
+      "bSublabel": "From stock or asset sales",
+      "rLabel": "Retirement income",
+      "rSublabel": "From 401(k), IRA, pension",
+      "noSETax": "None trigger SE tax",
+      "passive": "These forms report passive income—money from accounts, not from your work. No self-employment tax. No quarterly payments needed."
+    },
+    "insight": {
+      "title": "The important distinction",
+      "content": "These 1099s report passive income—interest, dividends, capital gains, retirement. They are NOT the same as 1099-NEC which reports self-employment income. Different forms. Different lines on your return. Different tax treatment."
+    },
+    "confused": "Confused by all the 1099s? You're not alone.",
+    "familyTreeLink": "See the complete 1099 family tree"
+  },
+  "family1099": {
+    "header": "The 1099 Family Tree",
+    "intro": "\"1099\" is a family of information returns, not a single form. Each reports different types of income and lands on different parts of your return.",
+    "categories": {
+      "selfEmployment": "Self-Employment",
+      "otherIncome": "Other Income (Not Self-Employment)",
+      "investment": "Investment, Interest, Passive Income",
+      "retirement": "Retirement"
+    },
+    "forms": {
+      "nec": {
+        "fullName": "Nonemployee Compensation",
+        "description": "Reports payments to contractors, freelancers, and non-employees. This is the modern form for what used to be Box 7 of 1099-MISC.",
+        "landingSpot": "Schedule C → Form 1040 Line 3",
+        "taxNotes": "Self-employment tax (Schedule SE) applies."
+      },
+      "k": {
+        "fullName": "Payment Card and Third Party Network Transactions",
+        "description": "Reports payments received through payment apps (Venmo, PayPal) and platforms. Thresholds are changing.",
+        "landingSpot": "Often Schedule C. Sometimes just gross receipts.",
+        "taxNotes": "May indicate self-employment income. Context matters."
+      },
+      "misc": {
+        "fullName": "Miscellaneous Income",
+        "description": "Reports rents, royalties, prizes, awards, medical payments, and other income types. Box 7 used to be for self-employment—that moved to 1099-NEC.",
+        "landingSpot": "Depends on box. Rents → Schedule E. Royalties → Schedule E.",
+        "taxNotes": "Not all 1099-MISC = Schedule C. Box matters."
+      },
+      "g": {
+        "fullName": "Certain Government Payments",
+        "description": "Reports government payments including unemployment compensation, state and local tax refunds, and other government payments such as agricultural payments.",
+        "landingSpot": "Form 1040, Schedule 1 (unemployment). State refunds on Schedule 1 if previously deducted.",
+        "taxNotes": "Unemployment is fully taxable as ordinary income. State tax refunds are taxable only if you deducted state taxes in the prior year."
+      },
+      "int": {
+        "fullName": "Interest Income",
+        "description": "Bank interest, savings bonds, loans you made.",
+        "landingSpot": "Form 1040 Schedule B",
+        "taxNotes": "Ordinary income tax. No self-employment tax."
+      },
+      "div": {
+        "fullName": "Dividends and Distributions",
+        "description": "Stock and mutual fund dividends.",
+        "landingSpot": "Form 1040 Schedule B",
+        "taxNotes": "Qualified dividends have lower tax rates."
+      },
+      "b": {
+        "fullName": "Proceeds from Broker Transactions",
+        "description": "Stock, bond, mutual fund sales. Also crypto from some platforms.",
+        "landingSpot": "Form 8949 → Schedule D",
+        "taxNotes": "Capital gains tax. Short-term vs long-term."
+      },
+      "r": {
+        "fullName": "Distributions from Pensions, Annuities, IRAs",
+        "description": "401(k), IRA, pension, and other retirement plan distributions.",
+        "landingSpot": "Form 1040 Lines 5a/5b",
+        "taxNotes": "May be taxable, partially taxable, or nontaxable."
+      }
+    },
+    "scheduleC": "Schedule C",
+    "usuallyScheduleC": "Usually Schedule C",
+    "dependsOnBox": "Depends on box",
+    "sidePanel": {
+      "whereItLands": "Where it lands",
+      "taxNotes": "Tax notes",
+      "selectPrompt": "Select a form to see details"
+    },
+    "insight": {
+      "title": "The biggest misconception",
+      "content": "'I got a 1099, so I'm self-employed.' Not necessarily. 1099-INT, 1099-DIV, 1099-B, and 1099-R report passive income—not self-employment. Only certain 1099s connect to Schedule C."
+    }
+  },
+  "scheduleCView": {
+    "badge": "Schedule C",
+    "header": "The quiet bridge between side work and business",
+    "intro": "Schedule C is where the IRS asks you to describe your profit-seeking activity. It's where \"I do some work on the side\" becomes visible as a business.",
+    "sections": {
+      "what": {
+        "title": "What is Schedule C?",
+        "body": "Schedule C is \"Profit or Loss From Business (Sole Proprietorship).\" It's a form where you report:",
+        "items": [
+          "All income from your self-employment or freelance work",
+          "All ordinary and necessary business expenses",
+          "The resulting net profit or loss"
+        ],
+        "footer": "The net profit flows to your Form 1040 as income."
+      },
+      "when": {
+        "title": "When does Schedule C appear?",
+        "body": "Schedule C applies when:",
+        "items": [
+          "You're self-employed (freelancer, contractor, consultant)",
+          "You have a sole proprietorship",
+          "You're a single-member LLC taxed as a disregarded entity",
+          "You have a side business or gig work"
+        ],
+        "footer": "Income type matters more than amount. If you earned $600 doing freelance graphic design, that's Schedule C. If you earned $600 in stock dividends, that's not Schedule C."
+      },
+      "line": {
+        "title": "The line between side income and business",
+        "body": "From a tax perspective, there isn't a bright line. The IRS looks at whether you're:",
+        "items": [
+          "Operating with a profit motive (not just a hobby)",
+          "Engaged in the activity regularly and continuously",
+          "Depending on the income"
+        ],
+        "footer": "You don't need an LLC, registered business name, or separate bank account to have Schedule C income. The form is filed based on how you earned the money, not how you're organized."
+      },
+      "expenses": {
+        "title": "What expenses can you deduct?",
+        "body": "Ordinary and necessary business expenses. Common examples:",
+        "items": [
+          "Software, subscriptions, tools for your work",
+          "Home office (portion of rent/mortgage, utilities)",
+          "Travel, mileage, meals (partial)",
+          "Professional development, books, courses",
+          "Advertising, professional services"
+        ],
+        "footer": "Record-keeping matters. The IRS can disallow deductions without documentation."
+      },
+      "selfemp": {
+        "title": "Self-employment tax",
+        "body": "When you have Schedule C net profit, Schedule SE follows. This is where you calculate:",
+        "items": [
+          "Social Security tax: 12.4%",
+          "Medicare tax: 2.9%",
+          "Additional Medicare: 0.9% above $200k ($250k joint)"
+        ],
+        "footer": "As an employee, your employer paid half. When you're self-employed, you pay both halves—but you can deduct half on your 1040."
+      }
+    },
+    "insight": {
+      "title": "Schedule C is descriptive, not prescriptive",
+      "content": "It doesn't create a business. It reports one that already exists because of how you're earning. You don't opt into Schedule C—the nature of your income determines whether it applies."
+    }
+  },
+  "comparison": {
+    "header": "Same work, different arrangement",
+    "intro": "Imagine the same person doing the same kind of work, earning the same $100,000—but arranged three different ways. The tax system treats each arrangement differently, and what reaches you at the end can be very different.",
+    "columns": {
+      "employed": {
+        "title": "Employed at a firm",
+        "savedLabel": "spent or saved",
+        "notes": "Employer pays the other half of FICA (7.65%). Benefits paid by employer. No Schedule C.",
+        "structure": [
+          "Employer provides office, equipment",
+          "Some benefits (health insurance, 401k)",
+          "Employer covers half of Social Security & Medicare"
+        ]
+      },
+      "contracted": {
+        "title": "Contracted as hired expert",
+        "savedLabel": "business pays",
+        "notes": "You pay both halves of FICA. No employer benefits. Quarterly estimated payments may apply.",
+        "structure": [
+          "Minimal overhead",
+          "You cover your own tools & software",
+          "You pay full SE tax (no split)",
+          "No employer benefits"
+        ]
+      },
+      "solo": {
+        "title": "Solo practice / small business",
+        "savedLabel": "business pays",
+        "notes": "Real business overhead. You deduct the actual cost of running it. Quarterly payments likely.",
+        "structure": [
+          "Your business pays for infrastructure",
+          "Office or home office expense",
+          "Professional insurance & tools",
+          "Marketing & business development"
+        ]
+      }
+    },
+    "rows": {
+      "grossSalary": "Gross salary",
+      "preTaxBenefits": "Pre-tax benefits",
+      "preTaxBenefitsNote": "401k, health insurance",
+      "ssEmployeeHalf": "SS (employee half)",
+      "medicareEmployeeHalf": "Medicare (employee half)",
+      "federalIncomeTax": "Federal income tax",
+      "federalNote": "illustrative",
+      "stateIncomeTax": "State income tax",
+      "stateNote": "illustrative",
+      "grossReceipts": "Gross receipts",
+      "businessExpenses": "Business expenses",
+      "businessExpensesNote1": "laptop, software, minor supplies",
+      "businessExpensesNote2": "office, software, insurance, marketing, supplies, CE",
+      "netProfit": "Net profit",
+      "seTax": "Self-employment tax",
+      "seTaxNote": "15.3% on net profit",
+      "grossRevenue": "Gross revenue",
+      "estimatedTakeHome": "Estimated take-home",
+      "taxes": "taxes",
+      "reachesYou": "reaches you"
+    },
+    "whatStructureProvides": "What each structure provides",
+    "employedLabel": "Employed",
+    "contractedLabel": "Contracted Expert",
+    "soloLabel": "Solo Practice / Business",
+    "whatProvides": {
+      "employed": [
+        "Employer provides office, equipment, workspace",
+        "Employer benefits (health insurance, 401k match)",
+        "Employer covers half of FICA taxes",
+        "Employer withholds taxes throughout year"
+      ],
+      "contracted": [
+        "Minimal overhead (mostly tools & software)",
+        "Personal costs remain personal (health, retirement)",
+        "You pay full SE tax (no employer split)",
+        "No withholding; you manage tax timing"
+      ],
+      "solo": [
+        "Your business pays for infrastructure",
+        "Real overhead: office, software, insurance, marketing",
+        "You deduct actual costs of running it",
+        "You pay full SE tax and manage quarterly payments"
+      ]
+    },
+    "realDifference": {
+      "title": "The real difference",
+      "body1": "Columns 2 and 3 use the same tax forms (1099, Schedule C, Schedule SE). The difference isn't the tax rules. It's the",
+      "expenseProfile": "expense profile",
+      "body1end": ".",
+      "body2": "A contracted expert usually has minimal overhead. A solo practice or small business—whether you offer services, sell goods, or run an operation—has the costs of actually running it: workspace, tools, insurance, marketing, dues, supplies."
+    },
+    "disclaimer": {
+      "label": "All numbers are illustrative.",
+      "body1": "Real outcomes depend on your filing status, state, family situation, actual expenses, pre-tax contributions, credits, and many other factors.",
+      "body2": "This is a conceptual comparison of how the same gross income is treated under three structures—not a calculator, and not a recommendation for which structure is \"best\" for you. Each has legitimate use cases. The structure you choose changes what you can deduct, which changes what gets taxed, which changes what reaches you."
+    }
+  },
+  "raiseCalc": {
+    "header": "What happens after a raise?",
+    "subtitle": "Sometimes a raise feels smaller than it looks. People often hear \"I moved into the 22% bracket\" and assume all their income is taxed at that rate. It's not how brackets work.",
+    "salaryLabel": "Current salary:",
+    "filingStatusLabel": "Filing status:",
+    "bracketsHeader": "Tax brackets (stacked)",
+    "totalLabel": "Total: ${{amount}} = your gross salary",
+    "grossSalaryLabel": "Gross salary:",
+    "stdDeductionLabel": "Standard deduction:",
+    "taxableIncomeLabel": "Taxable income:",
+    "federalIncomeTaxLabel": "Federal income tax:",
+    "keyRatesHeader": "Key rates",
+    "marginalRateLabel": "Marginal rate (rate on next dollar)",
+    "marginalRateNote": "This is the bracket people talk about",
+    "effectiveRateLabel": "Effective rate (overall burden)",
+    "effectiveRateNote": "Total tax ÷ gross salary",
+    "whyDiff": "Why the difference?",
+    "whyDiffBody": "You don't pay 22% on your entire salary. Most of it is in lower brackets. Only the money above the $48,475 threshold is taxed at 22%.",
+    "showBeforeAfter": "Show me before/after a raise",
+    "beforeAfterEnabled": "✓ Before/After enabled",
+    "beforeLabel": "Before (previous salary):",
+    "beforeHeader": "Before: ${{amount}}",
+    "afterHeader": "After: ${{amount}}",
+    "stdDeductionBar": "Std deduction (0%)",
+    "whatChanged": "What changed",
+    "salaryIncrease": "Salary increase:",
+    "additionalTax": "Additional federal tax:",
+    "takeHomeIncrease": "Estimated take-home increase:",
+    "keptPercent": "Your raise kept ~{{pct}}% of itself after federal income tax.",
+    "taxableIncome": "Taxable income:",
+    "federalTax": "Federal tax:",
+    "disclaimerLabel": "Disclaimer:",
+    "disclaimer": "This shows federal income tax only for 2025 tax year estimates. It excludes FICA (7.65%), state tax, pre-tax deductions, and credits. Your actual take-home will be lower."
+  },
+  "quarterly": {
+    "thresholdTitle": "The threshold",
+    "thresholdBody": "Quarterly payments are generally required if you expect to still owe the IRS $1,000 or more at filing time — after withholding and refundable credits.",
+    "thresholdNote": "The $1,000 is not your total tax. It's what's still owed after everything already paid in.",
+    "deadlinesTitle": "Quarterly deadlines",
+    "safeHarborTitle": "The safe harbor (more detail)",
+    "safeHarborIntro": "Even if you'll owe more than $1,000, you generally avoid an underpayment penalty if your withholding plus estimated payments cover at least:",
+    "safeHarbor90": "90% of this year's tax",
+    "safeHarborOr": ", OR",
+    "safeHarbor100": "100% of last year's tax",
+    "safeHarborNote": "(110% if prior-year AGI exceeded $150,000, or $75,000 if married filing separately)",
+    "safeHarborSmaller": "Whichever is smaller.",
+    "safeHarborW2Note": "This is why people with stable W-2 jobs and small side income often don't need separate quarterly payments — their W-2 withholding can be enough to satisfy the safe harbor on its own.",
+    "confusionTitle": "Common confusion",
+    "confusionQ": "\"My total tax will be way more than $1,000. Do I need to pay quarterly?\"",
+    "confusionA": "Not necessarily. The $1,000 threshold is about what's still owed",
+    "afterWithholding": "after withholding",
+    "confusionAEnd": ". If your W-2 withholding already covers most of your tax, you may be fine even with significant side income.",
+    "disclaimer": "Simplified for clarity. Actual requirements depend on your full picture: withholding, credits, prior-year tax, and safe harbor rules."
+  },
+  "anatomy": {
+    "hoverPrompt": "Hover or focus any box to see what it reports and where it lands.",
+    "hoverPromptReturn": "Hover or focus any box to see what it reports and where it lands on your return.",
+    "hoverPromptCalc": "Hover or focus any step to see how the calculation works.",
+    "hoverCta": "Hover or focus a box above",
+    "hoverCtaStep": "Hover or focus a step above",
+    "hoverCtaLine": "Hover or focus a line above",
+    "whereItLands": "Where it lands",
+    "w2": {
+      "formTitle": "Wage and Tax Statement",
+      "arrivesBy": "Arrives by January 31",
+      "box1": {
+        "label": "Wages, tips, other compensation",
+        "desc": "Your taxable wages — gross pay reduced by 401(k), HSA, and pre-tax health insurance.",
+        "where": "Form 1040, line 1a (wages, salaries, tips)"
+      },
+      "box2": {
+        "label": "Federal income tax withheld",
+        "desc": "Federal income tax already paid to the IRS on your behalf. Counts against what you owe at filing.",
+        "where": "Form 1040, line 25a (federal tax withheld)"
+      },
+      "box3": {
+        "label": "Social Security wages",
+        "desc": "Wages subject to Social Security tax. Usually equals gross pay minus pre-tax health insurance. 401(k) does NOT reduce this.",
+        "where": "Internal — basis for Box 4 calculation"
+      },
+      "box4": {
+        "label": "Social Security tax withheld",
+        "desc": "Social Security tax already withheld — your half of the 12.4% SS tax (6.2% of Box 3).",
+        "where": "Internal — already remitted by employer"
+      },
+      "box5": {
+        "label": "Medicare wages and tips",
+        "desc": "Wages subject to Medicare tax. Like Box 3, but no wage cap applies.",
+        "where": "Internal — basis for Box 6 calculation"
+      },
+      "box6": {
+        "label": "Medicare tax withheld",
+        "desc": "Medicare tax already withheld — your half of the 2.9% Medicare tax (1.45% of Box 5).",
+        "where": "Internal — already remitted by employer"
+      },
+      "box17": {
+        "label": "State income tax",
+        "desc": "State income tax already withheld and remitted by your employer.",
+        "where": "Your state tax return — state tax withheld line"
+      }
+    },
+    "1099nec": {
+      "formTitle": "1099-NEC · Nonemployee Compensation",
+      "arrivesBy": "Arrives by Jan 31",
+      "box1": {
+        "label": "Nonemployee compensation",
+        "desc": "Gross amount paid to you for services. Your client sends this when they paid you $600 or more during the year — it arrives by January 31. This number goes directly to Schedule C, Part I, Line 1 as gross receipts before any expense deductions.",
+        "where": "Schedule C, Part I, Line 1 (gross receipts or sales)"
+      },
+      "box4": {
+        "label": "Federal income tax withheld",
+        "desc": "Backup withholding — nearly always $0 for 1099-NEC. You receive the full payment amount and are responsible for estimating and paying your own taxes quarterly. If you see a non-zero amount here, it means your tax ID was flagged for backup withholding.",
+        "where": "Form 1040, Line 25a (federal tax withheld) — offsets what you owe at filing"
+      },
+      "box5": {
+        "label": "State tax withheld",
+        "desc": "State income tax withheld by the payer, if any. Nearly always $0 — self-employed workers are responsible for paying their own state estimated taxes.",
+        "where": "Your state income tax return — state tax withheld line"
+      },
+      "box6": {
+        "label": "State / Payer's state no.",
+        "desc": "The state where the income was earned and the payer's state tax ID number. Used to match the income to the correct state filing jurisdiction.",
+        "where": "State return — identifies the filing state"
+      },
+      "box7": {
+        "label": "State income",
+        "desc": "The amount of compensation attributable to the state listed in Box 6. Usually equals Box 1 if you work in a single state.",
+        "where": "State income tax return — same figure as Box 1 in single-state situations"
+      }
+    },
+    "1099k": {
+      "formTitle": "1099-K · Payment Card & Third Party Network",
+      "arrivesBy": "Arrives by Jan 31",
+      "box1a": {
+        "label": "Gross amount of payment card/third party network transactions",
+        "desc": "Total gross receipts reported to the IRS — this is before platform fees, refunds, chargebacks, or any deductions. Your actual taxable amount on Schedule C will usually be lower: you deduct platform fees and other expenses in Part II. Do not assume Box 1a equals your profit.",
+        "where": "Schedule C, Part I, Line 1 (gross receipts) — then deduct fees and refunds as expenses in Part II"
+      },
+      "box4": {
+        "label": "Federal income tax withheld",
+        "desc": "Backup withholding — nearly always $0. You are responsible for paying your own taxes through quarterly estimated payments (April 15, June 16, Sept 15, Jan 15).",
+        "where": "Form 1040, Line 25a — offsets what you owe at filing"
+      },
+      "box5a": {
+        "label": "January transactions",
+        "desc": "Gross payment volume processed in January. Boxes 5a–5l break down the annual Box 1a total by month — useful for estimating quarterly tax payments.",
+        "where": "Reference — the 12-month total (5a through 5l) equals Box 1a"
+      },
+      "box5b": {
+        "label": "February transactions",
+        "desc": "Gross payment volume processed in February.",
+        "where": "Reference — the 12-month total equals Box 1a"
+      },
+      "box5c": {
+        "label": "March transactions",
+        "desc": "Gross payment volume for March. Q1 total (5a + 5b + 5c) helps you estimate how much to pay by April 15 for your first quarterly payment.",
+        "where": "Reference — the 12-month total equals Box 1a"
+      }
+    },
+    "scheduleC": {
+      "formTitle": "Schedule C · Profit or Loss From Business",
+      "filedWith": "Filed with Form 1040",
+      "hoverPrompt": "Hover or focus any line to see what it reports and where it lands.",
+      "partI": "Part I — Income",
+      "partII": "Part II — Expenses",
+      "partIIBottom": "Part II — Bottom Line",
+      "line1": {
+        "label": "Gross receipts or sales",
+        "desc": "Total income received from your business before any deductions. Includes all 1099-NEC amounts, 1099-K amounts, direct payments, and any other business revenue — whether or not you received a form.",
+        "where": "Starting point for Schedule C income. Platform fees and refunds are deducted as Part II expenses."
+      },
+      "line7": {
+        "label": "Gross income",
+        "desc": "Gross receipts minus cost of goods sold (if applicable). For most service-based freelancers, this equals Line 1 — cost of goods sold only applies if you sell physical products.",
+        "where": "Carries into Part II as the income figure against which expenses are subtracted."
+      },
+      "line8": {
+        "label": "Advertising",
+        "desc": "Business promotion costs — website hosting, paid ads, business cards, social media promotion, print materials. Must be ordinary and necessary for the business.",
+        "where": "Part II total → subtracted from Line 7 to reach net profit on Line 31."
+      },
+      "line18": {
+        "label": "Office expense",
+        "desc": "Office supplies used directly in your business — printer paper, pens, folders, toner. Separate from home office (Line 30) and from equipment over $2,500 (which may need depreciation).",
+        "where": "Part II total → subtracted from Line 7 to reach net profit on Line 31."
+      },
+      "line22": {
+        "label": "Supplies",
+        "desc": "Materials and supplies used in delivering your service — tools, client materials, project-specific purchases. The line between Line 18 and Line 22 is fuzzy; the IRS cares more that you claim it somewhere than exactly which line.",
+        "where": "Part II total → subtracted from Line 7 to reach net profit on Line 31."
+      },
+      "line25": {
+        "label": "Utilities",
+        "desc": "Business-portion utility costs — phone (business use percentage), internet (business use percentage), electricity for a dedicated home office. You may need to allocate based on square footage or usage.",
+        "where": "Part II total → subtracted from Line 7 to reach net profit on Line 31."
+      },
+      "line27a": {
+        "label": "Other expenses",
+        "desc": "Ordinary and necessary business expenses not listed on Lines 8–26 — software subscriptions, professional dues, continuing education, bank fees, business books, reference materials.",
+        "where": "Part II total → subtracted from Line 7 to reach net profit on Line 31."
+      },
+      "line28": {
+        "label": "Total expenses",
+        "desc": "Sum of all business expenses from Lines 8 through 27b. This is the total deductible amount against your gross income — every dollar here reduces your taxable profit.",
+        "where": "Subtracted from Line 7 (gross income) to calculate net profit on Line 31."
+      },
+      "line31": {
+        "label": "Net profit or (loss)",
+        "desc": "Your business bottom line — gross income minus total expenses. This single number does two things: it flows to Schedule 1 as ordinary income (subject to income tax), and it also becomes the base for Schedule SE (self-employment tax). Every dollar of legitimate expense reduces both taxes simultaneously.",
+        "where": "Schedule 1, Line 3 → Form 1040, Line 8 (ordinary income). Also base for Schedule SE self-employment tax."
+      }
+    },
+    "scheduleSE": {
+      "formTitle": "Schedule SE · Self-Employment Tax",
+      "calculated": "Calculated on Schedule SE",
+      "net": {
+        "label": "Net SE earnings",
+        "value": "From Schedule C, Line 31",
+        "desc": "Your net profit from Schedule C — gross receipts minus all allowable business expenses. This is the starting number for the entire self-employment tax calculation.",
+        "where": "Schedule SE, Line 2 or Line 3 (depending on method)"
+      },
+      "adjustment": {
+        "label": "× 92.35%",
+        "value": "SE income reduction",
+        "desc": "Multiply net earnings by 92.35% (that is, 100% minus 7.65%). This removes the employer-equivalent half of SE tax from the taxable base — mirroring how W-2 employees are not taxed on the employer share of FICA that their employer pays on their behalf.",
+        "where": "Schedule SE, Line 4a — this becomes your SE income subject to tax"
+      },
+      "rate": {
+        "label": "× 15.3%",
+        "value": "12.4% SS + 2.9% Medicare",
+        "desc": "This is the combined employee AND employer share of FICA. A W-2 employee pays 7.65% and their employer quietly pays the other 7.65% — but as self-employed you pay both halves yourself. The rate applies to the 92.35%-adjusted amount, not your full net profit.",
+        "where": "Schedule SE, Line 12 (SS) + Line 13 (Medicare) = Line 15 total → Form 1040 Schedule 2, Line 4"
+      },
+      "deductible": {
+        "label": "÷ 2 = Deductible half",
+        "value": "Above-the-line deduction",
+        "desc": "Half of your SE tax is deductible as an above-the-line adjustment on Schedule 1. This partially compensates for paying both halves of FICA — it reduces your adjusted gross income and therefore your income tax base, even though the SE tax itself is still fully owed.",
+        "where": "Schedule 1, Line 15 → reduces Form 1040 adjusted gross income before the standard deduction"
+      }
+    },
+    "1099int": {
+      "formTitle": "1099-INT · Interest Income",
+      "arrivesBy": "From banks, CDs, bonds",
+      "box1": {
+        "label": "Interest income",
+        "desc": "Total taxable interest earned from bank accounts, savings accounts, CDs, and bonds. If your total interest income from all sources is $1,500 or less, you can report it directly on Form 1040. If over $1,500, you must also complete Schedule B.",
+        "where": "Schedule B, Part I → Form 1040, Line 2b (taxable interest)"
+      },
+      "box2": {
+        "label": "Early withdrawal penalty",
+        "desc": "Penalty you paid for withdrawing from a time deposit (like a CD) before maturity. Even though it reduces your actual return, you still report the full interest in Box 1 — then deduct this penalty separately as an above-the-line adjustment.",
+        "where": "Schedule 1, Line 18 (Penalty on early withdrawal of savings) — reduces your AGI"
+      },
+      "box3": {
+        "label": "Interest on U.S. Savings Bonds and Treasury obligations",
+        "desc": "Interest from federal government securities — U.S. Savings Bonds (like Series EE or I), Treasury bills, notes, and bonds. This interest is exempt from state and local income tax, but is fully taxable for federal purposes.",
+        "where": "Form 1040, Line 2b (federal) — exempt from state return"
+      },
+      "box4": {
+        "label": "Federal income tax withheld",
+        "desc": "Backup withholding applied if your tax ID was missing or flagged. Rare for most bank accounts — but if you see a non-zero amount, it means the bank has already sent that money to the IRS on your behalf.",
+        "where": "Form 1040, Line 25a (federal tax withheld) — reduces what you owe at filing"
+      }
+    },
+    "1099div": {
+      "formTitle": "1099-DIV · Dividends and Distributions",
+      "arrivesBy": "From your brokerage",
+      "box1a": {
+        "label": "Total ordinary dividends",
+        "desc": "All dividends received from stocks and mutual funds. This is your total dividend income — but not all of it is taxed the same way. Box 1b (below) shows the portion that qualifies for lower rates.",
+        "where": "Schedule B, Part II (if over $1,500 total) → Form 1040, Line 3b"
+      },
+      "box1b": {
+        "label": "Qualified dividends",
+        "desc": "The most misunderstood box on this form. Qualified dividends are a subset of Box 1a — they come from U.S. corporations (or qualifying foreign ones) and you held the stock long enough. They are taxed at preferential long-term capital gains rates (0%, 15%, or 20%) instead of your ordinary income tax rate. A dividend is not automatically qualified just because a company declared it.",
+        "where": "Form 1040, Line 3a — taxed at capital gains rates, not ordinary income rates"
+      },
+      "box2a": {
+        "label": "Total capital gain distributions",
+        "desc": "Gains distributed by mutual funds and ETFs from selling securities inside the fund during the year. You receive this even if you never sold your fund shares. Treated as long-term capital gain regardless of how long you held the fund.",
+        "where": "Schedule D, Part II (long-term) → Form 1040, Line 13"
+      },
+      "box4": {
+        "label": "Federal income tax withheld",
+        "desc": "Backup withholding on dividends — rare for most investors. If non-zero, the brokerage sent this amount directly to the IRS and it counts as a tax payment you already made.",
+        "where": "Form 1040, Line 25a (federal tax withheld) — offsets what you owe"
+      }
+    },
+    "1099b": {
+      "formTitle": "1099-B · Proceeds from Broker Transactions",
+      "arrivesBy": "From your brokerage",
+      "box1a": {
+        "label": "Description of property",
+        "desc": "What was sold — typically the security name and number of shares, units of crypto, or description of property.",
+        "where": "Schedule D, Part I or Part II (description column)"
+      },
+      "box1c": {
+        "label": "Date sold or disposed",
+        "desc": "The date of the sale. Combined with the purchase date, this determines whether the gain or loss is short-term (held 1 year or less) or long-term (held more than 1 year).",
+        "where": "Schedule D — determines which section (short vs. long-term) and applicable tax rate"
+      },
+      "box1d": {
+        "label": "Proceeds",
+        "desc": "The amount you received from the sale — your gross selling price. Gain or loss = Proceeds (Box 1d) minus Basis (Box 1e). If Box 1e is blank, you must determine your own cost basis.",
+        "where": "Schedule D, Proceeds column → Form 8949 if adjustments needed"
+      },
+      "box1e": {
+        "label": "Cost or other basis",
+        "desc": "What you originally paid for the asset (purchase price + commissions). If this box is blank or shows $0, the broker did not have basis information on file — you must look up your original purchase price and report the correct basis yourself.",
+        "where": "Schedule D, Cost/Basis column — subtracted from Box 1d to get your gain or loss"
+      },
+      "box2": {
+        "label": "Type of gain or loss",
+        "desc": "Short-term = held 1 year or less → taxed at ordinary income rates. Long-term = held more than 1 year → taxed at preferential capital gains rates (0%, 15%, or 20% depending on income).",
+        "where": "Schedule D, Part I (short-term) or Part II (long-term)"
+      }
+    },
+    "1099r": {
+      "formTitle": "1099-R · Distributions from Retirement Plans",
+      "arrivesBy": "From your plan administrator",
+      "box1": {
+        "label": "Gross distribution",
+        "desc": "Total amount distributed from your retirement account before any withholding or taxes. This is the full amount that left the account.",
+        "where": "Form 1040, Line 5a (pension/annuity total) — Box 2a is the taxable portion"
+      },
+      "box2a": {
+        "label": "Taxable amount",
+        "desc": "The portion of the distribution subject to income tax. Usually equals Box 1 for traditional 401(k) and IRA distributions. May be less than Box 1 if you made after-tax (non-deductible) contributions.",
+        "where": "Form 1040, Line 5b (pension/annuity taxable amount) → added to ordinary income"
+      },
+      "box4": {
+        "label": "Federal income tax withheld",
+        "desc": "Federal income tax withheld from your distribution — typically 20% for most retirement plan withdrawals, or 10% for IRA distributions (both are adjustable). This counts as a payment toward your tax bill.",
+        "where": "Form 1040, Line 25b (federal tax withheld) — reduces what you owe at filing"
+      },
+      "box7": {
+        "label": "Distribution code(s)",
+        "desc": "The most important box on the form — even though it is just a letter or number. Code 1 = early distribution (under 59½), may trigger 10% penalty. Code 2 = early, exception applies. Code 7 = normal distribution (59½ or older). Code G = direct rollover (not taxable). The code determines whether you owe a penalty.",
+        "where": "Determines Form 5329 (additional taxes) — penalty applies if Code 1 with no exception"
+      }
+    }
+  }
+}
