@@ -58,15 +58,26 @@ function App() {
     <div className="min-h-screen bg-cream-50 texture-paper">
       <header className="sticky top-0 bg-cream-50/95 backdrop-blur-sm border-b border-ink-100 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <button
-            onClick={() => navigate('entry')}
-            className="focus-ring rounded-lg p-2 -ml-2 group flex items-center gap-3"
-          >
-            <div className="w-8 h-8 bg-sage-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-serif text-sm font-bold">A</span>
-            </div>
-            <span className="text-ink-700 font-serif text-lg hidden sm:block">Aria Tax Services</span>
-          </button>
+          <div className="flex items-center gap-1 -ml-2">
+            <a
+              href="https://ariataxpa.com"
+              target="_self"
+              rel="noopener"
+              className="focus-ring rounded-lg p-2 group flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
+              <div className="w-8 h-8 bg-sage-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-serif text-sm font-bold">A</span>
+              </div>
+              <span className="text-ink-700 font-serif text-lg hidden sm:block">Aria Tax Services</span>
+            </a>
+            <button
+              onClick={() => navigate('entry')}
+              className="focus-ring rounded-lg px-2 py-1 text-xs text-ink-400 hover:text-ink-600 transition-colors hidden sm:block"
+              title="Back to guide home"
+            >
+              / Guide
+            </button>
+          </div>
           <nav className="flex items-center gap-2">
             <button
               onClick={() => navigate('form1099Tree')}
@@ -102,13 +113,22 @@ function App() {
       </main>
 
       <footer className="border-t border-ink-100 mt-20">
-        <div className="max-w-6xl mx-auto px-6 py-8">
+        <div className="max-w-6xl mx-auto px-6 py-8 space-y-3">
           <p className="text-center text-sm text-ink-400 max-w-xl mx-auto">
             This is an educational guide, not tax advice.
             No data is collected. Nothing is filed.
           </p>
-          <p className="text-center text-xs text-ink-300 mt-4">
-            Created by Aria Tax Services PA
+          <p className="text-center text-xs text-ink-400">
+            <a href="https://ariataxpa.com" target="_self" rel="noopener" className="hover:text-ink-600 transition-colors underline-offset-2 hover:underline">
+              About Aria Tax Services
+            </a>
+            <span className="mx-2 text-ink-300">|</span>
+            <a href="https://ariataxpa.com" target="_self" rel="noopener" className="hover:text-ink-600 transition-colors underline-offset-2 hover:underline">
+              Contact
+            </a>
+          </p>
+          <p className="text-center text-xs text-ink-300">
+            &copy; {new Date().getFullYear()} Aria Tax Services PA. All rights reserved.
           </p>
         </div>
       </footer>
@@ -3154,7 +3174,7 @@ function RaiseVisualizer() {
   const previous = showBeforeAfter ? calculateTax(prevSalary) : null;
 
   return (
-    <div className="mb-16 bg-white rounded-2xl border border-ink-100 overflow-hidden">
+    <div id="raise-calculator" className="mb-16 bg-white rounded-2xl border border-ink-100 overflow-hidden">
       <div className="p-8 bg-gradient-to-br from-steel-50 to-sage-50 border-b border-ink-100">
         <h2 className="text-2xl font-serif text-ink-800 mb-2">What happens after a raise?</h2>
         <p className="text-ink-600 mb-6 leading-relaxed">
