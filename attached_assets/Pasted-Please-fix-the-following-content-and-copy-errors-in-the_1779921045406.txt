@@ -1,0 +1,28 @@
+Please fix the following content and copy errors in the application. These are accuracy and consistency fixes, not design changes.
+CRITICAL FIXES (factual errors):
+
+Safe harbor wording — Find any text saying "whichever is smaller" in the safe harbor / estimated payments section. Replace with: "Meeting either safe harbor generally avoids the penalty." The current wording implies the smaller threshold applies, which is incorrect.
+1099-K clarification — Near the 1099-K explanation, add a note: "The form reports payment volume — not automatically taxable income." This is important because it may include reimbursements or personal transfers.
+$600 threshold — Change any phrasing like "Client paid you $600+" to: "Clients generally issue this form when payments reach $600 or more." (Income below $600 is still taxable — the $600 is just the form-filing threshold.)
+
+TERMINOLOGY FIXES:
+
+"Passive income" — Replace all instances of "passive income" when referring to interest/dividends/retirement with "investment and account income" or "investment and retirement income". In US tax law, "passive income" has a specific legal meaning (§469 passive activity rules) that doesn't apply here.
+Effective rate label — Wherever the effective tax rate is shown (e.g. 10.3%), add a small label nearby: "Federal income tax only" — users may confuse this with their total tax burden.
+"No one withheld anything" — Replace with "No tax was withheld" or "Nothing was withheld for taxes". The current phrasing sounds abrupt.
+
+DATE FIXES:
+
+Q4 estimated payment date — Change "Jan 15" to "Jan 15 (following year)" or show the actual year (e.g. "Jan 15, 2026"). Without the year, users may think it refers to the current January.
+W-2 / 1099 arrival date — Change "Arrives by Jan 31" to "Generally issued by January 31" — corrected and late forms are common exceptions.
+
+COPY POLISH:
+
+"1099 income" framing — Early in the user flow, before the detailed explanation, add a short note: "Not all 1099s are self-employment income." This prevents users from forming that misconception before reading further.
+Schedule C — Where the app says "No Schedule C for any of these" (investment income section), soften to "Usually no Schedule C" to cover edge cases like professional traders.
+Mock form labels — Make all W-2 mock form labels consistent: use "Federal income tax withheld" everywhere (not "Federal tax withheld"). This matches the actual IRS form language.
+
+TYPOGRAPHY CONSISTENCY:
+
+Dashes — Audit and unify dash usage throughout. Use em dash (—) consistently, not hyphens (-) or spaced dashes ( - ) for sentence-level punctuation.
+"Self-employment" — Hyphenate consistently everywhere. Do not use "self employment" (without hyphen) anywhere in the app.

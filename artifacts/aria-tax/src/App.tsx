@@ -508,13 +508,15 @@ function FreelanceRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => voi
           >
             <div className="mt-4 space-y-3">
               <div className="mb-4">
+                <p className="text-xs text-ink-500 italic mb-3">{t('pathB.flow.forms.notAllNote')}</p>
                 <div className="text-sm font-medium text-ink-700 mb-2">{t('pathB.flow.forms.necLabel')}</div>
                 <p className="text-xs text-ink-500 mb-3">{t('pathB.flow.forms.necDesc')}</p>
                 <Form1099NECAnatomy />
               </div>
               <div className="mb-4">
                 <div className="text-sm font-medium text-ink-700 mb-2">{t('pathB.flow.forms.kLabel')}</div>
-                <p className="text-xs text-ink-500 mb-3">{t('pathB.flow.forms.kDesc')}</p>
+                <p className="text-xs text-ink-500 mb-1">{t('pathB.flow.forms.kDesc')}</p>
+                <p className="text-xs text-sand-700 italic mb-3">{t('pathB.flow.forms.kNote')}</p>
                 <Form1099KAnatomy />
               </div>
               <div className="flex items-start gap-3 p-3 bg-ink-50 rounded-lg border border-ink-200">
@@ -862,7 +864,7 @@ function MixedRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => void })
                 <FileText className="w-5 h-5 text-steel-500" />
                 <div>
                   <div className="font-mono font-medium text-steel-700">W-2</div>
-                  <div className="text-sm text-ink-500">Arrives by January 31</div>
+                  <div className="text-sm text-ink-500">Generally issued by January 31</div>
                 </div>
               </div>
             </div>
@@ -1080,7 +1082,7 @@ function InvestmentRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => vo
           Investment / Interest
         </div>
         <h1 className="text-3xl md:text-4xl font-serif text-ink-900 mb-6">
-          Passive income has its own forms
+          Investment &amp; retirement income has its own forms
         </h1>
         <p className="text-lg text-ink-600 leading-relaxed">
           When money comes from accounts—not from work—a different family of 1099s reports it.
@@ -1174,7 +1176,7 @@ function InvestmentRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => vo
           <div className="p-8 border-t border-ink-100 bg-gradient-to-br from-steel-50 to-sage-50">
             <div className="text-center mb-6">
               <h3 className="text-xl font-serif text-ink-800 mb-2">Each lands on a different part of the return</h3>
-              <p className="text-sm text-ink-500">No Schedule C for any of these</p>
+              <p className="text-sm text-ink-500">Usually no Schedule C</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4">
@@ -1220,7 +1222,7 @@ function InvestmentRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => vo
                 </div>
               </div>
               <p className="text-center text-sm text-ink-600 leading-relaxed">
-                These forms report passive income—money from accounts, not from your work.
+                These forms report investment and account income—money from accounts, not from your work.
                 No self-employment tax. No quarterly payments needed.
               </p>
             </div>
@@ -1230,7 +1232,7 @@ function InvestmentRoadmap({ onNavigate }: { onNavigate: (view: ViewState) => vo
 
       <InsightBox
         title="The important distinction"
-        content="These 1099s report passive income—interest, dividends, capital gains, retirement. They are NOT the same as 1099-NEC which reports self-employment income. Different forms. Different lines on your return. Different tax treatment."
+        content="These 1099s report investment and account income—interest, dividends, capital gains, retirement. They are NOT the same as 1099-NEC which reports self-employment income. Different forms. Different lines on your return. Different tax treatment."
       />
 
       <div className="mt-8 p-4 bg-steel-50 rounded-lg">
@@ -1453,7 +1455,7 @@ function Form1099Tree({ onNavigate }: { onNavigate: (view: ViewState) => void })
 
       <InsightBox
         title="The biggest misconception"
-        content="'I got a 1099, so I'm self-employed.' Not necessarily. 1099-INT, 1099-DIV, 1099-B, and 1099-R report passive income—not self-employment. Only certain 1099s connect to Schedule C."
+        content="'I got a 1099, so I'm self-employed.' Not necessarily. 1099-INT, 1099-DIV, 1099-B, and 1099-R report investment and account income—not self-employment. Only certain 1099s connect to Schedule C."
       />
     </div>
   );
@@ -2125,7 +2127,7 @@ function QuarterlyPaymentsDetail() {
           </div>
           <div className="p-2 bg-white rounded border border-ink-100">
             <div className="text-ink-400">Q4</div>
-            <div className="font-medium text-ink-700">Jan 15</div>
+            <div className="font-medium text-ink-700">Jan 15 (following year)</div>
           </div>
         </div>
       </div>

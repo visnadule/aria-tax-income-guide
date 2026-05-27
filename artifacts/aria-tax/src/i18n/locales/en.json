@@ -21,8 +21,8 @@
     "hoverPrompt": "Hover or focus a box above",
     "whereItLands": "Where it lands",
     "taxNotes": "Tax notes",
-    "arrivesJan31": "Arrives by Jan 31",
-    "arrivesBy": "Arrives by January 31 of the following year",
+    "arrivesJan31": "Generally issued by January 31",
+    "arrivesBy": "Generally issued by January 31 of the following year",
     "selectFormDetails": "Select a form to see details"
   },
   "entry": {
@@ -133,9 +133,11 @@
         "title": "Form you may receive",
         "desc": "By January 31 of the following year",
         "necLabel": "1099-NEC (Most common)",
-        "necDesc": "Client paid you $600+ for services",
+        "necDesc": "Clients generally issue this form when payments reach $600 or more.",
         "kLabel": "1099-K (Platforms)",
         "kDesc": "Payment processors, gig apps, marketplaces",
+        "kNote": "The form reports payment volume — not automatically taxable income.",
+        "notAllNote": "Not all 1099s are self-employment income.",
         "nothing": "Nothing",
         "stillReport": "Still report it.",
         "stillReportDesc": "Income is taxable whether you receive a form or not."
@@ -159,7 +161,7 @@
         "seTaxBody": "Both halves of Social Security (12.4%) and Medicare (2.9%). W-2 employees split this with their employer."
       },
       "quarterly": {
-        "title": "No one withheld anything",
+        "title": "Nothing was withheld for taxes",
         "desc": "You may need to pay quarterly estimated tax — here's when that rule applies."
       }
     },
@@ -252,7 +254,7 @@
   },
   "pathD": {
     "badge": "Investment / Interest",
-    "header": "Passive income has its own forms",
+    "header": "Investment & retirement income has its own forms",
     "intro": "When money comes from accounts—not from work—a different family of 1099s reports it. These are not self-employment. No Schedule C.",
     "flow": {
       "account": {
@@ -274,11 +276,11 @@
       "rLabel": "Retirement income",
       "rSublabel": "From 401(k), IRA, pension",
       "noSETax": "None trigger SE tax",
-      "passive": "These forms report passive income—money from accounts, not from your work. No self-employment tax. No quarterly payments needed."
+      "passive": "These forms report investment and account income—money from accounts, not from your work. No self-employment tax. No quarterly payments needed."
     },
     "insight": {
       "title": "The important distinction",
-      "content": "These 1099s report passive income—interest, dividends, capital gains, retirement. They are NOT the same as 1099-NEC which reports self-employment income. Different forms. Different lines on your return. Different tax treatment."
+      "content": "These 1099s report investment and account income—interest, dividends, capital gains, retirement. They are NOT the same as 1099-NEC which reports self-employment income. Different forms. Different lines on your return. Different tax treatment."
     },
     "confused": "Confused by all the 1099s? You're not alone.",
     "familyTreeLink": "See the complete 1099 family tree"
@@ -352,7 +354,7 @@
     },
     "insight": {
       "title": "The biggest misconception",
-      "content": "'I got a 1099, so I'm self-employed.' Not necessarily. 1099-INT, 1099-DIV, 1099-B, and 1099-R report passive income—not self-employment. Only certain 1099s connect to Schedule C."
+      "content": "'I got a 1099, so I'm self-employed.' Not necessarily. 1099-INT, 1099-DIV, 1099-B, and 1099-R report investment and account income—not self-employment. Only certain 1099s connect to Schedule C."
     }
   },
   "scheduleCView": {
@@ -530,7 +532,7 @@
     "marginalRateLabel": "Marginal rate (rate on next dollar)",
     "marginalRateNote": "This is the bracket people talk about",
     "effectiveRateLabel": "Effective rate (overall burden)",
-    "effectiveRateNote": "Total tax ÷ gross salary",
+    "effectiveRateNote": "Total tax ÷ gross salary · federal income tax only",
     "whyDiff": "Why the difference?",
     "whyDiffBody": "You don't pay 22% on your entire salary. Most of it is in lower brackets. Only the money above the $48,475 threshold is taxed at 22%.",
     "showBeforeAfter": "Show me before/after a raise",
@@ -560,7 +562,7 @@
     "safeHarborOr": ", OR",
     "safeHarbor100": "100% of last year's tax",
     "safeHarborNote": "(110% if prior-year AGI exceeded $150,000, or $75,000 if married filing separately)",
-    "safeHarborSmaller": "Whichever is smaller.",
+    "safeHarborSmaller": "Meeting either safe harbor generally avoids the penalty.",
     "safeHarborW2Note": "This is why people with stable W-2 jobs and small side income often don't need separate quarterly payments — their W-2 withholding can be enough to satisfy the safe harbor on its own.",
     "confusionTitle": "Common confusion",
     "confusionQ": "\"My total tax will be way more than $1,000. Do I need to pay quarterly?\"",
@@ -579,7 +581,7 @@
     "whereItLands": "Where it lands",
     "w2": {
       "formTitle": "Wage and Tax Statement",
-      "arrivesBy": "Arrives by January 31",
+      "arrivesBy": "Generally issued by January 31",
       "box1": {
         "label": "Wages, tips, other compensation",
         "desc": "Your taxable wages — gross pay reduced by 401(k), HSA, and pre-tax health insurance.",
@@ -618,7 +620,7 @@
     },
     "1099nec": {
       "formTitle": "1099-NEC · Nonemployee Compensation",
-      "arrivesBy": "Arrives by Jan 31",
+      "arrivesBy": "Generally issued by January 31",
       "box1": {
         "label": "Nonemployee compensation",
         "desc": "Gross amount paid to you for services. Your client sends this when they paid you $600 or more during the year — it arrives by January 31. This number goes directly to Schedule C, Part I, Line 1 as gross receipts before any expense deductions.",
@@ -647,7 +649,7 @@
     },
     "1099k": {
       "formTitle": "1099-K · Payment Card & Third Party Network",
-      "arrivesBy": "Arrives by Jan 31",
+      "arrivesBy": "Generally issued by January 31",
       "box1a": {
         "label": "Gross amount of payment card/third party network transactions",
         "desc": "Total gross receipts reported to the IRS — this is before platform fees, refunds, chargebacks, or any deductions. Your actual taxable amount on Schedule C will usually be lower: you deduct platform fees and other expenses in Part II. Do not assume Box 1a equals your profit.",
@@ -655,7 +657,7 @@
       },
       "box4": {
         "label": "Federal income tax withheld",
-        "desc": "Backup withholding — nearly always $0. You are responsible for paying your own taxes through quarterly estimated payments (April 15, June 16, Sept 15, Jan 15).",
+        "desc": "Backup withholding — nearly always $0. You are responsible for paying your own taxes through quarterly estimated payments (April 15, June 16, Sept 15, Jan 15 of the following year).",
         "where": "Form 1040, Line 25a — offsets what you owe at filing"
       },
       "box5a": {
