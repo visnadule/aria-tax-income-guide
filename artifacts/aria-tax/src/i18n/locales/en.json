@@ -79,7 +79,7 @@
       },
       "w2Form": {
         "title": "Form W-2",
-        "desc": "Arrives by January 31 of the following year"
+        "desc": "Generally issued by January 31 of the following year"
       },
       "form1040": {
         "title": "Form 1040, Line 1",
@@ -291,7 +291,7 @@
     "categories": {
       "selfEmployment": "Self-Employment",
       "otherIncome": "Other Income (Not Self-Employment)",
-      "investment": "Investment, Interest, Passive Income",
+      "investment": "Investment, Interest & Account Income",
       "retirement": "Retirement"
     },
     "forms": {

@@ -1,0 +1,52 @@
+Please make the following targeted fixes to the translation files (en.json and ru.json).
+EN.JSON — fix 1:
+Find:
+"investment": "Investment, Interest, Passive Income"
+Replace with:
+"investment": "Investment, Interest & Account Income"
+RU.JSON — fix 1: Footer disclaimer
+Find:
+"disclaimer": "Это образовательное руководство, а не налоговая консультация. Данные не собираются. Ничего не подаётся."
+Replace with:
+"disclaimer": "Это образовательное руководство, а не налоговая консультация. Данные не собираются. Никакие документы не подаются в налоговые органы."
+RU.JSON — fix 2: Entry subhead
+Find:
+"subhead": "Доход не укладывается в две аккуратные категории. Найдите своё место и узнайте, как налоговая система вас видит."
+Replace with:
+"subhead": "Доход не укладывается в две аккуратные категории. Определите свой тип дохода и узнайте, как налоговая система его видит."
+RU.JSON — fix 3: Replace "самозанятость" and derivatives throughout the entire file
+This is the most important fix. The Russian word "самозанятость" refers to a specific Russian tax regime (НПД) and causes confusion for Russian-speaking immigrants. Replace all instances as follows:
+
+"Самозанятость" (as a category name) → "Независимая деятельность"
+"Налог на самозанятость" → "Налог SE (налог на независимую деятельность)"
+"налог на самозанятость" (lowercase) → "налог SE"
+"самозанятые" → "работающие на себя" or "независимые подрядчики"
+"самозанятый" → "работающий на себя"
+"самозанятости" (genitive) → "независимой деятельности"
+"доход от самозанятости" → "доход от независимой деятельности"
+
+Do a full search for every occurrence of самозан in ru.json and apply the appropriate replacement based on context.
+RU.JSON — fix 4: "Побочный доход" terminology consistency
+Currently the file uses "побочный доход", "подработка", "побочная работа", "побочный бизнес" inconsistently. Standardize:
+
+Use "побочный доход" when referring to income amount
+Use "подработка" when referring to the activity informally
+Use "дополнительный заработок" in formal/educational explanations
+
+RU.JSON — fix 5: Form anatomy — add English terms in parentheses
+In the anatomy section, for technical financial/tax terms in Russian, add the English IRS term in parentheses after the Russian label. Apply this pattern to these specific labels:
+
+"Скорректированная стоимость" → "Скорректированная стоимость (cost basis)"
+"Выручка" in 1099-B box1d → "Выручка (proceeds)"
+"Обычные дивиденды" → "Обычные дивиденды (ordinary dividends)"
+"Квалифицированные дивиденды" → "Квалифицированные дивиденды (qualified dividends)"
+"Распределения прироста капитала" → "Распределения прироста капитала (capital gain distributions)"
+"Код(ы) выплаты" → "Код(ы) выплаты (distribution code)"
+"Вознаграждение несотрудников" → "Вознаграждение несотрудников (nonemployee compensation)"
+
+EN.JSON — fix 2: W-2 form arrival date consistency
+Find in pathA.flow.w2Form:
+"desc": "Arrives by January 31 of the following year"
+Replace with:
+"desc": "Generally issued by January 31 of the following year"
+After all changes, commit with message: "Fix Russian self-employment terminology and translation accuracy issues"
