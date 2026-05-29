@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Income Structure Comparison | Aria Tax Services</title>
+  <meta name="description" content="See how the same $100,000 income is taxed differently depending on whether you are employed, contracted, or running a solo practice. An educational comparison by Aria Tax Services PA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #fcf9f3;
+      color: #404040;
+      -webkit-font-smoothing: antialiased;
+      padding: 0;
+      margin: 0;
+    }
+
+    .widget {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 32px;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    .widget-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .widget-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #859bb5;
+      margin-bottom: 10px;
+    }
+    .widget-title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #171717;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .widget-subtitle {
+      font-size: 15px;
+      color: #737373;
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── Three-column grid ───────────────────────────── */
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 640px) {
+      .columns { grid-template-columns: 1fr; }
+      .widget-title { font-size: 22px; }
+    }
+
+    /* ── Card base ───────────────────────────────────── */
+    .card {
+      border-radius: 12px;
+      border: 1px solid;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* steel — employed */
+    .card-steel {
+      background: #f7f9fb;
+      border-color: #dce4ed;
+    }
+    .card-steel .card-accent   { color: #596a87; }
+    .card-steel .card-badge    { background: #eef2f6; color: #596a87; }
+    .card-steel .divider       { border-color: #c4d1de; }
+    .card-steel .row-label     { color: #4a596f; }
+
+    /* sage — contracted */
+    .card-sage {
+      background: #f6f7f6;
+      border-color: #c7cfc7;
+    }
+    .card-sage .card-accent    { color: #3d483d; }
+    .card-sage .card-badge     { background: #e3e7e3; color: #4a584a; }
+    .card-sage .divider        { border-color: #a3b0a3; }
+    .card-sage .row-label      { color: #4a584a; }
+
+    /* sand — solo */
+    .card-sand {
+      background: #fdfcf9;
+      border-color: #e8d6b8;
+    }
+    .card-sand .card-accent    { color: #83653d; }
+    .card-sand .card-badge     { background: #f9f5ed; color: #83653d; }
+    .card-sand .divider        { border-color: #dbc29a; }
+    .card-sand .row-label      { color: #83653d; }
+
+    /* ── Card internals ──────────────────────────────── */
+    .card-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .card-title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #171717;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .card-gross {
+      font-size: 22px;
+      font-weight: 600;
+      color: #262626;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid;
+      margin: 14px 0;
+    }
+
+    /* ── Breakdown rows ──────────────────────────────── */
+    .rows { margin-bottom: 14px; }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      padding: 4px 0;
+    }
+    .row-label {
+      font-size: 12px;
+      line-height: 1.4;
+      flex: 1;
+    }
+    .row-label small {
+      display: block;
+      font-size: 10px;
+      color: #a3a3a3;
+      margin-top: 1px;
+    }
+    .row-amount {
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      color: #262626;
+    }
+    .row-amount.negative { color: #737373; }
+    .row-bold .row-label,
+    .row-bold .row-amount { font-weight: 600; color: #171717; font-size: 13px; }
+
+    /* ── Take-home box ───────────────────────────────── */
+    .take-home-box {
+      margin-top: auto;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+    .take-home-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #059669;
+      margin-bottom: 2px;
+    }
+    .take-home-amount {
+      font-size: 22px;
+      font-weight: 700;
+      color: #065f46;
+      letter-spacing: -0.02em;
+    }
+    .take-home-note {
+      font-size: 10px;
+      color: #6ee7b7;
+      margin-top: 2px;
+    }
+
+    /* ── Notes list ──────────────────────────────────── */
+    .card-notes {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid;
+    }
+    .card-steel .card-notes { border-color: #dce4ed; }
+    .card-sage  .card-notes { border-color: #c7cfc7; }
+    .card-sand  .card-notes { border-color: #e8d6b8; }
+
+    .card-notes ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .card-notes li {
+      font-size: 11px;
+      color: #737373;
+      line-height: 1.5;
+      padding: 2px 0 2px 14px;
+      position: relative;
+    }
+    .card-notes li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: #a3a3a3;
+    }
+
+    /* ── Tagline ─────────────────────────────────────── */
+    .tagline {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .tagline p {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 17px;
+      font-weight: 300;
+      color: #525252;
+      letter-spacing: 0.01em;
+    }
+    .tagline p strong {
+      font-weight: 700;
+      color: #262626;
+    }
+
+    /* ── CTA button ──────────────────────────────────── */
+    .cta-wrap {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: #4a584a;
+      color: #ffffff;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 8px;
+      letter-spacing: 0.01em;
+      transition: background 0.15s ease;
+    }
+    .cta-btn:hover { background: #3d483d; }
+    .cta-arrow {
+      display: inline-block;
+      margin-left: 6px;
+      transition: transform 0.15s ease;
+    }
+    .cta-btn:hover .cta-arrow { transform: translateX(3px); }
+
+    /* ── Footer disclaimer ───────────────────────────── */
+    .widget-footer {
+      text-align: center;
+    }
+    .widget-footer p {
+      font-size: 11px;
+      color: #a3a3a3;
+      line-height: 1.6;
+    }
+    .widget-footer a {
+      color: #859bb5;
+      text-decoration: none;
+    }
+    .widget-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="widget">
+
+    <!-- Header -->
+    <div class="widget-header">
+      <p class="widget-eyebrow">Aria Tax Services PA — Educational Guide</p>
+      <h2 class="widget-title">Same income. Three ways to earn it.</h2>
+      <p class="widget-subtitle">
+        The same $100,000 income is taxed very differently depending on how you
+        earn it. Structure changes what you can deduct, which changes what gets
+        taxed, which changes what reaches you.
+      </p>
+    </div>
+
+    <!-- Three columns -->
+    <div class="columns">
+
+      <!-- Column 1: Employed -->
+      <div class="card card-steel">
+        <span class="card-badge">Employed at a firm</span>
+        <h3 class="card-title">W-2 Employee</h3>
+        <p class="card-gross">$100,000</p>
+
+        <div class="rows">
+          <div class="row row-bold">
+            <span class="row-label">Gross salary</span>
+            <span class="row-amount">$100,000</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              Pre-tax benefits
+              <small>401k, health insurance</small>
+            </span>
+            <span class="row-amount negative">−$5,000</span>
+          </div>
+          <div class="row">
+            <span class="row-label">SS tax (employee half)</span>
+            <span class="row-amount negative">−$6,200</span>
+          </div>
+          <div class="row">
+            <span class="row-label">Medicare (employee half)</span>
+            <span class="row-amount negative">−$1,450</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              Federal income tax
+              <small>illustrative</small>
+            </span>
+            <span class="row-amount negative">−$15,000</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              State income tax
+              <small>illustrative</small>
+            </span>
+            <span class="row-amount negative">−$4,000</span>
+          </div>
+        </div>
+
+        <div class="take-home-box">
+          <p class="take-home-label">Estimated take-home</p>
+          <p class="take-home-amount">$68,350</p>
+        </div>
+
+        <div class="card-notes">
+          <ul>
+            <li>Employer pays the other half of FICA (7.65%)</li>
+            <li>Benefits and workspace provided by employer</li>
+            <li>Taxes withheld automatically — no quarterly payments</li>
+            <li>No Schedule C, no SE tax</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 2: Contracted -->
+      <div class="card card-sage">
+        <span class="card-badge">Contracted expert</span>
+        <h3 class="card-title">1099 / Freelance</h3>
+        <p class="card-gross">$100,000</p>
+
+        <div class="rows">
+          <div class="row row-bold">
+            <span class="row-label">Gross receipts</span>
+            <span class="row-amount">$100,000</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              Business expenses
+              <small>laptop, software, supplies</small>
+            </span>
+            <span class="row-amount negative">−$5,000</span>
+          </div>
+          <div class="row row-bold">
+            <span class="row-label">Net profit</span>
+            <span class="row-amount">$95,000</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              SE tax (15.3%)
+              <small>both halves of FICA</small>
+            </span>
+            <span class="row-amount negative">−$13,423</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              Federal income tax
+              <small>illustrative</small>
+            </span>
+            <span class="row-amount negative">−$12,500</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              State income tax
+              <small>illustrative</small>
+            </span>
+            <span class="row-amount negative">−$3,500</span>
+          </div>
+        </div>
+
+        <div class="take-home-box">
+          <p class="take-home-label">Estimated take-home</p>
+          <p class="take-home-amount">$65,577</p>
+        </div>
+
+        <div class="card-notes">
+          <ul>
+            <li>You pay both halves of SE tax — no employer split</li>
+            <li>No employer-provided benefits</li>
+            <li>Nothing withheld — quarterly payments required</li>
+            <li>Income flows through Schedule C → Schedule SE</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 3: Solo practice -->
+      <div class="card card-sand">
+        <span class="card-badge">Solo practice</span>
+        <h3 class="card-title">Small Business</h3>
+        <p class="card-gross">$100,000</p>
+
+        <div class="rows">
+          <div class="row row-bold">
+            <span class="row-label">Gross revenue</span>
+            <span class="row-amount">$100,000</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              Business expenses
+              <small>office, software, insurance, marketing</small>
+            </span>
+            <span class="row-amount negative">−$25,000</span>
+          </div>
+          <div class="row row-bold">
+            <span class="row-label">Net profit</span>
+            <span class="row-amount">$75,000</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              SE tax (15.3%)
+              <small>applied to net profit</small>
+            </span>
+            <span class="row-amount negative">−$10,597</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              Federal income tax
+              <small>illustrative</small>
+            </span>
+            <span class="row-amount negative">−$9,500</span>
+          </div>
+          <div class="row">
+            <span class="row-label">
+              State income tax
+              <small>illustrative</small>
+            </span>
+            <span class="row-amount negative">−$2,600</span>
+          </div>
+        </div>
+
+        <div class="take-home-box">
+          <p class="take-home-label">Estimated take-home</p>
+          <p class="take-home-amount">$52,303</p>
+        </div>
+
+        <div class="card-notes">
+          <ul>
+            <li>Real overhead is deductible — lowers the taxable base</li>
+            <li>Higher expenses = lower net profit = lower SE tax</li>
+            <li>SE tax applies to net profit, not gross revenue</li>
+            <li>Quarterly payments required</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /.columns -->
+
+    <!-- Tagline -->
+    <div class="tagline">
+      <p>
+        <strong>Same income.</strong> Different structure.
+        <strong>Different outcome.</strong>
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrap">
+      <a href="https://learn.ariataxpa.com" class="cta-btn">
+        Explore the full interactive comparison
+        <span class="cta-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="widget-footer">
+      <p>
+        All figures are illustrative. See full tool for assumptions. &nbsp;·&nbsp;
+        This is an educational guide, not tax advice. &nbsp;·&nbsp;
+        <a href="https://ariataxpa.com">ariataxpa.com</a>
+      </p>
+    </div>
+
+  </div><!-- /.widget -->
+</body>
+</html>
