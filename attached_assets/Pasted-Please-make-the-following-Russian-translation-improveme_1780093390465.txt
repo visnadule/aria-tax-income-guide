@@ -1,0 +1,49 @@
+Please make the following Russian translation improvements. All changes are in ru.json or whichever file contains the estimated payments / quarterly payments section text.
+SECTION HEADING
+Find: "Никаких удержаний для уплаты налогов"
+Replace with: "Налог удерживать некому"
+SECTION SUBTITLE
+Find: "Возможно, вам потребуется уплачивать ежеквартальный авансовый налог — вот когда это правило применяется."
+Replace with: "В таких ситуациях налог часто приходится платить самостоятельно в течение года. Ниже показано, когда возникают ежеквартальные платежи."
+THRESHOLD BLOCK — first sentence
+Find text about the $1,000 threshold (currently mentions "после удержания и возвратных налоговых льгот")
+Replace with: "Обычно ежеквартальные платежи требуются, если после всех удержаний, уже внесённых платежей и налоговых льгот при подаче декларации у вас остаётся задолженность перед IRS в размере $1 000 или более."
+THRESHOLD BLOCK — second sentence
+Find: "$1 000 — это не весь ваш налог. Это то, что ещё остаётся к оплате после всего уже уплаченного."
+Replace with: "$1 000 — это остаток налога, который ещё предстоит заплатить при подаче декларации. Общая сумма налога может быть значительно выше."
+DATES BLOCK HEADING
+Find: "Ежеквартальные сроки"
+Replace with: "Даты платежей"
+SAFE HARBOR SECTION HEADING
+Find: "Правило «безопасной гавани» (подробнее)"
+Replace with: "Когда штраф обычно не начисляется (Safe Harbor)"
+SAFE HARBOR INTRO SENTENCE
+Find: "Даже если вы будете должны более $1 000, штраф за недоплату обычно не начисляется, если ваше удержание плюс авансовые платежи покрывают хотя бы:"
+Replace with: "Даже если при подаче декларации окажется, что вы должны IRS более $1 000, штраф за недоплату часто удаётся избежать — если в течение года вы заплатили достаточно налога одним из следующих способов:"
+SAFE HARBOR BULLET POINTS
+Find: "90% налога за текущий год"
+Replace with: "не менее 90% налога за текущий год"
+Find: "100% налога за прошлый год"
+Replace with: "сумму налога за прошлый год полностью"
+SAFE HARBOR CONCLUSION LINE
+Find: "Выполнение любого из условий «безопасной гавани» обычно позволяет избежать штрафа."
+Replace with: "Если выполнено хотя бы одно из этих условий, штраф обычно не начисляется."
+SAFE HARBOR LAST PARAGRAPH
+Find the long sentence about W-2 employees with side income not needing quarterly payments.
+Replace with two shorter sentences:
+"Поэтому многие сотрудники с доходом по W-2 и небольшим дополнительным заработком вообще не делают ежеквартальных платежей. Удержаний из зарплаты часто оказывается достаточно для выполнения правил Safe Harbor."
+MISCONCEPTION BLOCK
+Find: "Не обязательно. Порог в $1 000 — это то, что ещё должно быть уплачено после удержания."
+Replace with: "Не обязательно. Значение имеет не общий налог, а сумма, которая остаётся к доплате при подаче декларации."
+Find: "Если удержание по W-2 уже покрывает большую часть вашего налога, всё может быть в порядке даже при значительном побочном доходе."
+Replace with: "Если налоги из зарплаты уже удерживаются в достаточном объёме, отдельные ежеквартальные платежи могут вовсе не понадобиться."
+GLOBAL REPLACEMENT — "удержание" language
+Throughout the entire ru.json file, make the following replacements where they improve readability:
+
+"удержание по W-2" → "налог, удержанный из зарплаты"
+"ваше удержание" → "удержанный налог"
+"сумма удержания" → "сумма удержанного налога"
+"после удержания" → "после уже уплаченных налогов"
+
+Use judgment — keep "удержанный налог" where it is already clear. The goal is warm, plain language, not literal tax terminology.
+After all changes, commit with message: "Improve Russian copy quality in estimated payments and safe harbor sections"
