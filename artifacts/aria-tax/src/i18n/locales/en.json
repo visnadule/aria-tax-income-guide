@@ -50,7 +50,7 @@
   "pathA": {
     "badge": "W-2 Employee",
     "header": "Your income follows a linear path",
-    "intro": "As an employee, your income is reported through your employer's payroll system. Taxes are withheld before you ever see the money.",
+    "intro": "W-2 income follows a straightforward path through the payroll system. Taxes are withheld along the way, and the results are reported on Form W-2 at year-end.",
     "introItalic": "Most of your tax is handled before you file. Your employer withholds, deposits with the IRS, and reports the totals on your W-2. Filing reconciles the math.",
     "confusion": {
       "title": "Understanding refunds",
