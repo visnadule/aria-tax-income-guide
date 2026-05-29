@@ -1,4 +1,18 @@
+import { useEffect } from 'react';
+
 export default function CompareEmbed() {
+  useEffect(() => {
+    const sendHeight = () => {
+      window.parent.postMessage(
+        { type: 'aria-embed-height', height: document.documentElement.scrollHeight },
+        '*'
+      );
+    };
+    sendHeight();
+    const ro = new ResizeObserver(sendHeight);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, []);
   const employed = {
     gross: 100_000,
     preTaxBenefits: 5_000,
@@ -58,7 +72,7 @@ export default function CompareEmbed() {
     n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
   return (
-    <div className="min-h-screen bg-cream-100 font-sans py-10 px-4">
+    <div className="bg-cream-100 font-sans py-10 px-4">
       <div className="max-w-[860px] mx-auto">
 
         {/* Header */}

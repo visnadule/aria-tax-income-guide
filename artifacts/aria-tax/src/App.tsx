@@ -1371,51 +1371,69 @@ function Form1099Tree({ onNavigate }: { onNavigate: (view: ViewState) => void })
               </h2>
               <div className="space-y-3">
                 {category.forms.map((form) => (
-                  <button
-                    key={form.id}
-                    onClick={() => setSelectedForm(selectedForm === form.id ? null : form.id)}
-                    className={`w-full text-left rounded-xl border-2 transition-all p-4 ${
-                      selectedForm === form.id
-                        ? 'border-sage-500 bg-sage-50'
-                        : 'border-ink-100 bg-white hover:border-steel-200'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono font-medium text-lg text-ink-800">
-                          {form.name}
-                        </span>
-                        {form.scheduleC === true && (
-                          <span className="text-xs bg-sage-100 text-sage-700 px-2 py-0.5 rounded-full">
-                            Schedule C
+                  <div key={form.id}>
+                    <button
+                      onClick={() => setSelectedForm(selectedForm === form.id ? null : form.id)}
+                      className={`w-full text-left rounded-xl border-2 transition-all p-4 ${
+                        selectedForm === form.id
+                          ? 'border-sage-500 bg-sage-50'
+                          : 'border-ink-100 bg-white hover:border-steel-200'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono font-medium text-lg text-ink-800">
+                            {form.name}
                           </span>
-                        )}
-                        {form.scheduleC === 'Usually' && (
-                          <span className="text-xs bg-sand-100 text-sand-700 px-2 py-0.5 rounded-full">
-                            Usually Schedule C
-                          </span>
-                        )}
-                        {form.scheduleC === 'Depends' && (
-                          <span className="text-xs bg-steel-100 text-steel-700 px-2 py-0.5 rounded-full">
-                            Depends on box
-                          </span>
-                        )}
+                          {form.scheduleC === true && (
+                            <span className="text-xs bg-sage-100 text-sage-700 px-2 py-0.5 rounded-full">
+                              Schedule C
+                            </span>
+                          )}
+                          {form.scheduleC === 'Usually' && (
+                            <span className="text-xs bg-sand-100 text-sand-700 px-2 py-0.5 rounded-full">
+                              Usually Schedule C
+                            </span>
+                          )}
+                          {form.scheduleC === 'Depends' && (
+                            <span className="text-xs bg-steel-100 text-steel-700 px-2 py-0.5 rounded-full">
+                              Depends on box
+                            </span>
+                          )}
+                        </div>
+                        <ChevronRight
+                          className={`w-5 h-5 text-ink-400 transition-transform ${
+                            selectedForm === form.id ? 'rotate-90' : ''
+                          }`}
+                        />
                       </div>
-                      <ChevronRight
-                        className={`w-5 h-5 text-ink-400 transition-transform ${
-                          selectedForm === form.id ? 'rotate-90' : ''
-                        }`}
-                      />
-                    </div>
-                    <p className="text-sm text-ink-500 mt-1">{form.fullName}</p>
-                  </button>
+                      <p className="text-sm text-ink-500 mt-1">{form.fullName}</p>
+                    </button>
+                    {selectedForm === form.id && (
+                      <div className="lg:hidden mt-2 bg-white rounded-2xl border border-ink-100 p-5 animate-fade-in">
+                        <h3 className="font-mono text-xs text-ink-500 mb-1">{form.name}</h3>
+                        <h2 className="text-xl font-serif text-ink-800 mb-3">{form.fullName}</h2>
+                        <p className="text-ink-600 mb-4">{form.description}</p>
+                        <div className="space-y-3">
+                          <div>
+                            <h4 className="text-sm font-medium text-ink-500 mb-1">Where it lands</h4>
+                            <p className="text-ink-700">{form.landingSpot}</p>
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-medium text-ink-500 mb-1">Tax notes</h4>
+                            <p className="text-ink-700">{form.taxNotes}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="lg:sticky lg:top-24 h-fit">
+        <div className="hidden lg:block lg:sticky lg:top-24 h-fit">
           {selectedForm ? (
             <div className="bg-white rounded-2xl border border-ink-100 p-6 animate-fade-in">
               <h3 className="font-mono text-xs text-ink-500 mb-1">

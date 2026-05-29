@@ -513,5 +513,17 @@
     </div>
 
   </div><!-- /.widget -->
+  <script>
+    function sendHeight() {
+      window.parent.postMessage(
+        { type: 'aria-embed-height', height: document.documentElement.scrollHeight },
+        '*'
+      );
+    }
+    window.addEventListener('load', sendHeight);
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(sendHeight).observe(document.documentElement);
+    }
+  </script>
 </body>
 </html>
