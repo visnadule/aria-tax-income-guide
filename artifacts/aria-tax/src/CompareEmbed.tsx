@@ -206,6 +206,8 @@ export default function CompareEmbed() {
         <div className="text-center mb-6">
           <a
             href="https://learn.ariataxpa.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-sage-600 hover:bg-sage-700 text-white font-semibold text-[15px] px-7 py-3.5 rounded-lg tracking-[0.01em] transition-colors"
           >
             Explore the full interactive comparison →
