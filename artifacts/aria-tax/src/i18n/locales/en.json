@@ -49,7 +49,7 @@
   },
   "pathA": {
     "badge": "W-2 Employee",
-    "header": "Your income follows a linear path",
+    "header": "Your income follows a straightforward path",
     "intro": "W-2 income follows a straightforward path through the payroll system. Taxes are withheld along the way, and the results are reported on Form W-2 at year-end.",
     "introItalic": "Most of your tax is handled before you file. Your employer withholds, deposits with the IRS, and reports the totals on your W-2. Filing reconciles the math.",
     "confusion": {
@@ -92,11 +92,11 @@
         "title": "Reconciliation happens",
         "subtitle": "The IRS compares what was withheld against what you owe",
         "refund": "Refund",
-        "refundDesc": "Withholding exceeded liability",
+        "refundDesc": "More was withheld than you owed",
         "balanceDue": "Balance due",
-        "balanceDueDesc": "Underpaid during the year",
+        "balanceDueDesc": "Not enough was withheld during the year",
         "even": "Even",
-        "evenDesc": "Withholding matched obligation"
+        "evenDesc": "Withholding matched what you owed"
       }
     },
     "complicated": {
@@ -116,7 +116,7 @@
   },
   "pathB": {
     "badge": "Freelance / Contract",
-    "header": "You're part of the tax system now",
+    "header": "You're now responsible for your own taxes",
     "intro": "When you're paid directly by clients without an employer intermediary, the tax responsibilities shift entirely to you.",
     "flow": {
       "client": {
@@ -522,7 +522,7 @@
     "subtitle": "Sometimes a raise feels smaller than it looks. People often hear \"I moved into the 22% bracket\" and assume all their income is taxed at that rate. It's not how brackets work.",
     "salaryLabel": "Current salary:",
     "filingStatusLabel": "Filing status:",
-    "bracketsHeader": "Tax brackets (stacked)",
+    "bracketsHeader": "How your income moves through brackets",
     "totalLabel": "Total: ${{amount}} = your gross salary",
     "grossSalaryLabel": "Gross salary:",
     "stdDeductionLabel": "Standard deduction:",
@@ -532,7 +532,7 @@
     "marginalRateLabel": "Marginal rate (rate on next dollar)",
     "marginalRateNote": "This is the bracket people talk about",
     "effectiveRateLabel": "Effective rate (overall burden)",
-    "effectiveRateNote": "Total tax ÷ gross salary · federal income tax only",
+    "effectiveRateNote": "Federal income tax only (total tax ÷ gross salary)",
     "whyDiff": "Why the difference?",
     "whyDiffBody": "You don't pay 22% on your entire salary. Most of it is in lower brackets. Only the money above the $48,475 threshold is taxed at 22%.",
     "showBeforeAfter": "Show me before/after a raise",
@@ -545,7 +545,7 @@
     "salaryIncrease": "Salary increase:",
     "additionalTax": "Additional federal tax:",
     "takeHomeIncrease": "Estimated take-home increase:",
-    "keptPercent": "Your raise kept ~{{pct}}% of itself after federal income tax.",
+    "keptPercent": "About {{pct}}% of your raise remained after federal income tax.",
     "taxableIncome": "Taxable income:",
     "federalTax": "Federal tax:",
     "disclaimerLabel": "Disclaimer:",
