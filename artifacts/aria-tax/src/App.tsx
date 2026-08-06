@@ -3141,6 +3141,14 @@ function RaiseVisualizer() {
     hoh: 23625,
   };
 
+  // Additional Medicare Tax thresholds — stable since 2013, not inflation-adjusted
+  const additionalMedicareThresholds: Record<'single' | 'mfj' | 'mfs' | 'hoh', number> = {
+    single: 200000,
+    mfj:    250000,
+    mfs:    125000,
+    hoh:    200000,
+  };
+
   const calculateTax = (grossSalary: number) => {
     const brackets = taxBrackets[filingStatus];
     const standardDeduction = standardDeductions[filingStatus];
@@ -3151,7 +3159,6 @@ function RaiseVisualizer() {
 
     for (let i = 0; i < brackets.length; i++) {
       const bracket = brackets[i];
-      const nextThreshold = i < brackets.length - 1 ? brackets[i + 1].threshold : taxableIncome;
       const incomeInBracket = Math.min(taxableIncome, bracket.limit) - bracket.threshold;
 
       if (incomeInBracket > 0) {
@@ -3160,10 +3167,15 @@ function RaiseVisualizer() {
       }
     }
 
+    // Additional Medicare Tax: 0.9% on gross wages above filing-status threshold
+    const amtThreshold = additionalMedicareThresholds[filingStatus];
+    const additionalMedicareTax = Math.max(0, grossSalary - amtThreshold) * 0.009;
+    tax += additionalMedicareTax;
+
     const effectiveRate = grossSalary > 0 ? (tax / grossSalary) * 100 : 0;
     const marginalRate = brackets.find(b => b.threshold < taxableIncome && taxableIncome <= b.limit)?.rate || brackets[brackets.length - 1].rate;
 
-    return { tax, layers, effectiveRate, marginalRate, taxableIncome };
+    return { tax, layers, effectiveRate, marginalRate, taxableIncome, additionalMedicareTax };
   };
 
   const current = calculateTax(salary);
@@ -3184,7 +3196,7 @@ function RaiseVisualizer() {
               <input
                 type="range"
                 min="20000"
-                max="250000"
+                max="600000"
                 step="1000"
                 value={salary}
                 onChange={(e) => setSalary(Number(e.target.value))}
