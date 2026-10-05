@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import './CompareEmbed.css';
 
 export default function CompareEmbed() {
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function CompareEmbed() {
 
   return (
     <main
-      className="bg-cream-100 font-sans py-10 px-4 overflow-y-auto min-h-screen"
+      className="compare-embed bg-cream-100 font-sans py-10 px-4 overflow-y-auto min-h-screen"
       style={{ WebkitOverflowScrolling: 'touch' }}
     >
       <div className="max-w-[860px] mx-auto">
