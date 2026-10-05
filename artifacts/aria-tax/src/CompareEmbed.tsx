@@ -190,7 +190,7 @@ export default function CompareEmbed() {
               <Note>Real overhead is deductible — lowers the taxable base</Note>
               <Note>Higher expenses = lower net profit = lower SE tax</Note>
               <Note>SE tax applies to net profit, not gross revenue</Note>
-              <Note>Quarterly payments required</Note>
+              <Note><a href="https://ariataxpa.com/quarterly-estimated-tax-calculator/" target="_blank" rel="noopener noreferrer" className="quarterly-tax-link" aria-label="Quarterly payments required (opens in a new tab)">Quarterly payments required</a></Note>
             </ul>
           </div>
 

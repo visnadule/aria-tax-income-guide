@@ -78,6 +78,11 @@
   text-decoration: underline;
 }
 
+.compare-embed a.quarterly-tax-link {
+  color: #1a2330;
+  text-decoration: underline;
+}
+
 .compare-embed a.bg-sage-600 {
   background-color: #d9e5da;
   color: #182e20;
