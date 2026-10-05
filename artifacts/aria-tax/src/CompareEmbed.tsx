@@ -158,7 +158,7 @@ export default function CompareEmbed() {
             <ul className="mt-4 pt-3 border-t border-sage-200 space-y-1">
               <Note>You pay both halves of SE tax — no employer split</Note>
               <Note>No employer-provided benefits</Note>
-              <Note>Nothing withheld — quarterly payments required</Note>
+              <Note>Nothing withheld — <a href="https://ariataxpa.com/quarterly-estimated-tax-calculator/" target="_blank" rel="noopener noreferrer" className="quarterly-tax-link" aria-label="quarterly payments required (opens in a new tab)">quarterly payments required</a></Note>
               <Note>Income flows through Schedule C → Schedule SE</Note>
             </ul>
           </div>

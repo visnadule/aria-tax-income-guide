@@ -233,8 +233,14 @@
     }
 
     .card-notes a.quarterly-tax-link {
-      color: #1a2330;
+      color: #1e40af;
       text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .card-notes a.quarterly-tax-link:hover {
+      color: #1e3a8a;
     }
 
     /* ── Tagline ─────────────────────────────────────── */
@@ -425,7 +431,7 @@
           <ul>
             <li>You pay both halves of SE tax — no employer split</li>
             <li>No employer-provided benefits</li>
-            <li>Nothing withheld — quarterly payments required</li>
+            <li>Nothing withheld — <a href="https://ariataxpa.com/quarterly-estimated-tax-calculator/" target="_blank" rel="noopener noreferrer" class="quarterly-tax-link" aria-label="quarterly payments required (opens in a new tab)">quarterly payments required</a></li>
             <li>Income flows through Schedule C → Schedule SE</li>
           </ul>
         </div>

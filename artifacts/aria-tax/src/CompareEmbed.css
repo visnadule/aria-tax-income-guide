@@ -79,8 +79,14 @@
 }
 
 .compare-embed a.quarterly-tax-link {
-  color: #1a2330;
+  color: #1e40af;
   text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.compare-embed a.quarterly-tax-link:hover {
+  color: #1e3a8a;
 }
 
 .compare-embed a.bg-sage-600 {
