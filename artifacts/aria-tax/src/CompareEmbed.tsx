@@ -76,7 +76,7 @@ export default function CompareEmbed() {
     n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
   return (
-    <div
+    <main
       className="bg-cream-100 font-sans py-10 px-4 overflow-y-auto min-h-screen"
       style={{ WebkitOverflowScrolling: 'touch' }}
     >
@@ -84,13 +84,13 @@ export default function CompareEmbed() {
 
         {/* Header */}
         <div className="text-center mb-9">
-          <p className="text-[11px] font-semibold tracking-[0.1em] uppercase text-steel-400 mb-2">
+          <p className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[#5b6f84] mb-2">
             Aria Tax Services PA — Educational Guide
           </p>
           <h1 className="font-serif text-[26px] font-bold text-ink-900 leading-snug mb-2">
             Same income. Three ways to earn it.
           </h1>
-          <p className="text-[15px] text-ink-500 leading-relaxed max-w-[560px] mx-auto">
+          <p className="text-[15px] text-[#595959] leading-relaxed max-w-[560px] mx-auto">
             The same $100,000 income is taxed very differently depending on how you
             earn it. Structure changes what you can deduct, which changes what gets
             taxed, which changes what reaches you.
@@ -102,7 +102,7 @@ export default function CompareEmbed() {
 
           {/* ── Employed (steel) ───────────────────────────── */}
           <div className="bg-steel-50 border border-steel-200 rounded-xl p-5 flex flex-col">
-            <span className="inline-flex w-fit text-[10px] font-semibold tracking-[0.08em] uppercase bg-steel-100 text-steel-700 rounded-full px-3 py-0.5 mb-2">
+            <span className="inline-flex w-fit text-[11px] font-semibold tracking-[0.08em] uppercase bg-steel-100 text-steel-700 rounded-full px-3 py-0.5 mb-2">
               Employed at a firm
             </span>
             <h2 className="font-serif text-[15px] font-bold text-ink-900 leading-snug mb-1">
@@ -133,7 +133,7 @@ export default function CompareEmbed() {
 
           {/* ── Contracted (sage) ──────────────────────────── */}
           <div className="bg-sage-50 border border-sage-200 rounded-xl p-5 flex flex-col">
-            <span className="inline-flex w-fit text-[10px] font-semibold tracking-[0.08em] uppercase bg-sage-100 text-sage-700 rounded-full px-3 py-0.5 mb-2">
+            <span className="inline-flex w-fit text-[11px] font-semibold tracking-[0.08em] uppercase bg-sage-100 text-sage-700 rounded-full px-3 py-0.5 mb-2">
               Contracted expert
             </span>
             <h2 className="font-serif text-[15px] font-bold text-ink-900 leading-snug mb-1">
@@ -164,7 +164,7 @@ export default function CompareEmbed() {
 
           {/* ── Solo practice (sand) ───────────────────────── */}
           <div className="bg-sand-50 border border-sand-200 rounded-xl p-5 flex flex-col">
-            <span className="inline-flex w-fit text-[10px] font-semibold tracking-[0.08em] uppercase bg-sand-100 text-sand-800 rounded-full px-3 py-0.5 mb-2">
+            <span className="inline-flex w-fit text-[11px] font-semibold tracking-[0.08em] uppercase bg-sand-100 text-sand-800 rounded-full px-3 py-0.5 mb-2">
               Solo practice
             </span>
             <h2 className="font-serif text-[15px] font-bold text-ink-900 leading-snug mb-1">
@@ -215,16 +215,16 @@ export default function CompareEmbed() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-[11px] text-ink-400 leading-relaxed">
+        <p className="text-center text-[11px] text-[#595959] leading-relaxed">
           All figures are illustrative. See full tool for assumptions. &nbsp;·&nbsp;
           This is an educational guide, not tax advice. &nbsp;·&nbsp;
-          <a href="https://ariataxpa.com" className="text-steel-400 hover:underline">
+          <a href="https://ariataxpa.com" className="text-[#5b6f84] underline">
             ariataxpa.com
           </a>
         </p>
 
       </div>
-    </div>
+    </main>
   );
 }
 
@@ -250,9 +250,9 @@ function Row({
     <div className="flex justify-between items-baseline gap-2 py-0.5">
       <span className={`text-[12px] leading-snug flex-1 ${bold ? 'font-semibold text-ink-800 text-[13px]' : 'text-ink-600'}`}>
         {label}
-        {sub && <span className="block text-[10px] text-ink-400 mt-0.5">{sub}</span>}
+        {sub && <span className="block text-[11px] text-[#595959] mt-0.5">{sub}</span>}
       </span>
-      <span className={`text-[12px] font-medium whitespace-nowrap ${bold ? 'font-semibold text-ink-800 text-[13px]' : isNeg ? 'text-ink-500' : 'text-ink-800'}`}>
+      <span className={`text-[12px] font-medium whitespace-nowrap ${bold ? 'font-semibold text-ink-800 text-[13px]' : isNeg ? 'text-[#595959]' : 'text-ink-800'}`}>
         {display}
       </span>
     </div>
@@ -267,7 +267,7 @@ function TakeHome({ amount }: { amount: number }) {
   });
   return (
     <div className="mt-auto bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-3 text-center">
-      <p className="text-[10px] font-semibold tracking-[0.08em] uppercase text-emerald-700 mb-0.5">
+      <p className="text-[11px] font-semibold tracking-[0.08em] uppercase text-emerald-700 mb-0.5">
         Estimated take-home
       </p>
       <p className="text-[22px] font-bold text-emerald-900 tracking-tight">{display}</p>
@@ -277,8 +277,8 @@ function TakeHome({ amount }: { amount: number }) {
 
 function Note({ children }: { children: React.ReactNode }) {
   return (
-    <li className="flex gap-1.5 text-[11px] text-ink-400 leading-relaxed">
-      <span className="text-ink-300 mt-px">·</span>
+    <li className="flex gap-1.5 text-[11px] text-[#595959] leading-relaxed">
+      <span className="text-[#595959] mt-px">·</span>
       <span>{children}</span>
     </li>
   );
