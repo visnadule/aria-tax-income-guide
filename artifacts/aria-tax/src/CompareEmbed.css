@@ -8,40 +8,69 @@
 }
 
 .compare-embed :is(.text-\[11px\], .text-\[12px\]) {
-  font-size: 12px;
-  color: #3f4a57;
+  font-size: 13px;
+  color: #2f3945;
+}
+
+.compare-embed .text-\[13px\] {
+  font-size: 14px;
+  color: #1a2330;
+}
+
+.compare-embed .text-\[14px\] {
+  font-size: 15px;
+}
+
+.compare-embed li span {
+  color: inherit;
 }
 
 .compare-embed .uppercase {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .compare-embed .border {
-  border-color: #64748b;
+  border-color: #475569;
 }
 
 .compare-embed .border-t {
-  border-color: #64748b;
+  border-color: #475569;
+}
+
+.compare-embed .bg-steel-50 {
+  background-color: #edf2f7;
+}
+
+.compare-embed .bg-sage-50 {
+  background-color: #edf2ed;
+}
+
+.compare-embed .bg-sand-50 {
+  background-color: #f6efe3;
 }
 
 .compare-embed .bg-steel-50 .uppercase {
-  color: #29466c;
+  color: #233d60;
 }
 
 .compare-embed .bg-sage-50 .uppercase {
-  color: #24452c;
+  color: #1f3d26;
 }
 
 .compare-embed .bg-sand-50 .uppercase {
-  color: #624016;
+  color: #563812;
 }
 
 .compare-embed .bg-emerald-50 {
-  border-color: #3e6b58;
+  border-color: #285440;
 }
 
 .compare-embed .bg-emerald-50 p {
   color: #174b36;
+}
+
+.compare-embed .bg-emerald-50 .uppercase {
+  color: #123e2d;
 }
 
 .compare-embed a {
